@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700;800&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "on-primary-fixed-variant": "#4918c8",
+              "on-secondary-container": "#aec6ff",
+              "inverse-primary": "#613de0",
+              "secondary-fixed": "#d8e2ff",
+              "tertiary": "#ffb77d",
+              "on-primary-fixed": "#1c0062",
+              "primary": "#cabeff",
+              "primary-fixed": "#e6deff",
+              "surface-container-lowest": "#0e0e13",
+              "secondary-fixed-dim": "#aec6ff",
+              "error-container": "#93000a",
+              "surface-container-high": "#2a292f",
+              "outline": "#938ea1",
+              "on-error-container": "#ffdad6",
+              "surface-bright": "#39383e",
+              "secondary": "#aec6ff",
+              "on-tertiary-fixed": "#2f1500",
+              "primary-fixed-dim": "#cabeff",
+              "inverse-surface": "#e4e1e9",
+              "on-tertiary-container": "#432100",
+              "on-error": "#690005",
+              "on-secondary-fixed-variant": "#004397",
+              "on-primary": "#32009a",
+              "outline-variant": "#484555",
+              "on-tertiary": "#4d2600",
+              "surface-container-low": "#1b1b20",
+              "tertiary-container": "#d57a20",
+              "on-primary-container": "#2b0088",
+              "surface-container": "#1f1f25",
+              "tertiary-fixed": "#ffdcc3",
+              "secondary-container": "#024ead",
+              "on-surface": "#e4e1e9",
+              "surface-variant": "#35343a",
+              "tertiary-fixed-dim": "#ffb77d",
+              "on-secondary-fixed": "#001a43",
+              "on-secondary": "#002e6b",
+              "surface-tint": "#cabeff",
+              "surface": "#131318",
+              "inverse-on-surface": "#303036",
+              "error": "#ffb4ab",
+              "primary-container": "#947dff",
+              "on-tertiary-fixed-variant": "#6e3900",
+              "surface-container-highest": "#35343a",
+              "on-surface-variant": "#c9c4d8",
+              "surface-dim": "#131318",
+              "on-background": "#e4e1e9",
+              "background": "#131318"
+            },
+            fontFamily: {
+              "headline": ["Manrope", "Pretendard", "sans-serif"],
+              "body": ["Inter", "Pretendard", "sans-serif"],
+              "label": ["Inter", "Pretendard", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            display: inline-block;
+            line-height: 1;
+        }
+        body {
+            background-color: #0A0A0F;
+            color: #F0F0F5;
+            font-family: 'Pretendard', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(35, 35, 48, 0.6);
+            backdrop-filter: blur(20px);
+            -webkit-backdrop-filter: blur(20px);
+        }
+        .toast-shadow {
+            box-shadow: 0 24px 48px -12px rgba(0, 0, 0, 0.5);
+        }
+    </style>
+</head>
+<body class="antialiased overflow-hidden h-screen">
+<!-- TopNavBar -->
+<nav class="fixed top-0 w-full z-50 bg-[#0A0A0F]/80 backdrop-blur-xl border-b border-[#2A2A3A]/40 flex justify-between items-center px-6 h-16 w-full">
+<div class="flex items-center gap-8">
+<span class="text-xl font-bold bg-clip-text text-transparent bg-gradient-to-r from-[#7C5CFC] to-[#5B8DEF]">The Curator</span>
+<div class="hidden md:flex gap-6">
+<a class="text-[#F0F0F5] font-semibold border-b-2 border-[#7C5CFC] pb-1" href="#">Dashboard</a>
+<a class="text-[#9898A8] hover:text-[#F0F0F5] transition-colors" href="#">Projects</a>
+<a class="text-[#9898A8] hover:text-[#F0F0F5] transition-colors" href="#">Assets</a>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-[#9898A8] hover:bg-[#1A1A25] rounded-md transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="notifications">notifications</span>
+</button>
+<button class="p-2 text-[#9898A8] hover:bg-[#1A1A25] rounded-md transition-all active:scale-95 duration-200">
+<span class="material-symbols-outlined" data-icon="settings">settings</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-surface-container overflow-hidden">
+<img alt="User profile" data-alt="User profile avatar placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuCIK1qSrkFjOMdVnvBjIwYVa_DMM3NDDRudixDHAKrw9ERK6tOFQEyhK7lz0MwWchmlc3k4X1-wavvcBLq1_BikC7uuf7tAW8GWZdvCi5rZ0JIeihULLip1sKqx7I0SsNuvpcfzbbaiQNzRduyiOcEwR3DIpgXP1YeE5csuB0RKbNTGkdb7QeqJAF0kS5KH8_5x1mifx2IevpEk1JdsdbwhZHzwlQ0o1iZT1qzbKWP07VH1bQaytoJ5voGKeYKD0im9zj5KjfO6CuGI"/>
+</div>
+</div>
+</nav>
+<!-- SideNavBar -->
+<aside class="h-screen w-64 fixed left-0 top-0 bg-[#12121A] flex flex-col py-6 gap-2 z-40 mt-16">
+<div class="px-6 mb-8">
+<div class="flex items-center gap-3">
+<div class="w-8 h-8 rounded-lg bg-gradient-to-br from-[#7C5CFC] to-[#5B8DEF] flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="auto_awesome">auto_awesome</span>
+</div>
+<div>
+<h2 class="font-bold text-[#F0F0F5] leading-none">Curator Pro</h2>
+<span class="text-[10px] text-[#9898A8] uppercase tracking-wider">Enterprise Tier</span>
+</div>
+</div>
+</div>
+<div class="px-4 space-y-1">
+<a class="flex items-center gap-3 px-4 py-3 text-[#9898A8] hover:bg-[#1A1A25] rounded-lg transition-all active:translate-x-1 duration-150 group" href="#">
+<span class="material-symbols-outlined" data-icon="home">home</span>
+<span class="font-['Pretendard'] text-sm group-hover:text-[#F0F0F5]">Home</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 bg-gradient-to-r from-[#7C5CFC]/10 to-transparent text-[#F0F0F5] border-l-4 border-[#7C5CFC] active:translate-x-1 duration-150" href="#">
+<span class="material-symbols-outlined" data-icon="psychology" style="font-variation-settings: 'FILL' 1;">psychology</span>
+<span class="font-['Pretendard'] text-sm">AI Models</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#9898A8] hover:bg-[#1A1A25] rounded-lg transition-all active:translate-x-1 duration-150 group" href="#">
+<span class="material-symbols-outlined" data-icon="folder_open">folder_open</span>
+<span class="font-['Pretendard'] text-sm group-hover:text-[#F0F0F5]">Library</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#9898A8] hover:bg-[#1A1A25] rounded-lg transition-all active:translate-x-1 duration-150 group" href="#">
+<span class="material-symbols-outlined" data-icon="insights">insights</span>
+<span class="font-['Pretendard'] text-sm group-hover:text-[#F0F0F5]">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-3 text-[#9898A8] hover:bg-[#1A1A25] rounded-lg transition-all active:translate-x-1 duration-150 group" href="#">
+<span class="material-symbols-outlined" data-icon="history">history</span>
+<span class="font-['Pretendard'] text-sm group-hover:text-[#F0F0F5]">Archive</span>
+</a>
+</div>
+<div class="mt-auto px-6 pt-4">
+<button class="w-full bg-gradient-to-r from-[#7C5CFC] to-[#5B8DEF] py-3 rounded-xl font-semibold text-white shadow-lg active:scale-95 transition-all text-sm">
+                New Insight
+            </button>
+</div>
+<div class="px-4 mt-6 space-y-1">
+<a class="flex items-center gap-3 px-4 py-2 text-[#9898A8] hover:bg-[#1A1A25] rounded-lg transition-all text-sm group" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="help">help</span>
+<span class="group-hover:text-[#F0F0F5]">Support</span>
+</a>
+<a class="flex items-center gap-3 px-4 py-2 text-[#9898A8] hover:bg-[#1A1A25] rounded-lg transition-all text-sm group" href="#">
+<span class="material-symbols-outlined text-sm" data-icon="person">person</span>
+<span class="group-hover:text-[#F0F0F5]">Account</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="ml-64 pt-16 h-screen overflow-y-auto bg-[#0A0A0F]">
+<div class="p-8 max-w-7xl mx-auto space-y-8">
+<header class="space-y-2">
+<h1 class="text-3xl font-bold font-headline text-[#F0F0F5]">AI Model Playground</h1>
+<p class="text-[#9898A8] text-sm max-w-2xl">Monitor and manage your active curator instances. Real-time notifications and toast patterns are showcased below in the bottom-right corner.</p>
+</header>
+<!-- Dashboard Bento Grid -->
+<div class="grid grid-cols-12 gap-6">
+<!-- Large Card -->
+<div class="col-span-8 bg-[#12121A] rounded-xl p-6 border border-[#2A2A3A]/40 min-h-[400px] flex flex-col">
+<div class="flex justify-between items-center mb-6">
+<h3 class="text-lg font-semibold text-[#F0F0F5]">System Performance</h3>
+<span class="text-xs text-[#5A5A6E]">Last updated: Just now</span>
+</div>
+<div class="flex-grow flex items-center justify-center opacity-40">
+<div class="text-center">
+<span class="material-symbols-outlined text-6xl mb-4" data-icon="monitoring">monitoring</span>
+<p class="text-sm">Real-time throughput data stream</p>
+</div>
+</div>
+</div>
+<!-- Small Cards Column -->
+<div class="col-span-4 space-y-6">
+<div class="bg-[#1A1A25] rounded-xl p-6 border border-[#2A2A3A]/40">
+<h4 class="text-sm font-semibold text-[#9898A8] mb-4">API Utilization</h4>
+<div class="flex items-end gap-2">
+<span class="text-3xl font-bold text-[#F0F0F5]">84.2%</span>
+<span class="text-emerald-400 text-sm mb-1">↑ 12%</span>
+</div>
+</div>
+<div class="bg-gradient-to-br from-[#7C5CFC]/20 to-[#5B8DEF]/5 rounded-xl p-6 border border-[#7C5CFC]/20">
+<h4 class="text-sm font-semibold text-[#F0F0F5] mb-2">Curator Insight AI</h4>
+<p class="text-xs text-[#9898A8] leading-relaxed">Optimization suggestion: Increase shard count for high-latency queries detected in North America regions.</p>
+<button class="mt-4 text-xs font-semibold text-[#7C5CFC] hover:underline">Apply Optimization</button>
+</div>
+</div>
+</div>
+</div>
+</main>
+<!-- Toast Notification Stack (Bottom Right) -->
+<div class="fixed bottom-8 right-8 z-[60] flex flex-col gap-4 max-w-[360px] w-full items-end">
+<!-- Info Toast -->
+<div class="w-full bg-[#1A1A25] rounded-lg border-l-4 border-[#60A5FA] p-4 flex gap-4 toast-shadow animate-in slide-in-from-right duration-500 overflow-hidden relative glass-panel">
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-[#60A5FA]" data-icon="info" style="font-variation-settings: 'FILL' 1;">info</span>
+</div>
+<div class="flex-grow">
+<h4 class="text-sm font-semibold text-[#F0F0F5]">새로운 알림이 있습니다</h4>
+<p class="text-xs text-[#9898A8] mt-1">시스템 업데이트가 03:00 AM에 예정되어 있습니다.</p>
+</div>
+<button class="flex-shrink-0 text-[#5A5A6E] hover:text-[#F0F0F5] transition-colors self-start">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+</button>
+</div>
+<!-- Warning Toast -->
+<div class="w-full bg-[#1A1A25] rounded-lg border-l-4 border-[#FBBF24] p-4 flex gap-4 toast-shadow animate-in slide-in-from-right duration-500 delay-100 glass-panel">
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-[#FBBF24]" data-icon="warning" style="font-variation-settings: 'FILL' 1;">warning</span>
+</div>
+<div class="flex-grow">
+<h4 class="text-sm font-semibold text-[#F0F0F5]">주의가 필요합니다</h4>
+<p class="text-xs text-[#9898A8] mt-1">API 사용량이 할당량의 90%에 도달했습니다.</p>
+</div>
+<button class="flex-shrink-0 text-[#5A5A6E] hover:text-[#F0F0F5] transition-colors self-start">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+</button>
+</div>
+<!-- Error Toast -->
+<div class="w-full bg-[#1A1A25] rounded-lg border-l-4 border-[#F87171] p-4 flex gap-4 toast-shadow animate-in slide-in-from-right duration-500 delay-200 glass-panel">
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-[#F87171]" data-icon="error" style="font-variation-settings: 'FILL' 1;">error</span>
+</div>
+<div class="flex-grow">
+<h4 class="text-sm font-semibold text-[#F0F0F5]">오류가 발생했습니다</h4>
+<p class="text-xs text-[#9898A8] mt-1">네트워크 연결이 불안정하여 동기화에 실패했습니다.</p>
+</div>
+<button class="flex-shrink-0 text-[#5A5A6E] hover:text-[#F0F0F5] transition-colors self-start">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+</button>
+</div>
+<!-- Success Toast -->
+<div class="w-full bg-[#1A1A25] rounded-lg border-l-4 border-[#34D399] p-4 flex gap-4 toast-shadow animate-in slide-in-from-right duration-500 delay-300 glass-panel">
+<div class="flex-shrink-0">
+<span class="material-symbols-outlined text-[#34D399]" data-icon="check_circle" style="font-variation-settings: 'FILL' 1;">check_circle</span>
+</div>
+<div class="flex-grow">
+<h4 class="text-sm font-semibold text-[#F0F0F5]">성공적으로 저장되었습니다</h4>
+<p class="text-xs text-[#9898A8] mt-1">변경사항이 클라우드에 즉시 반영되었습니다.</p>
+</div>
+<button class="flex-shrink-0 text-[#5A5A6E] hover:text-[#F0F0F5] transition-colors self-start">
+<span class="material-symbols-outlined text-sm" data-icon="close">close</span>
+</button>
+</div>
+</div>
+<!-- Floating Prompt Bar (Design System Mandate) -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-xl px-4 z-50">
+<div class="glass-panel border border-[#2A2A3A]/40 rounded-full h-14 flex items-center px-6 gap-3 shadow-2xl">
+<span class="material-symbols-outlined text-[#7C5CFC]" data-icon="auto_fix_high">auto_fix_high</span>
+<input class="bg-transparent border-none focus:ring-0 flex-grow text-sm text-[#F0F0F5] placeholder-[#5A5A6E]" placeholder="Ask Curator AI to generate a report..." type="text"/>
+<button class="bg-[#7C5CFC] p-1.5 rounded-full flex items-center justify-center">
+<span class="material-symbols-outlined text-white text-sm" data-icon="arrow_upward">arrow_upward</span>
+</button>
+</div>
+</div>
+</body></html>

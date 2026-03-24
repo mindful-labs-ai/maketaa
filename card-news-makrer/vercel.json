@@ -1,0 +1,89 @@
+{
+  "projectSettings": {
+    "name": "Canvas Editor MVP",
+    "description": "Mental Health Card News - Canvas Editor for card spec preview & approval"
+  },
+
+  "env": [
+    {
+      "key": "NEXT_PUBLIC_SUPABASE_URL",
+      "value": "@supabase_url",
+      "description": "Supabase project URL"
+    },
+    {
+      "key": "NEXT_PUBLIC_SUPABASE_ANON_KEY",
+      "value": "@supabase_anon_key",
+      "description": "Supabase public anonymous key"
+    },
+    {
+      "key": "SUPABASE_SERVICE_ROLE_KEY",
+      "value": "@supabase_service_role_key",
+      "description": "Supabase service role key (server-side only)"
+    },
+    {
+      "key": "NEXT_PUBLIC_DEBUG",
+      "value": "false",
+      "description": "Enable debug logging"
+    }
+  ],
+
+  "buildCommand": "npm run build",
+  "outputDirectory": ".next",
+
+  "installCommand": "npm install --legacy-peer-deps",
+
+  "framework": "nextjs",
+  "nodeVersion": "18.x",
+
+  "regions": [
+    "icn1"
+  ],
+
+  "functions": {
+    "api/**/*.ts": {
+      "maxDuration": 30
+    }
+  },
+
+  "crons": [
+    {
+      "path": "/api/health",
+      "schedule": "0 * * * *"
+    }
+  ],
+
+  "redirects": [
+    {
+      "source": "/editor",
+      "destination": "/",
+      "permanent": false
+    }
+  ],
+
+  "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "public, max-age=3600, stale-while-revalidate=86400"
+        }
+      ]
+    },
+    {
+      "source": "/api/(.*)",
+      "headers": [
+        {
+          "key": "Cache-Control",
+          "value": "no-cache, no-store, must-revalidate"
+        }
+      ]
+    }
+  ],
+
+  "git": {
+    "deploymentEnabled": {
+      "main": true
+    }
+  }
+}

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.8/dist/web/static/pretendard.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary-container": "#d57a20",
+              "secondary-container": "#024ead",
+              "surface-bright": "#39383e",
+              "on-background": "#e4e1e9",
+              "secondary-fixed": "#d8e2ff",
+              "primary-fixed": "#e6deff",
+              "primary-fixed-dim": "#cabeff",
+              "on-tertiary": "#4d2600",
+              "surface-container-lowest": "#0e0e13",
+              "on-secondary-container": "#aec6ff",
+              "on-primary": "#32009a",
+              "on-secondary-fixed-variant": "#004397",
+              "on-tertiary-fixed": "#2f1500",
+              "on-secondary": "#002e6b",
+              "surface-variant": "#35343a",
+              "on-error": "#690005",
+              "tertiary": "#ffb77d",
+              "on-surface-variant": "#c9c4d8",
+              "on-secondary-fixed": "#001a43",
+              "background": "#0A0A0F",
+              "error": "#ffb4ab",
+              "surface-container-highest": "#35343a",
+              "tertiary-fixed": "#ffdcc3",
+              "inverse-surface": "#e4e1e9",
+              "primary-container": "#947dff",
+              "on-tertiary-container": "#432100",
+              "surface-container-high": "#2a292f",
+              "error-container": "#93000a",
+              "surface-container": "#1f1f25",
+              "on-error-container": "#ffdad6",
+              "on-tertiary-fixed-variant": "#6e3900",
+              "secondary": "#aec6ff",
+              "on-primary-fixed": "#1c0062",
+              "inverse-on-surface": "#303036",
+              "tertiary-fixed-dim": "#ffb77d",
+              "surface": "#12121A",
+              "on-primary-container": "#2b0088",
+              "surface-tint": "#cabeff",
+              "secondary-fixed-dim": "#aec6ff",
+              "outline": "#938ea1",
+              "surface-container-low": "#1b1b20",
+              "primary": "#cabeff",
+              "outline-variant": "#484555",
+              "inverse-primary": "#613de0",
+              "on-surface": "#F0F0F5",
+              "surface-dim": "#131318",
+              "on-primary-fixed-variant": "#4918c8"
+            },
+            fontFamily: {
+              "headline": ["Pretendard", "sans-serif"],
+              "body": ["Pretendard", "sans-serif"],
+              "label": ["Pretendard", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0F;
+            color: #F0F0F5;
+            font-family: 'Pretendard', sans-serif;
+            -webkit-font-smoothing: antialiased;
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .brand-gradient {
+            background: linear-gradient(135deg, #7C5CFC 0%, #5B8DEF 100%);
+        }
+        .ghost-border {
+            border: 1px solid rgba(42, 42, 58, 0.4);
+        }
+        .glass-panel {
+            background: rgba(35, 35, 48, 0.5);
+            backdrop-filter: blur(20px);
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar (Shared Component Identity) -->
+<aside class="fixed left-0 top-0 h-full w-64 z-40 bg-zinc-950 flex flex-col p-4 pt-20 gap-2 border-r border-zinc-900 text-sm font-medium">
+<div class="px-4 mb-8">
+<h1 class="text-lg font-bold text-zinc-100">Aetheris</h1>
+<p class="text-xs text-zinc-500">Pro Plan</p>
+</div>
+<nav class="flex-1 flex flex-col gap-1">
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">dashboard</span>
+                Dashboard
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">rocket_launch</span>
+                Campaigns
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">insights</span>
+                Analytics
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">group</span>
+                Audience
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 bg-zinc-900 text-zinc-100 rounded-lg shadow-[inset_0_1px_0_0_rgba(255,255,255,0.05)] active:translate-x-1 transition-transform" href="#">
+<span class="material-symbols-outlined">settings</span>
+                Settings
+            </a>
+</nav>
+<div class="mt-auto pt-4 border-t border-zinc-900 flex flex-col gap-1">
+<button class="mb-4 brand-gradient text-white py-3 px-4 rounded-lg font-semibold flex items-center justify-center gap-2 shadow-[0_4px_12px_rgba(124,92,252,0.3)]">
+<span class="material-symbols-outlined text-sm">add</span>
+                New Campaign
+            </button>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">contact_support</span>
+                Support
+            </a>
+<a class="flex items-center gap-3 px-4 py-3 text-zinc-400 hover:text-zinc-200 hover:bg-zinc-900/50 rounded-lg transition-all duration-200" href="#">
+<span class="material-symbols-outlined">logout</span>
+                Logout
+            </a>
+</div>
+</aside>
+<!-- TopNavBar (Shared Component Identity) -->
+<header class="fixed top-0 w-full z-50 bg-zinc-950/80 backdrop-blur-xl flex justify-between items-center px-6 h-16 border-b border-zinc-900/50">
+<div class="flex items-center gap-8 pl-64">
+<span class="text-xl font-bold tracking-tight bg-gradient-to-br from-violet-400 to-blue-400 bg-clip-text text-transparent">Aetheris AI</span>
+<div class="relative group hidden md:block">
+<span class="material-symbols-outlined absolute left-3 top-1/2 -translate-y-1/2 text-zinc-500 group-focus-within:text-violet-400 transition-colors">search</span>
+<input class="bg-zinc-900/50 border-none rounded-full pl-10 pr-4 py-1.5 text-sm w-64 focus:ring-1 focus:ring-violet-500 transition-all outline-none" placeholder="Search resources..." type="text"/>
+</div>
+</div>
+<div class="flex items-center gap-4">
+<button class="p-2 text-zinc-400 hover:bg-zinc-800/50 rounded-full transition-colors">
+<span class="material-symbols-outlined">notifications</span>
+</button>
+<button class="p-2 text-zinc-400 hover:bg-zinc-800/50 rounded-full transition-colors">
+<span class="material-symbols-outlined">help</span>
+</button>
+<div class="w-8 h-8 rounded-full bg-zinc-800 overflow-hidden ml-2 cursor-pointer border border-zinc-700">
+<img alt="User avatar" class="w-full h-full object-cover" data-alt="User profile placeholder" src="https://lh3.googleusercontent.com/aida-public/AB6AXuDGyTgDWq4JGArN6eeGzz7qPJTKzfywg5sXVe0_LtKLH-9D0FRwo5wz_d8mxFAzHfXPcul8ch0iFikJ_nakwLGHZ5kGuosEJYvWYM18DJkFnECQOYYSuA1hbfiG2oEspnNy3d0SiipasLrLbQF_Epy4XeqO7X1MDn-OmPwvlfiYSIJIU84osfqTLzODqedUbGLUixi9UoyZYM1UcmtVTtlBX9M_Wvnk3PY8cl8Tt25sNp9GsfGKMRPZmCLsy4ElM_x2FqIOmgtEZCh-"/>
+</div>
+</div>
+</header>
+<!-- Main Content Canvas -->
+<main class="flex-1 ml-64 pt-24 pb-12 px-6 flex justify-center">
+<div class="w-full max-w-[640px]">
+<!-- Page Heading -->
+<div class="mb-10">
+<h2 class="text-3xl font-bold text-on-surface tracking-tight font-headline">설정</h2>
+<p class="text-secondary text-sm mt-2">계정 정보 및 서비스 사용 현황을 관리하세요.</p>
+</div>
+<!-- Profile Section -->
+<section class="mb-12">
+<h3 class="text-sm font-semibold uppercase tracking-wider text-tertiary mb-6">프로필</h3>
+<div class="space-y-8">
+<div class="flex items-center gap-6">
+<div class="relative group w-20 h-20 rounded-full overflow-hidden cursor-pointer border-2 border-zinc-800">
+<img alt="Profile avatar" class="w-full h-full object-cover transition-opacity group-hover:opacity-40" data-alt="Large circular user avatar" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBBaOQNt9hXKepZ7EuItarKv3UPTY0AqoiGwqhoe0jdH0tfrHp0CjeS8CID0goVWbzxsNurW9KcTYWARy2HAulApCxP9yBuI6mKsEtcEnXa3tH0Fbi0-FuZ3x6ScMsuy-TtFlQGwQ1QkyBBedZ7aJ8FnzzHsSGAkzboQR7XqPR8pQ0wHxvhfukksf9yUeVOldU45HSxgKXWNEHqzDAImctHqihiBYR_5xfg7pj1aRZ3Zwapl_TpAyvbJA96rskAoNz9nUWJ2pgxUYzM"/>
+<div class="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity">
+<span class="text-[10px] font-bold text-white tracking-widest">변경</span>
+</div>
+</div>
+<div>
+<p class="text-on-surface font-semibold">프로필 사진</p>
+<p class="text-secondary text-xs mt-1">PNG 또는 JPG 형식 (최대 2MB)</p>
+</div>
+</div>
+<div class="grid gap-6">
+<div class="flex flex-col gap-2">
+<label class="text-[11px] font-medium text-zinc-500 uppercase tracking-widest ml-1">이름</label>
+<input class="bg-[#1A1A25] ghost-border rounded-lg px-4 py-3 text-sm focus:ring-2 focus:ring-[#7C5CFC]/20 focus:border-[#7C5CFC] outline-none transition-all text-on-surface" type="text" value="홍길동"/>
+</div>
+<div class="flex flex-col gap-2">
+<label class="text-[11px] font-medium text-zinc-500 uppercase tracking-widest ml-1">이메일</label>
+<input class="bg-zinc-900/50 border border-zinc-800 rounded-lg px-4 py-3 text-sm text-zinc-500 cursor-not-allowed outline-none" readonly="" type="email" value="user@maketaa.ai"/>
+</div>
+</div>
+<div class="flex justify-end">
+<button class="brand-gradient text-on-surface px-8 py-3 rounded-lg text-sm font-bold shadow-[0_8px_20px_rgba(124,92,252,0.2)] active:scale-95 transition-transform">
+                            저장
+                        </button>
+</div>
+</div>
+</section>
+<!-- Usage Section (Bento Grid Style Card) -->
+<section class="mb-12">
+<h3 class="text-sm font-semibold uppercase tracking-wider text-tertiary mb-6">사용량</h3>
+<div class="bg-[#12121A] rounded-xl p-8 ghost-border relative overflow-hidden">
+<!-- Subtle ambient gradient in the background -->
+<div class="absolute -top-24 -right-24 w-64 h-64 bg-violet-600/10 blur-[100px] pointer-events-none"></div>
+<div class="space-y-8">
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="text-sm font-medium text-on-surface">이번 달 이미지 생성</span>
+<span class="text-xs font-semibold text-zinc-400">12 / 50회</span>
+</div>
+<div class="h-2 w-full bg-zinc-900 rounded-full overflow-hidden">
+<div class="h-full brand-gradient w-[24%] rounded-full shadow-[0_0_8px_rgba(124,92,252,0.5)]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="text-sm font-medium text-on-surface">이번 달 비디오 생성</span>
+<span class="text-xs font-semibold text-zinc-400">3 / 10회</span>
+</div>
+<div class="h-2 w-full bg-zinc-900 rounded-full overflow-hidden">
+<div class="h-full brand-gradient w-[30%] rounded-full shadow-[0_0_8px_rgba(124,92,252,0.5)]"></div>
+</div>
+</div>
+<div>
+<div class="flex justify-between items-end mb-2">
+<span class="text-sm font-medium text-on-surface">저장 공간</span>
+<span class="text-xs font-semibold text-zinc-400">128MB / 1GB</span>
+</div>
+<div class="h-2 w-full bg-zinc-900 rounded-full overflow-hidden">
+<div class="h-full bg-blue-500 w-[12.8%] rounded-full"></div>
+</div>
+</div>
+<div class="pt-4 flex items-center justify-between">
+<p class="text-xs text-zinc-500 leading-relaxed max-w-[320px]">
+<span class="text-violet-400 font-semibold">Pro 플랜</span>을 사용 중입니다. 더 많은 리소스가 필요하신가요?
+                            </p>
+<button class="bg-violet-500/10 text-violet-400 px-6 py-2.5 rounded-lg text-sm font-bold border border-violet-500/30 hover:bg-violet-500/20 transition-all">
+                                업그레이드
+                            </button>
+</div>
+</div>
+</div>
+</section>
+<!-- Account Section -->
+<section class="mb-12">
+<h3 class="text-sm font-semibold uppercase tracking-wider text-tertiary mb-6">계정</h3>
+<div class="space-y-2">
+<button class="w-full flex items-center justify-between px-4 py-5 hover:bg-[#1A1A25] rounded-xl transition-all group">
+<div class="flex items-center gap-4">
+<span class="material-symbols-outlined text-zinc-500 group-hover:text-violet-400 transition-colors">lock_reset</span>
+<span class="text-sm font-medium text-zinc-300 group-hover:text-on-surface">비밀번호 변경</span>
+</div>
+<span class="material-symbols-outlined text-zinc-600 text-sm group-hover:translate-x-1 transition-transform">chevron_right</span>
+</button>
+<div class="h-px w-full bg-zinc-900/50 my-2"></div>
+<div class="px-4 pt-4 flex items-center justify-between">
+<div>
+<p class="text-sm font-medium text-zinc-300">로그아웃</p>
+<p class="text-xs text-zinc-500 mt-0.5">현재 장치에서 세션을 종료합니다.</p>
+</div>
+<button class="px-6 py-2.5 rounded-lg text-sm font-semibold border border-zinc-800 text-zinc-400 hover:text-error hover:border-error/40 hover:bg-error/5 transition-all">
+                            로그아웃
+                        </button>
+</div>
+</div>
+</section>
+<!-- Danger Zone Insight -->
+<div class="mt-20 p-6 rounded-xl border border-error/20 bg-error/5 flex items-center justify-between">
+<div>
+<h4 class="text-sm font-bold text-error">계정 삭제</h4>
+<p class="text-xs text-zinc-500 mt-1">삭제된 계정 데이터는 복구할 수 없습니다.</p>
+</div>
+<button class="text-xs font-bold text-zinc-600 hover:text-error transition-colors underline underline-offset-4">
+                    영구 삭제
+                </button>
+</div>
+</div>
+</main>
+<!-- Floating Prompt Bar (Design System AI Component) -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-xl px-4 z-50">
+<div class="glass-panel p-2 rounded-2xl shadow-2xl border border-white/5 flex items-center gap-3">
+<div class="w-10 h-10 rounded-xl brand-gradient flex items-center justify-center shrink-0">
+<span class="material-symbols-outlined text-white text-xl" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+</div>
+<input class="flex-1 bg-transparent border-none outline-none text-sm text-zinc-300 placeholder:text-zinc-500 py-2" placeholder="AI 비서에게 무엇이든 물어보세요..." type="text"/>
+<button class="p-2 text-zinc-400 hover:text-on-surface transition-colors mr-2">
+<span class="material-symbols-outlined">send</span>
+</button>
+</div>
+</div>
+</body></html>

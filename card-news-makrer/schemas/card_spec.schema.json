@@ -1,0 +1,185 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "CardNews Spec",
+  "description": "멘탈헬스 카드뉴스 전체 스펙 - 모든 에이전트의 공통 데이터 포맷",
+  "type": "object",
+  "required": ["meta", "cards", "sns"],
+  "properties": {
+    "meta": {
+      "type": "object",
+      "required": ["id", "topic", "created_at", "status"],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "고유 ID (YYYY-MM-DD-NNN 형식)"
+        },
+        "topic": {
+          "type": "string",
+          "description": "주제명"
+        },
+        "angle": {
+          "type": "string",
+          "description": "접근 각도"
+        },
+        "target_persona": {
+          "type": "string",
+          "description": "타겟 페르소나"
+        },
+        "created_at": {
+          "type": "string",
+          "format": "date-time"
+        },
+        "status": {
+          "type": "string",
+          "enum": ["draft", "review", "approved", "published"],
+          "default": "draft"
+        },
+        "sources": {
+          "type": "array",
+          "items": { "type": "string" },
+          "description": "참고 자료 URL 목록"
+        }
+      }
+    },
+    "cards": {
+      "type": "array",
+      "minItems": 6,
+      "maxItems": 10,
+      "items": {
+        "type": "object",
+        "required": ["index", "role", "text", "style"],
+        "properties": {
+          "index": {
+            "type": "integer",
+            "minimum": 1,
+            "description": "카드 순서 (1부터 시작)"
+          },
+          "role": {
+            "type": "string",
+            "enum": ["cover", "content", "end"],
+            "description": "카드의 역할"
+          },
+          "content_layout": {
+            "type": "string",
+            "enum": ["basic", "memo"],
+            "description": "content 역할의 레이아웃 타입. basic: 헤드라인+본문 형식, memo: 리스트/팁 형식 (세트당 1회만 사용)"
+          },
+          "text": {
+            "type": "object",
+            "required": ["headline"],
+            "properties": {
+              "headline": {
+                "type": "string",
+                "maxLength": 30,
+                "description": "헤드라인 (30자 이내)"
+              },
+              "body": {
+                "type": "string",
+                "maxLength": 150,
+                "description": "본문 (150자 이내)"
+              },
+              "sub_text": {
+                "type": "string",
+                "maxLength": 100,
+                "description": "보조 텍스트 (100자 이내)"
+              },
+              "description": {
+                "type": "string",
+                "maxLength": 300,
+                "description": "긴 설명 (300자 이내) — insight, source 역할에 권장"
+              },
+              "quote": {
+                "type": "string",
+                "maxLength": 200,
+                "description": "인용문 (200자 이내) — empathy 역할에 권장"
+              },
+              "bullet_points": {
+                "type": "array",
+                "items": {
+                  "type": "string",
+                  "maxLength": 100
+                },
+                "description": "목록형 텍스트 (각 항목 100자 이내) — cause, solution, tip 역할에 권장"
+              }
+            }
+          },
+          "style": {
+            "type": "object",
+            "properties": {
+              "layout": {
+                "type": "string",
+                "enum": ["center", "top-left", "top-right", "bottom-left", "bottom-right", "split"],
+                "description": "텍스트 레이아웃 위치"
+              },
+              "color_palette": {
+                "type": "object",
+                "properties": {
+                  "primary": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+                  "secondary": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+                  "text": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" },
+                  "background": { "type": "string", "pattern": "^#[0-9A-Fa-f]{6}$" }
+                }
+              },
+              "font": {
+                "type": "object",
+                "properties": {
+                  "headline_family": { "type": "string", "default": "Pretendard Bold" },
+                  "headline_size": { "type": "integer", "default": 36 },
+                  "body_family": { "type": "string", "default": "Pretendard Regular" },
+                  "body_size": { "type": "integer", "default": 18 }
+                }
+              }
+            }
+          },
+          "background": {
+            "type": "object",
+            "properties": {
+              "type": {
+                "type": "string",
+                "enum": ["image", "gradient", "solid"],
+                "default": "image"
+              },
+              "src": {
+                "type": ["string", "null"],
+                "description": "이미지 파일 경로 또는 URL (이미지 생성 전에는 null)"
+              },
+              "prompt": {
+                "type": ["string", "null"],
+                "description": "이미지 생성 프롬프트"
+              },
+              "overlay_opacity": {
+                "type": "number",
+                "minimum": 0,
+                "maximum": 1,
+                "default": 0.3,
+                "description": "텍스트 가독성을 위한 오버레이 투명도"
+              }
+            }
+          }
+        }
+      }
+    },
+    "sns": {
+      "type": "object",
+      "properties": {
+        "instagram": {
+          "type": "object",
+          "properties": {
+            "caption": { "type": "string", "description": "인스타그램 캡션" },
+            "hashtags": {
+              "type": "array",
+              "items": { "type": "string" },
+              "description": "해시태그 목록"
+            }
+          }
+        },
+        "threads": {
+          "type": "object",
+          "properties": {
+            "text": { "type": "string", "description": "스레드 게시 텍스트" }
+          }
+        }
+      }
+    }
+  }
+}

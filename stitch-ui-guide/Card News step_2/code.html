@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&amp;family=Manrope:wght@600;700&amp;family=Pretendard:wght@400;500;600;700&amp;display=swap" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary": "#ffb77d",
+              "secondary-fixed-dim": "#aec6ff",
+              "inverse-primary": "#613de0",
+              "outline-variant": "#484555",
+              "on-secondary-container": "#aec6ff",
+              "on-surface": "#e4e1e9",
+              "surface": "#131318",
+              "primary-fixed-dim": "#cabeff",
+              "outline": "#938ea1",
+              "on-tertiary-fixed-variant": "#6e3900",
+              "on-tertiary": "#4d2600",
+              "secondary": "#aec6ff",
+              "surface-variant": "#35343a",
+              "error": "#ffb4ab",
+              "primary-container": "#947dff",
+              "on-tertiary-fixed": "#2f1500",
+              "on-error": "#690005",
+              "inverse-surface": "#e4e1e9",
+              "background": "#131318",
+              "secondary-fixed": "#d8e2ff",
+              "tertiary-container": "#d57a20",
+              "surface-container-high": "#2a292f",
+              "on-secondary": "#002e6b",
+              "on-primary-fixed-variant": "#4918c8",
+              "primary": "#cabeff",
+              "on-background": "#e4e1e9",
+              "error-container": "#93000a",
+              "surface-tint": "#cabeff",
+              "primary-fixed": "#e6deff",
+              "on-secondary-fixed-variant": "#004397",
+              "on-error-container": "#ffdad6",
+              "inverse-on-surface": "#303036",
+              "surface-container-lowest": "#0e0e13",
+              "secondary-container": "#024ead",
+              "tertiary-fixed-dim": "#ffb77d",
+              "on-tertiary-container": "#432100",
+              "tertiary-fixed": "#ffdcc3",
+              "on-primary-container": "#2b0088",
+              "surface-dim": "#131318",
+              "surface-container-low": "#1b1b20",
+              "on-secondary-fixed": "#001a43",
+              "surface-container-highest": "#35343a",
+              "surface-bright": "#39383e",
+              "on-primary-fixed": "#1c0062",
+              "on-surface-variant": "#c9c4d8",
+              "surface-container": "#1f1f25",
+              "on-primary": "#32009a"
+            },
+            fontFamily: {
+              "headline": ["Manrope"],
+              "body": ["Inter"],
+              "label": ["Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Pretendard', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .active-ring {
+            box-shadow: 0 0 0 2px #7C5CFC, 0 0 20px rgba(124, 92, 252, 0.15);
+        }
+        .ghost-border {
+            border: 1px solid rgba(42, 42, 58, 0.4);
+        }
+        .brand-gradient {
+            background: linear-gradient(135deg, #7C5CFC 0%, #5B8DEF 100%);
+        }
+    </style>
+</head>
+<body class="bg-[#0A0A0F] text-[#F0F0F5] min-h-screen flex flex-col">
+<!-- TopNavBar (Shared Component) -->
+<nav class="bg-[#12121A] fixed top-0 w-full z-50 flex items-center justify-between px-6 h-16 w-full">
+<div class="text-lg font-bold tracking-tighter text-[#F0F0F5]">Maketaa Lumina</div>
+<div class="hidden md:flex items-center gap-8 font-['Pretendard'] text-[0.875rem] leading-relaxed">
+<a class="text-[#9898A8] hover:text-[#F0F0F5] transition-colors" href="#">Drafts</a>
+<a class="text-[#9898A8] hover:text-[#F0F0F5] transition-colors" href="#">Templates</a>
+<a class="text-[#9898A8] hover:text-[#F0F0F5] transition-colors" href="#">Archive</a>
+</div>
+<div class="flex items-center gap-4">
+<button class="bg-[#7C5CFC] text-[#F0F0F5] px-4 py-1.5 rounded-md text-sm font-semibold hover:opacity-90 active:scale-95 duration-200">
+                Save Progress
+            </button>
+<div class="flex items-center gap-3 text-[#9898A8]">
+<span class="material-symbols-outlined cursor-pointer hover:text-[#F0F0F5]" data-icon="help">help</span>
+<span class="material-symbols-outlined cursor-pointer hover:text-[#F0F0F5]" data-icon="account_circle">account_circle</span>
+</div>
+</div>
+</nav>
+<!-- Main Content Canvas -->
+<main class="flex-grow flex items-center justify-center pt-24 pb-12 px-6">
+<div class="w-full max-width-[640px] max-w-2xl mx-auto">
+<!-- Step Indicator -->
+<div class="flex items-center justify-center gap-4 mb-12">
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-500 flex items-center justify-center">
+<span class="material-symbols-outlined text-sm font-bold" data-icon="check">check</span>
+</div>
+<span class="text-sm font-medium text-[#9898A8]">주제</span>
+</div>
+<div class="w-12 h-px bg-[#232330]"></div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full bg-[#7C5CFC] text-white flex items-center justify-center font-bold text-sm">2</div>
+<span class="text-sm font-semibold text-[#F0F0F5]">목적</span>
+</div>
+<div class="w-12 h-px bg-[#232330]"></div>
+<div class="flex items-center gap-2">
+<div class="w-8 h-8 rounded-full border border-[#232330] text-[#5A5A6E] flex items-center justify-center font-bold text-sm">3</div>
+<span class="text-sm font-medium text-[#5A5A6E]">디자인</span>
+</div>
+</div>
+<!-- Header Section -->
+<div class="text-center mb-10">
+<h1 class="text-[1.75rem] font-semibold text-[#F0F0F5] mb-2 tracking-tight">어떤 목적으로 만들까요?</h1>
+<p class="text-[#9898A8] text-sm">콘텐츠의 성격에 맞춰 최적화된 레이아웃을 추천해 드립니다.</p>
+</div>
+<!-- Selection Grid/List -->
+<div class="space-y-4 mb-12">
+<!-- Option 1 -->
+<label class="group relative flex items-center gap-4 p-5 bg-[#12121A] rounded-xl border border-transparent hover:border-[#7C5CFC]/30 cursor-pointer transition-all active:scale-[0.99]">
+<input class="hidden peer" name="purpose" type="radio"/>
+<div class="w-12 h-12 flex items-center justify-center bg-[#1A1A25] rounded-lg text-[#7C5CFC] transition-colors group-hover:bg-[#232330]">
+<span class="material-symbols-outlined text-2xl" data-icon="info">info</span>
+</div>
+<div class="flex-grow">
+<h3 class="text-[1rem] font-semibold text-[#F0F0F5]">정보 전달</h3>
+<p class="text-[#9898A8] text-sm mt-0.5">핵심 내용을 명확하게 전달</p>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-[#232330] flex items-center justify-center peer-checked:border-[#7C5CFC] transition-colors">
+<div class="w-2.5 h-2.5 rounded-full bg-[#7C5CFC] opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+</div>
+<div class="absolute inset-0 rounded-xl peer-checked:border-[#7C5CFC] border-2 pointer-events-none opacity-0 peer-checked:opacity-100 ring-4 ring-[#7C5CFC]/10"></div>
+</label>
+<!-- Option 2 (Selected Example) -->
+<label class="group relative flex items-center gap-4 p-5 bg-[#12121A] rounded-xl border-2 border-[#7C5CFC] cursor-pointer transition-all active:scale-[0.99] ring-4 ring-[#7C5CFC]/10">
+<input checked="" class="hidden peer" name="purpose" type="radio"/>
+<div class="w-12 h-12 flex items-center justify-center bg-[#1A1A25] rounded-lg text-[#7C5CFC]">
+<span class="material-symbols-outlined text-2xl" data-icon="heart" style="font-variation-settings: 'FILL' 1;">person_heart</span>
+</div>
+<div class="flex-grow">
+<h3 class="text-[1rem] font-semibold text-[#F0F0F5]">감성 공감</h3>
+<p class="text-[#9898A8] text-sm mt-0.5">독자의 감정에 공감하고 위로</p>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-[#7C5CFC] flex items-center justify-center">
+<div class="w-2.5 h-2.5 rounded-full bg-[#7C5CFC]"></div>
+</div>
+</label>
+<!-- Option 3 -->
+<label class="group relative flex items-center gap-4 p-5 bg-[#12121A] rounded-xl border border-transparent hover:border-[#7C5CFC]/30 cursor-pointer transition-all active:scale-[0.99]">
+<input class="hidden peer" name="purpose" type="radio"/>
+<div class="w-12 h-12 flex items-center justify-center bg-[#1A1A25] rounded-lg text-[#7C5CFC] transition-colors group-hover:bg-[#232330]">
+<span class="material-symbols-outlined text-2xl" data-icon="touch_app">touch_app</span>
+</div>
+<div class="flex-grow">
+<h3 class="text-[1rem] font-semibold text-[#F0F0F5]">행동 유도</h3>
+<p class="text-[#9898A8] text-sm mt-0.5">특정 행동을 이끌어내기</p>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-[#232330] flex items-center justify-center peer-checked:border-[#7C5CFC] transition-colors">
+<div class="w-2.5 h-2.5 rounded-full bg-[#7C5CFC] opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+</div>
+<div class="absolute inset-0 rounded-xl peer-checked:border-[#7C5CFC] border-2 pointer-events-none opacity-0 peer-checked:opacity-100"></div>
+</label>
+<!-- Option 4 -->
+<label class="group relative flex items-center gap-4 p-5 bg-[#12121A] rounded-xl border border-transparent hover:border-[#7C5CFC]/30 cursor-pointer transition-all active:scale-[0.99]">
+<input class="hidden peer" name="purpose" type="radio"/>
+<div class="w-12 h-12 flex items-center justify-center bg-[#1A1A25] rounded-lg text-[#7C5CFC] transition-colors group-hover:bg-[#232330]">
+<span class="material-symbols-outlined text-2xl" data-icon="library_books">library_books</span>
+</div>
+<div class="flex-grow">
+<h3 class="text-[1rem] font-semibold text-[#F0F0F5]">교육/가이드</h3>
+<p class="text-[#9898A8] text-sm mt-0.5">단계별 안내와 설명</p>
+</div>
+<div class="w-6 h-6 rounded-full border-2 border-[#232330] flex items-center justify-center peer-checked:border-[#7C5CFC] transition-colors">
+<div class="w-2.5 h-2.5 rounded-full bg-[#7C5CFC] opacity-0 peer-checked:opacity-100 transition-opacity"></div>
+</div>
+<div class="absolute inset-0 rounded-xl peer-checked:border-[#7C5CFC] border-2 pointer-events-none opacity-0 peer-checked:opacity-100"></div>
+</label>
+</div>
+<!-- Footer Actions -->
+<div class="flex items-center justify-between pt-8 border-t border-[#1A1A25]">
+<button class="flex items-center gap-2 px-6 py-3 rounded-lg text-[#9898A8] font-medium hover:text-[#F0F0F5] hover:bg-[#1A1A25] transition-all active:scale-95">
+                    이전
+                </button>
+<button class="brand-gradient flex items-center gap-2 px-8 py-3 rounded-lg text-[#F0F0F5] font-semibold shadow-lg shadow-[#7C5CFC]/10 hover:opacity-90 active:scale-95 transition-all">
+                    다음
+                    <span class="material-symbols-outlined text-lg" data-icon="arrow_forward">arrow_forward</span>
+</button>
+</div>
+</div>
+</main>
+<!-- SideNavBar (Shared Component - Hidden on focused wizard screen as per UX guidelines) -->
+<!-- Suppressed to prioritize the transaction/wizard focus -->
+</body></html>

@@ -1,0 +1,112 @@
+{
+  "session_id": "test-journal",
+  "started_at": "2026-03-09T12:31:51.950348+09:00",
+  "pipeline_status": "completed",
+  "total_entries": 7,
+  "summary": {
+    "agents": {
+      "orchestrator": {
+        "status": "success",
+        "actions": 3,
+        "duration_ms": 0
+      },
+      "researcher": {
+        "status": "success",
+        "actions": 3,
+        "duration_ms": 500
+      },
+      "qa_editor": {
+        "status": "warning",
+        "actions": 1,
+        "duration_ms": 0
+      }
+    },
+    "total_entries": 7
+  },
+  "entries": [
+    {
+      "timestamp": "2026-03-09T12:31:51.951059+09:00",
+      "agent_id": "orchestrator",
+      "action": "테스트 시작",
+      "detail": "업무일지 시스템 테스트",
+      "input_summary": "",
+      "output_summary": "",
+      "status": "info",
+      "duration_ms": 0,
+      "metadata": {}
+    },
+    {
+      "timestamp": "2026-03-09T12:31:51.951073+09:00",
+      "agent_id": "researcher",
+      "action": "실행 시작",
+      "detail": "researcher 에이전트가 작업을 시작합니다",
+      "input_summary": "테스트 입력",
+      "output_summary": "",
+      "status": "info",
+      "duration_ms": 0,
+      "metadata": {}
+    },
+    {
+      "timestamp": "2026-03-09T12:31:51.951087+09:00",
+      "agent_id": "researcher",
+      "action": "검색",
+      "detail": "뉴스 23건 수집",
+      "input_summary": "",
+      "output_summary": "",
+      "status": "info",
+      "duration_ms": 0,
+      "metadata": {}
+    },
+    {
+      "timestamp": "2026-03-09T12:31:51.951093+09:00",
+      "agent_id": "researcher",
+      "action": "실행 완료",
+      "detail": "후보 2개",
+      "input_summary": "",
+      "output_summary": "후보 2개",
+      "status": "success",
+      "duration_ms": 500,
+      "metadata": {}
+    },
+    {
+      "timestamp": "2026-03-09T12:31:51.951101+09:00",
+      "agent_id": "orchestrator",
+      "action": "데이터 전달",
+      "detail": "researcher → strategist: 후보 주제 2개 JSON",
+      "input_summary": "",
+      "output_summary": "",
+      "status": "info",
+      "duration_ms": 0,
+      "metadata": {}
+    },
+    {
+      "timestamp": "2026-03-09T12:31:51.951106+09:00",
+      "agent_id": "qa_editor",
+      "action": "검증 통과 (경고 있음)",
+      "detail": "경고 1건",
+      "input_summary": "",
+      "output_summary": "",
+      "status": "warning",
+      "duration_ms": 0,
+      "metadata": {
+        "warnings": [
+          {
+            "field": "test",
+            "message": "테스트 경고"
+          }
+        ]
+      }
+    },
+    {
+      "timestamp": "2026-03-09T12:31:51.951109+09:00",
+      "agent_id": "orchestrator",
+      "action": "파이프라인 종료",
+      "detail": "세션 test-journal — 상태: completed",
+      "input_summary": "",
+      "output_summary": "",
+      "status": "success",
+      "duration_ms": 0,
+      "metadata": {}
+    }
+  ]
+}

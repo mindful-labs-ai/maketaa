@@ -1,0 +1,3 @@
+{"t":0,"agent":"ad6ef87","agent_type":"architect","event":"agent_stop","success":true}
+{"t":0,"agent":"ad0535e","agent_type":"security-reviewer","event":"agent_stop","success":true}
+{"t":0,"agent":"a414117","agent_type":"code-reviewer","event":"agent_stop","success":true}

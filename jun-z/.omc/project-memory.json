@@ -1,0 +1,250 @@
+{
+  "version": "1.0.0",
+  "lastScanned": 1773745776315,
+  "projectRoot": "/Users/sicei/Documents/GitHub/jun-z",
+  "techStack": {
+    "languages": [],
+    "frameworks": [],
+    "packageManager": null,
+    "runtime": null
+  },
+  "build": {
+    "buildCommand": null,
+    "testCommand": null,
+    "lintCommand": null,
+    "devCommand": null,
+    "scripts": {}
+  },
+  "conventions": {
+    "namingStyle": null,
+    "importStyle": null,
+    "testPattern": null,
+    "fileOrganization": null
+  },
+  "structure": {
+    "isMonorepo": false,
+    "workspaces": [],
+    "mainDirectories": [],
+    "gitBranches": null
+  },
+  "customNotes": [],
+  "directoryMap": {
+    "ai-video-maker": {
+      "path": "ai-video-maker",
+      "purpose": null,
+      "fileCount": 13,
+      "lastAccessed": 1773745776300,
+      "keyFiles": [
+        "README.md",
+        "components.json",
+        "eslint.config.mjs",
+        "next-env.d.ts",
+        "next.config.ts"
+      ]
+    },
+    "ai-video-maker/docs": {
+      "path": "ai-video-maker/docs",
+      "purpose": "Documentation",
+      "fileCount": 1,
+      "lastAccessed": 1773745776300,
+      "keyFiles": [
+        "prettier.md"
+      ]
+    }
+  },
+  "hotPaths": [
+    {
+      "path": "ai-video-maker/README.md",
+      "accessCount": 2,
+      "lastAccessed": 1773745955316,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/lib/maker/types.ts",
+      "accessCount": 2,
+      "lastAccessed": 1773745955600,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/lib/maker/useAiConfigStore.ts",
+      "accessCount": 2,
+      "lastAccessed": 1773745959217,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/lib/maker/prompt.ts",
+      "accessCount": 2,
+      "lastAccessed": 1773745959700,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/package.json",
+      "accessCount": 2,
+      "lastAccessed": 1773745960072,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/.env.local",
+      "accessCount": 1,
+      "lastAccessed": 1773745869252,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/tsconfig.json",
+      "accessCount": 1,
+      "lastAccessed": 1773745869826,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/next.config.ts",
+      "accessCount": 1,
+      "lastAccessed": 1773745869863,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/app/layout.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1773745873260,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/app/page.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1773745873456,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/app/maker/page.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1773745874115,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/app/api/scenes/route.ts",
+      "accessCount": 1,
+      "lastAccessed": 1773745877505,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/app/api/image-gen/gemini/[id]/route.ts",
+      "accessCount": 1,
+      "lastAccessed": 1773745877904,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/app/api/image-gen/gpt/[id]/route.ts",
+      "accessCount": 1,
+      "lastAccessed": 1773745878122,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/lib/maker/utils.ts",
+      "accessCount": 1,
+      "lastAccessed": 1773745878679,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/app/api/kling/clip-gen/[id]/route.ts",
+      "accessCount": 1,
+      "lastAccessed": 1773745881307,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/app/api/seedance/clip-gen/[id]/route.ts",
+      "accessCount": 1,
+      "lastAccessed": 1773745881726,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/components/maker/VisualPipeLine.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1773745882145,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/components/maker/NarrationPanel.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1773745882329,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/lib/maker/imagePromptBuilder.ts",
+      "accessCount": 1,
+      "lastAccessed": 1773745886099,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/lib/maker/clipPromptBuilder.ts",
+      "accessCount": 1,
+      "lastAccessed": 1773745886348,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/app/video/page.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1773745886492,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/app/gemini/page.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1773745886801,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/components.json",
+      "accessCount": 1,
+      "lastAccessed": 1773745890038,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/.prettierrc",
+      "accessCount": 1,
+      "lastAccessed": 1773745890213,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/components/maker/ConfigModal.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1773745894080,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/components/maker/ImageSection.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1773745894511,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/components/maker/ClipSection.tsx",
+      "accessCount": 1,
+      "lastAccessed": 1773745894612,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/app/api/kling/[id]/route.ts",
+      "accessCount": 1,
+      "lastAccessed": 1773745897455,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/app/api/seedance/[id]/route.ts",
+      "accessCount": 1,
+      "lastAccessed": 1773745897885,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/src/lib/shared/utils.ts",
+      "accessCount": 1,
+      "lastAccessed": 1773745897955,
+      "type": "file"
+    },
+    {
+      "path": "ai-video-maker/docs/PROJECT_SPEC.md",
+      "accessCount": 1,
+      "lastAccessed": 1773746256698,
+      "type": "file"
+    }
+  ],
+  "userDirectives": []
+}

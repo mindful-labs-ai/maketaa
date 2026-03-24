@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard/dist/web/static/pretendard.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "tertiary": "#ffb77d",
+              "surface-dim": "#131318",
+              "on-secondary-container": "#aec6ff",
+              "surface-bright": "#39383e",
+              "surface-tint": "#cabeff",
+              "background": "#0A0A0F",
+              "outline-variant": "#484555",
+              "on-secondary": "#002e6b",
+              "on-primary-fixed-variant": "#4918c8",
+              "on-primary-container": "#2b0088",
+              "error": "#ffb4ab",
+              "tertiary-container": "#d57a20",
+              "on-tertiary": "#4d2600",
+              "surface-variant": "#35343a",
+              "on-error": "#690005",
+              "inverse-on-surface": "#303036",
+              "on-tertiary-fixed-variant": "#6e3900",
+              "primary-container": "#947dff",
+              "on-error-container": "#ffdad6",
+              "primary-fixed": "#e6deff",
+              "secondary": "#aec6ff",
+              "on-background": "#e4e1e9",
+              "inverse-primary": "#613de0",
+              "surface-container-low": "#1b1b20",
+              "on-primary-fixed": "#1c0062",
+              "inverse-surface": "#e4e1e9",
+              "primary": "#cabeff",
+              "on-tertiary-container": "#432100",
+              "error-container": "#93000a",
+              "on-surface": "#e4e1e9",
+              "surface-container-lowest": "#0e0e13",
+              "tertiary-fixed": "#ffdcc3",
+              "on-tertiary-fixed": "#2f1500",
+              "on-secondary-fixed": "#001a43",
+              "surface-container-highest": "#35343a",
+              "surface": "#131318",
+              "secondary-fixed": "#d8e2ff",
+              "secondary-container": "#024ead",
+              "on-secondary-fixed-variant": "#004397",
+              "tertiary-fixed-dim": "#ffb77d",
+              "on-primary": "#32009a",
+              "surface-container": "#1f1f25",
+              "primary-fixed-dim": "#cabeff",
+              "surface-container-high": "#2a292f",
+              "outline": "#938ea1",
+              "secondary-fixed-dim": "#aec6ff",
+              "on-surface-variant": "#c9c4d8"
+            },
+            fontFamily: {
+              "headline": ["Pretendard", "Manrope"],
+              "body": ["Pretendard", "Inter"],
+              "label": ["Pretendard", "Inter"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.75rem", "xl": "1rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body { font-family: 'Pretendard', sans-serif; }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+        }
+        .brand-glow {
+            box-shadow: 0 0 40px -10px rgba(124, 92, 252, 0.3);
+            border: 1px solid rgba(124, 92, 252, 0.2);
+        }
+        .shimmer-text {
+            background: linear-gradient(90deg, #9898A8 0%, #F0F0F5 50%, #9898A8 100%);
+            background-size: 200% auto;
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: shimmer 3s linear infinite;
+        }
+        @keyframes shimmer {
+            to { background-position: 200% center; }
+        }
+    </style>
+</head>
+<body class="bg-[#0A0A0F] text-on-surface min-h-screen flex items-center justify-center p-6">
+<!-- Focused Generation Card -->
+<main class="w-full max-w-[480px] bg-[#12121A] rounded-xl brand-glow overflow-hidden relative p-10 flex flex-col items-center">
+<!-- Decorative Background Gradient Bloom -->
+<div class="absolute -top-24 -left-24 w-48 h-48 bg-[#7C5CFC] opacity-10 blur-[80px]"></div>
+<div class="absolute -bottom-24 -right-24 w-48 h-48 bg-[#5B8DEF] opacity-10 blur-[80px]"></div>
+<!-- Magic Wand Icon Section -->
+<div class="relative mb-8">
+<div class="w-20 h-20 bg-gradient-to-br from-[#7C5CFC]/20 to-[#5B8DEF]/20 rounded-full flex items-center justify-center relative">
+<span class="material-symbols-outlined text-4xl text-[#7C5CFC]" data-icon="magic_button">magic_button</span>
+<!-- Sparkles -->
+<span class="material-symbols-outlined absolute -top-1 -right-1 text-sm text-[#5B8DEF]" data-icon="auto_awesome" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+<span class="material-symbols-outlined absolute bottom-2 -left-2 text-xs text-[#7C5CFC]" data-icon="sparkles" style="font-variation-settings: 'FILL' 1;">colors_spark</span>
+</div>
+</div>
+<!-- Heading & Status -->
+<div class="text-center space-y-3 mb-10">
+<h2 class="text-2xl font-bold tracking-tight text-[#F0F0F5]">카드뉴스를 만들고 있어요</h2>
+<div class="flex items-center justify-center gap-1.5">
+<p class="text-sm shimmer-text font-medium">AI가 최고의 디자인을 구성하는 중입니다...</p>
+<span class="flex space-x-0.5">
+<span class="w-1 h-1 bg-[#9898A8] rounded-full animate-bounce" style="animation-delay: 0.1s"></span>
+<span class="w-1 h-1 bg-[#9898A8] rounded-full animate-bounce" style="animation-delay: 0.2s"></span>
+<span class="w-1 h-1 bg-[#9898A8] rounded-full animate-bounce" style="animation-delay: 0.3s"></span>
+</span>
+</div>
+</div>
+<!-- Progress List -->
+<div class="w-full space-y-5 mb-10 px-4">
+<div class="flex items-center gap-4 transition-opacity duration-500">
+<div class="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/10">
+<span class="material-symbols-outlined text-emerald-500 text-lg font-bold" data-icon="check">check</span>
+</div>
+<span class="text-sm text-on-surface font-medium">주제 분석 완료</span>
+</div>
+<div class="flex items-center gap-4 transition-opacity duration-500">
+<div class="flex items-center justify-center w-6 h-6 rounded-full bg-emerald-500/10">
+<span class="material-symbols-outlined text-emerald-500 text-lg font-bold" data-icon="check">check</span>
+</div>
+<span class="text-sm text-on-surface font-medium">콘텐츠 생성 완료</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center justify-center w-6 h-6">
+<span class="material-symbols-outlined text-[#7C5CFC] text-xl animate-spin" data-icon="progress_activity">progress_activity</span>
+</div>
+<span class="text-sm text-[#F0F0F5] font-semibold">디자인 적용 중...</span>
+</div>
+<div class="flex items-center gap-4 opacity-40">
+<div class="flex items-center justify-center w-6 h-6">
+<span class="material-symbols-outlined text-[#9898A8] text-xl" data-icon="circle">circle</span>
+</div>
+<span class="text-sm text-[#9898A8]">이미지 검색 대기</span>
+</div>
+</div>
+<!-- Progress Bar Section -->
+<div class="w-full space-y-3 mb-10">
+<div class="w-full h-2 bg-[#232330] rounded-full overflow-hidden">
+<div class="h-full w-[65%] bg-gradient-to-r from-[#7C5CFC] to-[#5B8DEF] rounded-full relative">
+<div class="absolute inset-0 bg-white/20 animate-pulse"></div>
+</div>
+</div>
+<p class="text-[0.6875rem] text-[#9898A8] text-center font-medium tracking-wider uppercase">약 30초 정도 소요됩니다</p>
+</div>
+<!-- Bottom Action -->
+<button class="px-8 py-2.5 text-sm font-medium text-[#9898A8] hover:text-[#F0F0F5] transition-colors rounded-lg border border-transparent hover:bg-[#1A1A25]">
+            취소
+        </button>
+</main>
+<!-- Global Background Elements (Brand Consistency) -->
+<div class="fixed top-0 left-0 w-full h-full pointer-events-none -z-10 overflow-hidden">
+<div class="absolute top-[10%] right-[5%] w-[40rem] h-[40rem] bg-[#7C5CFC]/5 rounded-full blur-[120px]"></div>
+<div class="absolute bottom-[10%] left-[5%] w-[40rem] h-[40rem] bg-[#5B8DEF]/5 rounded-full blur-[120px]"></div>
+</div>
+</body></html>

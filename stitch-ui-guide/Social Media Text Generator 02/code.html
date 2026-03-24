@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<title>Curator AI - 소셜미디어 텍스트 생성</title>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              "surface-container-high": "#2a292f",
+              "tertiary-fixed-dim": "#ffb77d",
+              "secondary-fixed-dim": "#aec6ff",
+              "primary": "#cabeff",
+              "surface-variant": "#35343a",
+              "tertiary-fixed": "#ffdcc3",
+              "outline": "#938ea1",
+              "error-container": "#93000a",
+              "on-tertiary-fixed": "#2f1500",
+              "on-surface-variant": "#c9c4d8",
+              "on-primary-fixed-variant": "#4918c8",
+              "secondary-fixed": "#d8e2ff",
+              "surface-container-highest": "#35343a",
+              "secondary-container": "#024ead",
+              "on-primary-container": "#2b0088",
+              "on-background": "#e4e1e9",
+              "surface-container-lowest": "#0e0e13",
+              "surface-container-low": "#1b1b20",
+              "inverse-surface": "#e4e1e9",
+              "error": "#ffb4ab",
+              "background": "#131318",
+              "surface-bright": "#39383e",
+              "on-tertiary": "#4d2600",
+              "on-secondary-fixed-variant": "#004397",
+              "on-error-container": "#ffdad6",
+              "surface-tint": "#cabeff",
+              "surface": "#131318",
+              "on-tertiary-fixed-variant": "#6e3900",
+              "on-secondary-fixed": "#001a43",
+              "on-error": "#690005",
+              "on-surface": "#e4e1e9",
+              "tertiary": "#ffb77d",
+              "outline-variant": "#484555",
+              "surface-container": "#1f1f25",
+              "primary-fixed-dim": "#cabeff",
+              "on-primary-fixed": "#1c0062",
+              "tertiary-container": "#d57a20",
+              "on-secondary-container": "#aec6ff",
+              "primary-fixed": "#e6deff",
+              "inverse-on-surface": "#303036",
+              "on-tertiary-container": "#432100",
+              "on-primary": "#32009a",
+              "on-secondary": "#002e6b",
+              "secondary": "#aec6ff",
+              "inverse-primary": "#613de0",
+              "surface-dim": "#131318",
+              "primary-container": "#947dff"
+            },
+            fontFamily: {
+              "pretendard": ["Pretendard", "sans-serif"],
+              "headline": ["Pretendard", "sans-serif"],
+              "body": ["Pretendard", "sans-serif"],
+              "label": ["Pretendard", "sans-serif"]
+            },
+            borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "full": "9999px"},
+          },
+        },
+      }
+    </script>
+<style>
+        body {
+            background-color: #0A0A0F;
+            color: #F0F0F5;
+            font-family: 'Pretendard', sans-serif;
+        }
+        .glass-panel {
+            background: rgba(26, 26, 37, 0.6);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(42, 42, 58, 0.4);
+        }
+        .brand-gradient {
+            background: linear-gradient(135deg, #7C5CFC 0%, #5B8DEF 100%);
+        }
+        .brand-text-gradient {
+            background: linear-gradient(135deg, #7C5CFC 0%, #5B8DEF 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .ghost-border {
+            border: 1px solid rgba(42, 42, 58, 0.4);
+        }
+        .active-chip {
+            border-color: #7C5CFC;
+            box-shadow: 0 0 12px rgba(124, 92, 252, 0.2);
+            background: rgba(124, 92, 252, 0.1);
+        }
+        .material-symbols-outlined {
+            font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="flex min-h-screen">
+<!-- SideNavBar -->
+<aside class="h-screen w-64 left-0 sticky bg-[#12121A] flex flex-col p-4 gap-y-2 shrink-0 overflow-y-auto">
+<div class="flex items-center gap-3 px-2 mb-8 mt-2">
+<div class="w-10 h-10 rounded-xl brand-gradient flex items-center justify-center text-white shadow-lg shadow-[#7C5CFC]/20">
+<span class="material-symbols-outlined">auto_awesome</span>
+</div>
+<div>
+<h1 class="text-lg font-bold text-[#F0F0F5] leading-none">Curator AI</h1>
+<p class="text-[10px] text-[#9898A8] mt-1 uppercase tracking-wider">The Digital Curator</p>
+</div>
+</div>
+<nav class="flex-1 space-y-1">
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#F0F0F5] bg-[#1A1A25] rounded-lg border-l-2 border-[#7C5CFC] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined text-[#7C5CFC]">auto_awesome</span>
+<span class="font-pretendard body-md">Generator</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#9898A8] hover:bg-[#1A1A25]/50 hover:text-[#F0F0F5] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">dashboard_customize</span>
+<span class="font-pretendard body-md">Templates</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#9898A8] hover:bg-[#1A1A25]/50 hover:text-[#F0F0F5] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">book</span>
+<span class="font-pretendard body-md">Library</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#9898A8] hover:bg-[#1A1A25]/50 hover:text-[#F0F0F5] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">bar_chart</span>
+<span class="font-pretendard body-md">Analytics</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#9898A8] hover:bg-[#1A1A25]/50 hover:text-[#F0F0F5] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">settings</span>
+<span class="font-pretendard body-md">Settings</span>
+</a>
+</nav>
+<div class="mt-auto pt-6 space-y-1">
+<button class="w-full flex items-center justify-center gap-2 brand-gradient text-white py-2.5 rounded-lg font-semibold text-sm mb-4 active:scale-95 transition-transform duration-150">
+<span class="material-symbols-outlined text-sm">add_circle</span>
+                New Draft
+            </button>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#9898A8] hover:bg-[#1A1A25] hover:text-[#F0F0F5] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">help</span>
+<span class="font-pretendard body-md">Help Center</span>
+</a>
+<a class="flex items-center gap-3 px-3 py-2.5 text-[#9898A8] hover:bg-[#1A1A25] hover:text-[#F0F0F5] transition-all duration-200 ease-in-out" href="#">
+<span class="material-symbols-outlined">logout</span>
+<span class="font-pretendard body-md">Log Out</span>
+</a>
+</div>
+</aside>
+<!-- Main Content Canvas -->
+<main class="flex-1 overflow-y-auto">
+<!-- TopAppBar -->
+<header class="bg-[#0A0A0F] sticky top-0 z-10 flex justify-between items-center w-full px-8 py-4">
+<div class="flex items-center gap-4">
+<span class="font-pretendard headline-md text-[#F0F0F5] tracking-tight font-semibold">소셜미디어 텍스트 생성</span>
+</div>
+<div class="flex items-center gap-4">
+<div class="flex items-center bg-[#12121A] px-4 py-2 rounded-full border border-white/5 w-64">
+<span class="material-symbols-outlined text-[#9898A8] text-lg mr-2">search</span>
+<input class="bg-transparent border-none text-sm text-[#F0F0F5] focus:ring-0 w-full placeholder-[#5A5A6E]" placeholder="Search prompts..." type="text"/>
+</div>
+<button class="text-[#9898A8] hover:text-[#F0F0F5] transition-colors"><span class="material-symbols-outlined">history</span></button>
+<button class="text-[#9898A8] hover:text-[#F0F0F5] transition-colors"><span class="material-symbols-outlined">settings</span></button>
+<img class="w-8 h-8 rounded-full object-cover ring-2 ring-[#7C5CFC]/20" data-alt="User profile avatar circle" src="https://lh3.googleusercontent.com/aida-public/AB6AXuD4Isr525fuZNKtLmn78CiAySa0oXrK-AfGLpeI4R7LP5FaTajKpeVvaSV3ZSbkt7eWAjNtSjrd_3UK_T1dCBka5vkBJ8izCpYvoN0Re90FQn53QspdNODvES7En80VGS0hHe6MwvGyZJC__e3uAOdlbLVMd_vv0IkKu9j7x1M8u75MY7fgbKxE4UhMhVBdEHz_59glwWJhTzDHtJh-UThU0vflStlKeA6C-Yi2Gm9AHmm5i8bEUKjFRVRgntHXq5dx-smMEQRHXkv6"/>
+</div>
+</header>
+<div class="max-w-[720px] mx-auto px-6 py-12">
+<!-- Hero Header -->
+<div class="mb-12">
+<h2 class="text-3xl font-bold text-[#F0F0F5] mb-2 font-pretendard tracking-tight">소셜미디어 텍스트 생성</h2>
+<p class="text-[#9898A8] font-pretendard body-md">플랫폼에 맞는 마케팅 카피와 댓글을 AI가 작성합니다</p>
+</div>
+<!-- Configuration Form -->
+<div class="space-y-10">
+<!-- Platform Selection -->
+<section>
+<label class="block text-xs font-medium text-[#5A5A6E] uppercase tracking-widest mb-4">Platform Selector</label>
+<div class="flex flex-wrap gap-3">
+<button class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1A1A25] ghost-border text-[#9898A8] hover:text-[#F0F0F5] transition-all active-chip">
+<span class="material-symbols-outlined text-[18px]">photo_camera</span>
+<span class="text-sm font-medium">Instagram</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1A1A25] ghost-border text-[#9898A8] hover:text-[#F0F0F5] transition-all">
+<span class="material-symbols-outlined text-[18px]">alternate_email</span>
+<span class="text-sm font-medium">Threads</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1A1A25] ghost-border text-[#9898A8] hover:text-[#F0F0F5] transition-all">
+<span class="material-symbols-outlined text-[18px]">play_circle</span>
+<span class="text-sm font-medium">YouTube</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1A1A25] ghost-border text-[#9898A8] hover:text-[#F0F0F5] transition-all">
+<span class="material-symbols-outlined text-[18px]">music_note</span>
+<span class="text-sm font-medium">TikTok</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1A1A25] ghost-border text-[#9898A8] hover:text-[#F0F0F5] transition-all">
+<span class="material-symbols-outlined text-[18px]">close</span>
+<span class="text-sm font-medium">X (Twitter)</span>
+</button>
+<button class="flex items-center gap-2 px-4 py-2.5 rounded-full bg-[#1A1A25] ghost-border text-[#9898A8] hover:text-[#F0F0F5] transition-all">
+<span class="material-symbols-outlined text-[18px]">description</span>
+<span class="text-sm font-medium">블로그</span>
+</button>
+</div>
+</section>
+<!-- Subject Input -->
+<section>
+<label class="block text-xs font-medium text-[#5A5A6E] uppercase tracking-widest mb-3">주제 / 키워드</label>
+<div class="relative group">
+<input class="w-full bg-[#1A1A25] ghost-border rounded-xl px-4 py-4 text-[#F0F0F5] placeholder-[#5A5A6E] focus:ring-2 focus:ring-[#7C5CFC]/20 focus:border-[#7C5CFC] transition-all outline-none" placeholder="홍보할 제품이나 주제를 입력하세요" type="text"/>
+<div class="absolute right-4 top-1/2 -translate-y-1/2 text-[#5A5A6E] group-focus-within:text-[#7C5CFC] transition-colors">
+<span class="material-symbols-outlined">edit_note</span>
+</div>
+</div>
+</section>
+<!-- Tone & Style -->
+<section>
+<label class="block text-xs font-medium text-[#5A5A6E] uppercase tracking-widest mb-4">톤 &amp; 스타일</label>
+<div class="flex flex-wrap gap-2">
+<button class="px-4 py-2 rounded-lg bg-[#12121A] ghost-border text-[#9898A8] text-sm hover:bg-[#1A1A25] hover:text-[#F0F0F5] transition-all active-chip">전문적</button>
+<button class="px-4 py-2 rounded-lg bg-[#12121A] ghost-border text-[#9898A8] text-sm hover:bg-[#1A1A25] hover:text-[#F0F0F5] transition-all">캐주얼</button>
+<button class="px-4 py-2 rounded-lg bg-[#12121A] ghost-border text-[#9898A8] text-sm hover:bg-[#1A1A25] hover:text-[#F0F0F5] transition-all">유머</button>
+<button class="px-4 py-2 rounded-lg bg-[#12121A] ghost-border text-[#9898A8] text-sm hover:bg-[#1A1A25] hover:text-[#F0F0F5] transition-all">감성적</button>
+<button class="px-4 py-2 rounded-lg bg-[#12121A] ghost-border text-[#9898A8] text-sm hover:bg-[#1A1A25] hover:text-[#F0F0F5] transition-all">정보성</button>
+</div>
+</section>
+<!-- Content Type -->
+<section>
+<label class="block text-xs font-medium text-[#5A5A6E] uppercase tracking-widest mb-4">콘텐츠 유형</label>
+<div class="grid grid-cols-2 sm:grid-cols-4 gap-3">
+<button class="flex flex-col items-center justify-center p-4 rounded-xl bg-[#12121A] ghost-border text-[#9898A8] hover:text-[#F0F0F5] transition-all active-chip group">
+<span class="material-symbols-outlined mb-2 group-hover:scale-110 transition-transform">article</span>
+<span class="text-xs font-medium">게시글 캡션</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl bg-[#12121A] ghost-border text-[#9898A8] hover:text-[#F0F0F5] transition-all group">
+<span class="material-symbols-outlined mb-2 group-hover:scale-110 transition-transform">forum</span>
+<span class="text-xs font-medium">댓글/답글</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl bg-[#12121A] ghost-border text-[#9898A8] hover:text-[#F0F0F5] transition-all group">
+<span class="material-symbols-outlined mb-2 group-hover:scale-110 transition-transform">tag</span>
+<span class="text-xs font-medium">해시태그</span>
+</button>
+<button class="flex flex-col items-center justify-center p-4 rounded-xl bg-[#12121A] ghost-border text-[#9898A8] hover:text-[#F0F0F5] transition-all group">
+<span class="material-symbols-outlined mb-2 group-hover:scale-110 transition-transform">person_book</span>
+<span class="text-xs font-medium">프로필 소개</span>
+</button>
+</div>
+</section>
+<!-- Collapsible Additional Instructions -->
+<section class="bg-[#12121A] rounded-xl overflow-hidden border border-white/5">
+<button class="w-full flex items-center justify-between px-6 py-4 text-[#F0F0F5] hover:bg-white/5 transition-colors">
+<div class="flex items-center gap-3">
+<span class="material-symbols-outlined text-sm text-[#7C5CFC]">tips_and_updates</span>
+<span class="text-sm font-semibold">추가 지시사항</span>
+</div>
+<span class="material-symbols-outlined">expand_more</span>
+</button>
+<div class="px-6 pb-6">
+<textarea class="w-full bg-[#1A1A25] ghost-border rounded-lg p-3 text-sm text-[#F0F0F5] placeholder-[#5A5A6E] focus:ring-1 focus:ring-[#7C5CFC] outline-none resize-none" placeholder="특정 금지어, 타겟 고객, 포함하고 싶은 키워드 등을 자유롭게 적어주세요." rows="4"></textarea>
+</div>
+</section>
+</div>
+<!-- Action Button Area -->
+<div class="mt-16 flex flex-col items-center gap-4">
+<button class="w-full py-4 brand-gradient rounded-xl flex items-center justify-center gap-3 text-white font-bold text-lg shadow-xl shadow-[#7C5CFC]/20 active:scale-[0.98] transition-all">
+<span class="material-symbols-outlined" style="font-variation-settings: 'FILL' 1;">auto_awesome</span>
+                    텍스트 생성
+                </button>
+<p class="text-[11px] text-[#5A5A6E] flex items-center gap-1">
+<span class="material-symbols-outlined text-xs">info</span>
+                    AI는 가끔 부정확한 정보를 제공할 수 있습니다. 생성된 내용을 확인해 주세요.
+                </p>
+</div>
+<!-- Preview Card (Ghost style to show potential) -->
+<div class="mt-20 opacity-40">
+<label class="block text-xs font-medium text-[#5A5A6E] uppercase tracking-widest mb-4">Preview Placeholder</label>
+<div class="bg-gradient-to-br from-[#12121A] to-[#0A0A0F] rounded-2xl p-8 border border-white/5 flex flex-col items-center justify-center min-h-[200px] border-dashed">
+<span class="material-symbols-outlined text-4xl text-[#1A1A25] mb-2">auto_fix_high</span>
+<p class="text-sm text-[#5A5A6E]">설정을 완료하고 생성을 누르면 이곳에 결과가 나타납니다</p>
+</div>
+</div>
+</div>
+</main>
+<!-- Floating Prompt Bar (Global Intent) -->
+<div class="fixed bottom-8 left-1/2 -translate-x-1/2 w-full max-w-lg px-6 z-20">
+<div class="glass-panel rounded-full px-6 py-3 flex items-center gap-4 shadow-2xl">
+<span class="material-symbols-outlined text-[#7C5CFC]">psychology</span>
+<input class="bg-transparent border-none flex-1 text-sm text-[#F0F0F5] focus:ring-0 placeholder-[#5A5A6E]" placeholder="AI에게 다른 스타일을 물어보세요..." type="text"/>
+<button class="p-2 rounded-full hover:bg-white/10 transition-colors">
+<span class="material-symbols-outlined text-[#9898A8]">send</span>
+</button>
+</div>
+</div>
+</body></html>

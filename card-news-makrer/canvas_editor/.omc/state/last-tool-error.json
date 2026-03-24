@@ -1,0 +1,7 @@
+{
+  "tool_name": "mcp__playwright__browser_type",
+  "tool_input_preview": "{\"element\":\"주제 입력 필드\",\"ref\":\"e48\",\"text\":\"봄철 우울감 극복하기\"}",
+  "error": "### Error\nError: Ref e48 not found in the current page snapshot. Try capturing new snapshot.",
+  "timestamp": "2026-03-18T01:04:27.198Z",
+  "retry_count": 1
+}

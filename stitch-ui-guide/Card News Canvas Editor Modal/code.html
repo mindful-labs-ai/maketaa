@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+
+<html class="dark" lang="ko"><head>
+<meta charset="utf-8"/>
+<meta content="width=device-width, initial-scale=1.0" name="viewport"/>
+<script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<link href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" rel="stylesheet"/>
+<link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&amp;display=swap" rel="stylesheet"/>
+<script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "tertiary-fixed": "#ffdcc3",
+            "error": "#ffb4ab",
+            "on-primary": "#32009a",
+            "surface-container-high": "#2a292f",
+            "on-surface": "#e4e1e9",
+            "surface-container-highest": "#35343a",
+            "tertiary-container": "#d57a20",
+            "on-secondary": "#002e6b",
+            "surface-container-low": "#1b1b20",
+            "primary-fixed-dim": "#cabeff",
+            "on-primary-fixed-variant": "#4918c8",
+            "on-primary-fixed": "#1c0062",
+            "inverse-surface": "#e4e1e9",
+            "on-primary-container": "#2b0088",
+            "surface-bright": "#39383e",
+            "surface-tint": "#cabeff",
+            "secondary-fixed-dim": "#aec6ff",
+            "tertiary": "#ffb77d",
+            "on-secondary-fixed-variant": "#004397",
+            "on-background": "#e4e1e9",
+            "surface-variant": "#35343a",
+            "primary": "#cabeff",
+            "on-surface-variant": "#c9c4d8",
+            "secondary-fixed": "#d8e2ff",
+            "secondary-container": "#024ead",
+            "secondary": "#aec6ff",
+            "on-tertiary": "#4d2600",
+            "on-error": "#690005",
+            "on-secondary-fixed": "#001a43",
+            "on-secondary-container": "#aec6ff",
+            "tertiary-fixed-dim": "#ffb77d",
+            "outline-variant": "#484555",
+            "on-tertiary-fixed-variant": "#6e3900",
+            "primary-container": "#947dff",
+            "on-error-container": "#ffdad6",
+            "inverse-primary": "#613de0",
+            "surface-dim": "#131318",
+            "error-container": "#93000a",
+            "surface-container-lowest": "#0e0e13",
+            "outline": "#938ea1",
+            "on-tertiary-container": "#432100",
+            "background": "#131318",
+            "surface-container": "#1f1f25",
+            "surface": "#131318",
+            "primary-fixed": "#e6deff",
+            "on-tertiary-fixed": "#2f1500",
+            "inverse-on-surface": "#303036"
+          },
+          fontFamily: {
+            "headline": ["Pretendard", "Manrope"],
+            "body": ["Pretendard", "Inter"],
+            "label": ["Pretendard", "Inter"]
+          },
+          borderRadius: {"DEFAULT": "0.25rem", "lg": "0.5rem", "xl": "0.75rem", "2xl": "1rem", "full": "9999px"},
+        },
+      },
+    }
+  </script>
+<style>
+    body { font-family: 'Pretendard', sans-serif; }
+    .material-symbols-outlined {
+      font-variation-settings: 'FILL' 0, 'wght' 400, 'GRAD' 0, 'opsz' 24;
+      display: inline-block;
+      line-height: 1;
+    }
+    .brand-gradient {
+      background: linear-gradient(135deg, #7C5CFC 0%, #5B8DEF 100%);
+    }
+    .glass-effect {
+      backdrop-filter: blur(20px);
+      background: rgba(35, 35, 48, 0.6);
+    }
+    .ghost-border {
+      border: 1px solid rgba(42, 42, 58, 0.4);
+    }
+  </style>
+</head>
+<body class="bg-background text-on-background min-h-screen overflow-hidden">
+<!-- Background Editor Content (Simulated SCREEN_22) -->
+<div class="fixed inset-0 flex overflow-hidden">
+<!-- SideNavBar -->
+<aside class="fixed left-0 top-0 h-full flex flex-col py-8 border-r border-[#232330]/40 bg-[#0A0A0F] w-64 z-0">
+<div class="px-6 mb-10">
+<h1 class="text-xl font-bold text-[#F0F0F5]">Editorial AI</h1>
+<p class="text-xs text-[#9898A8]">Premium Tier</p>
+</div>
+<nav class="flex-1 px-4 space-y-2">
+<div class="flex items-center gap-3 text-[#9898A8] px-4 py-3 hover:bg-[#12121A] hover:text-[#F0F0F5] transition-all rounded-lg">
+<span class="material-symbols-outlined" data-icon="dashboard">dashboard</span>
+<span class="text-sm">Dashboard</span>
+</div>
+<div class="flex items-center gap-3 bg-[#1A1A25] text-[#F0F0F5] rounded-lg px-4 py-3">
+<span class="material-symbols-outlined" data-icon="article">article</span>
+<span class="text-sm">Content</span>
+</div>
+<div class="flex items-center gap-3 text-[#9898A8] px-4 py-3 hover:bg-[#12121A] hover:text-[#F0F0F5] transition-all rounded-lg">
+<span class="material-symbols-outlined" data-icon="image">image</span>
+<span class="text-sm">Media</span>
+</div>
+<div class="flex items-center gap-3 text-[#9898A8] px-4 py-3 hover:bg-[#12121A] hover:text-[#F0F0F5] transition-all rounded-lg">
+<span class="material-symbols-outlined" data-icon="leaderboard">leaderboard</span>
+<span class="text-sm">Analytics</span>
+</div>
+</nav>
+<div class="mt-auto px-4 space-y-2">
+<div class="flex items-center gap-3 text-[#9898A8] px-4 py-3 hover:bg-[#12121A] transition-all rounded-lg">
+<span class="material-symbols-outlined" data-icon="chat_bubble">chat_bubble</span>
+<span class="text-sm">Feedback</span>
+</div>
+</div>
+</aside>
+<!-- Main Stage Content -->
+<main class="ml-64 flex-1 flex flex-col">
+<!-- TopNavBar -->
+<header class="flex justify-between items-center w-full px-6 h-16 bg-[#12121A] border-b border-[#232330]/40">
+<div class="flex items-center gap-8">
+<span class="text-lg font-bold tracking-tight text-[#F0F0F5]">News Editor</span>
+<nav class="flex gap-6">
+<a class="text-[#F0F0F5] border-b-2 border-[#7C5CFC] pb-1 text-sm" href="#">Drafts</a>
+<a class="text-[#9898A8] hover:text-[#F0F0F5] transition-colors text-sm" href="#">Templates</a>
+<a class="text-[#9898A8] hover:text-[#F0F0F5] transition-colors text-sm" href="#">Archive</a>
+</nav>
+</div>
+<div class="flex items-center gap-4">
+<button class="text-[#9898A8] hover:text-[#F0F0F5] px-4 py-2 text-sm">Preview</button>
+<button class="brand-gradient text-[#F0F0F5] px-4 py-2 rounded-lg text-sm font-medium">Save Changes</button>
+<div class="flex items-center gap-2 ml-2">
+<span class="material-symbols-outlined text-[#9898A8]" data-icon="settings">settings</span>
+<div class="w-8 h-8 rounded-full bg-surface-3 overflow-hidden">
+<img alt="Editor Profile" class="w-full h-full object-cover" data-alt="User avatar for professional profile" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvupa8LLNZ9xbFnLhaVsBpdaDF_xIauNtxRIZccH_vkA02yW8CaYIyAfbG8JTisZanL7TZjQNrAbdeWyXSNFJf9SOXyZISCsf4JnaY8l_U13vilbObJG6gMxGl66CFDvUW9oLRlCd9owvU6_jQJEMJn8zaZtBITg45n_VGpcNWIh9GWii5lMh0Fd56Gz32VyBr9JzpGAnx1YQx3s8fSdtAeL0XZKCrw4Xg1mM1KNGK2IkrUThZTFZW7TLa4EiTGx68xxdAip8l7WpO"/>
+</div>
+</div>
+</div>
+</header>
+<!-- Canvas Area -->
+<section class="flex-1 bg-surface-dim p-12 overflow-y-auto">
+<div class="max-w-4xl mx-auto flex gap-8">
+<!-- Card Preview -->
+<div class="w-full aspect-[4/5] bg-surface-container-low rounded-2xl p-8 flex flex-col justify-end relative overflow-hidden ghost-border">
+<img alt="Card Background" class="absolute inset-0 w-full h-full object-cover opacity-60" data-alt="Abstract dark gradient background with fluid shapes" src="https://lh3.googleusercontent.com/aida-public/AB6AXuBvUi-R0dzHxSjEQ_RQkAoZ0v1VeimWpLXZydjZpKklg1M4UQ9TfkEq1kYJKkL0Dh_TxB-gc72Gx9ztUHSoLLCmGVhOh4EZ30QsPkx2msAgQ9aGKr4C9n4U4RCzNYKnXWddZTBvN4GKqUhWxN50YavufCAHnELGynNOJ0Vr5c3UBFFJJmvljndzShU5ilZItpdkS3HFbzy0N0r4Og76wc5sgLguFNiO3Xou2N7CYL0GcsPpmqtav9AfjNyze4uR3SoYwgOHDMIjabGB"/>
+<div class="relative z-10">
+<span class="text-xs font-bold uppercase tracking-widest text-[#7C5CFC] mb-2 block">Technology</span>
+<h2 class="text-4xl font-bold leading-tight mb-4">The Future of AI in Editorial Spaces</h2>
+<p class="text-[#9898A8] text-lg">Exploring how generative models are reshaping the way we craft daily news and visual narratives.</p>
+</div>
+</div>
+<!-- Properties Panel (Asymmetric Layout) -->
+<div class="w-80 shrink-0 space-y-6">
+<div class="bg-surface-container p-6 rounded-2xl ghost-border">
+<h3 class="text-sm font-semibold mb-4 text-[#F0F0F5]">Layout Properties</h3>
+<div class="grid grid-cols-2 gap-3">
+<div class="h-12 bg-surface-container-high rounded-lg flex items-center justify-center border border-[#7C5CFC]/30">
+<span class="material-symbols-outlined text-sm" data-icon="grid_view">grid_view</span>
+</div>
+<div class="h-12 bg-surface-container-high rounded-lg flex items-center justify-center">
+<span class="material-symbols-outlined text-sm" data-icon="splitscreen">splitscreen</span>
+</div>
+</div>
+</div>
+</div>
+</div>
+</section>
+</main>
+</div>
+<!-- Modal Overlay (Dimmed background) -->
+<div class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/70 backdrop-blur-sm">
+<!-- Text Edit Modal -->
+<div class="w-full max-w-[480px] bg-[#12121A] rounded-2xl shadow-2xl flex flex-col overflow-hidden animate-in fade-in zoom-in duration-200">
+<!-- Header -->
+<div class="flex items-center justify-between px-6 py-5 border-b border-[#232330]/40">
+<h2 class="text-[#F0F0F5] font-semibold text-lg tracking-tight">텍스트 편집</h2>
+<button class="text-[#9898A8] hover:text-[#F0F0F5] transition-colors p-1">
+<span class="material-symbols-outlined text-2xl" data-icon="close">close</span>
+</button>
+</div>
+<!-- Content -->
+<div class="p-6 space-y-6">
+<!-- Title Input Section -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="text-xs font-medium text-[#9898A8] uppercase tracking-wider">제목</label>
+<span class="text-[10px] text-[#9898A8]">12/30</span>
+</div>
+<input class="w-full bg-[#1A1A25] text-[#F0F0F5] text-[20px] font-bold py-3 px-4 rounded-lg ghost-border focus:outline-none focus:border-[#7C5CFC] focus:ring-2 focus:ring-[#7C5CFC]/15 transition-all" type="text" value="미래 지향적 AI 공간"/>
+</div>
+<!-- Body Textarea Section -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="text-xs font-medium text-[#9898A8] uppercase tracking-wider">본문</label>
+<span class="text-[10px] text-[#9898A8]">45/150</span>
+</div>
+<textarea class="w-full bg-[#1A1A25] text-[#F0F0F5] text-sm py-3 px-4 rounded-lg ghost-border focus:outline-none focus:border-[#7C5CFC] focus:ring-2 focus:ring-[#7C5CFC]/15 transition-all resize-none leading-relaxed" rows="4">에디토리얼 공간에서의 생성형 AI는 단순히 도구를 넘어 새로운 창의적 파트너로 진화하고 있습니다.</textarea>
+</div>
+<!-- Description Textarea Section (Error State) -->
+<div class="space-y-2">
+<div class="flex justify-between items-center">
+<label class="text-xs font-medium text-[#9898A8] uppercase tracking-wider">설명</label>
+<span class="text-[10px] text-[#F87171] font-semibold">285/300</span>
+</div>
+<textarea class="w-full bg-[#1A1A25] text-[#F0F0F5] text-sm py-3 px-4 rounded-lg border border-[#F87171]/40 focus:outline-none focus:border-[#F87171] focus:ring-2 focus:ring-[#F87171]/15 transition-all resize-none leading-relaxed" rows="3">이 기사는 인공지능 기술이 저널리즘과 디지털 편집 디자인에 미치는 실질적인 영향력을 탐구합니다. 특히 시각적인 요소와 텍스트의 조화로운 생성이 어떻게 효율성을 극대화하는지에 대한 심도 있는 인사이트를 독자들에게 제공하며 미래의 뉴스룸이 나아가야 할 방향성을 제시합니다.</textarea>
+<p class="text-[10px] text-[#F87171] mt-1">최대 글자 수에 도달했습니다.</p>
+</div>
+</div>
+<!-- Footer -->
+<div class="px-6 py-5 bg-[#1A1A25]/30 flex justify-end gap-3 items-center">
+<button class="px-5 py-2.5 text-sm font-medium text-[#9898A8] hover:text-[#F0F0F5] ghost-border rounded-lg transition-all hover:bg-[#232330]">
+          취소
+        </button>
+<button class="px-8 py-2.5 text-sm font-bold text-[#F0F0F5] brand-gradient rounded-lg shadow-lg shadow-primary/20 hover:scale-[1.02] active:scale-[0.98] transition-all">
+          적용
+        </button>
+</div>
+</div>
+</div>
+</body></html>
