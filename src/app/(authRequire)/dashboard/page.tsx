@@ -345,7 +345,7 @@ export default function DashboardPage() {
   }, [projects, activeTab, searchQuery]);
 
   return (
-    <div>
+    <div className='pb-12'>
       {/* 1. Header row */}
       <div className='px-6 pt-6 pb-4'>
         <div className='flex items-center justify-between'>
