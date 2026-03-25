@@ -35,6 +35,12 @@ type ProjectItem = {
   status?: string;
   created_at: string;
   href: string;
+  /** Card-news fallback gradient when no cover image */
+  gradient?: string;
+  /** Card-news cover headline for gradient fallback */
+  headline?: string;
+  /** Card count for card-news */
+  cardCount?: number;
 };
 
 // ---------------------------------------------------------------------------
@@ -115,13 +121,23 @@ function assetToProject(a: AssetHistory): ProjectItem {
 }
 
 function cardToProject(c: CardSpecRecord): ProjectItem {
+  const coverCard = c.spec?.cards?.[0];
+  const coverSrc = coverCard?.background?.src;
+  const palette = coverCard?.style?.color_palette;
+
   return {
     id: c.id,
     type: 'card-news',
     title: c.topic || '카드뉴스',
+    thumbnail: coverSrc || undefined,
     status: c.status,
     created_at: c.created_at,
     href: `/card-news/editor/${c.id}`,
+    gradient: !coverSrc
+      ? `linear-gradient(135deg, ${palette?.primary ?? '#374151'}, ${palette?.secondary ?? '#6b7280'})`
+      : undefined,
+    headline: !coverSrc ? coverCard?.text?.headline : undefined,
+    cardCount: c.spec?.cards?.length ?? 0,
   };
 }
 
@@ -209,9 +225,27 @@ function ProjectCard({ item }: { item: ProjectItem }) {
       style={{ backgroundColor: 'var(--surface-2)' }}
     >
       {/* Thumbnail / placeholder */}
-      <div className='aspect-video w-full bg-[--surface-1] relative overflow-hidden'>
+      <div
+        className='aspect-video w-full bg-[--surface-1] relative overflow-hidden'
+        style={item.gradient ? { background: item.gradient } : undefined}
+      >
         {item.thumbnail ? (
           <img src={item.thumbnail} alt={item.title} className='w-full h-full object-cover' />
+        ) : item.gradient ? (
+          <>
+            {item.headline && (
+              <div className='absolute inset-0 flex items-center justify-center p-4'>
+                <p className='text-white/80 text-sm font-medium text-center line-clamp-3'>
+                  {item.headline}
+                </p>
+              </div>
+            )}
+            {item.cardCount != null && item.cardCount > 0 && (
+              <div className='absolute bottom-2 right-2 bg-black/60 text-white text-[11px] font-medium px-2 py-0.5 rounded-md backdrop-blur-sm'>
+                {item.cardCount}장
+              </div>
+            )}
+          </>
         ) : (
           <div className='w-full h-full flex items-center justify-center'>
             <Icon className='w-10 h-10 text-[--text-tertiary]' />
