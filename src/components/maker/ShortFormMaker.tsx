@@ -41,6 +41,7 @@ import {
 } from 'react';
 import { KlingImageToVideoResponse } from '../../app/api/kling/clip-gen/[id]/route';
 import { SeeDanceImageToVideoResponse } from '../../app/api/seedance/clip-gen/[id]/route';
+import { creditFetch } from '@/lib/credits/creditFetch';
 
 type ClipJob = { sceneId: string; aiType: 'kling' | 'seedance' };
 
@@ -689,7 +690,7 @@ export const ShortFormMaker = () => {
 
     try {
       setGeneratingScenes(true);
-      const res = await fetch('/api/scenes', {
+      const res = await creditFetch('/api/scenes', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ script, customRule, globalStyle }),
@@ -767,7 +768,7 @@ export const ShortFormMaker = () => {
             noCharacter: true,
           };
 
-          const res = await fetch(`/api/image-gen/gpt/${sceneId}`, {
+          const res = await creditFetch(`/api/image-gen/gpt/${sceneId}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
@@ -843,7 +844,7 @@ export const ShortFormMaker = () => {
             resolution: String(sourceResolution),
           };
 
-          const res = await fetch(`/api/image-gen/gemini/${sceneId}`, {
+          const res = await creditFetch(`/api/image-gen/gemini/${sceneId}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
@@ -910,7 +911,7 @@ export const ShortFormMaker = () => {
             noCharacter: false,
           };
 
-          const res = await fetch(`/api/image-gen/gpt/${sceneId}`, {
+          const res = await creditFetch(`/api/image-gen/gpt/${sceneId}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
@@ -1196,7 +1197,7 @@ export const ShortFormMaker = () => {
             noSubject: isSelected,
           };
 
-          const response = await fetch(`/api/kling/clip-gen/${sceneId}`, {
+          const response = await creditFetch(`/api/kling/clip-gen/${sceneId}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
@@ -1248,7 +1249,7 @@ export const ShortFormMaker = () => {
             noSubject: isSelected,
           };
 
-          const response = await fetch(`/api/seedance/clip-gen/${sceneId}`, {
+          const response = await creditFetch(`/api/seedance/clip-gen/${sceneId}`, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },
             body: JSON.stringify(body),
@@ -1480,7 +1481,7 @@ export const ShortFormMaker = () => {
     setGeneratingNarration(true);
 
     try {
-      const res = await fetch('/api/narration', {
+      const res = await creditFetch('/api/narration', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -1667,7 +1668,7 @@ export const ShortFormMaker = () => {
 
   /* ============ render ============ */
   return (
-    <div className='min-h-screen bg-background'>
+    <div className='min-h-screen'>
       <HeaderBar
         onBack={() => router.replace('/')}
         onEditScript={handleEditScript}
@@ -1754,7 +1755,7 @@ export const ShortFormMaker = () => {
         className={[
           'fixed right-0 top-0 z-50 h-full',
           'w-[420px] sm:w-[480px]',
-          'border-l border-border bg-card shadow-xl',
+          'border-l border-[--border-default] bg-[--surface-1]',
           'transition-transform duration-300 ease-in-out',
           audioOpen
             ? 'translate-x-0'
@@ -1777,7 +1778,7 @@ export const ShortFormMaker = () => {
               'h-28 w-[var(--handle)]',
               'rounded-l-md rounded-r-none',
               'bg-primary text-primary-foreground',
-              'shadow-lg hover:brightness-110 active:scale-[0.98]',
+              'hover:brightness-110 active:scale-[0.98]',
               'flex items-center justify-center',
               'transition-all duration-200',
             ].join(' ')}
@@ -1792,7 +1793,7 @@ export const ShortFormMaker = () => {
 
           {/* 패널 본문 */}
           <div className='h-full flex flex-col'>
-            <div className='px-4 py-5 border-b border-border'>
+            <div className='px-4 py-5 border-b border-[--border-default]'>
               <h3 className='text-lg font-semibold'>AUDIO PANEL</h3>
             </div>
             <div className='flex-1 overflow-y-auto p-4'>
@@ -1816,7 +1817,7 @@ export const ShortFormMaker = () => {
       </div>
 
       {/* Footer */}
-      <footer className='border-t border-border sticky bottom-0 z-10 bg-card mt-auto'>
+      <footer className='border-t border-[--border-default] sticky bottom-0 z-10 mt-auto'>
         <div className='container mx-auto px-4 py-4'>
           <div className='flex items-center justify-between'>
             <div className='flex items-center gap-2'>
@@ -1844,7 +1845,7 @@ export const ShortFormMaker = () => {
               </Button>
             </div>
 
-            <div className='text-sm text-muted-foreground mr-8'>
+            <div className='text-sm text-[--text-secondary] mr-8'>
               {script ? `스크립트: ${script.length}자` : '스크립트 없음'}
             </div>
           </div>

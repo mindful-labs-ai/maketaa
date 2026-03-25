@@ -154,7 +154,7 @@ export default function VisualPipeline({
     <section className='relative w-full mx-auto'>
       {/* Sticky Stepper */}
       <div className='sticky top-2 z-20'>
-        <div className='backdrop-blur supports-[backdrop-filter]:bg-background/60 bg-background/90 border rounded-2xl px-3 py-2'>
+        <div className='backdrop-blur supports-[backdrop-filter]:bg-[--surface-0]/60 bg-[--surface-0]/90 border rounded-2xl px-3 py-2'>
           <div className='flex justify-between'>
             <div className='flex items-center gap-2'>
               {steps.map((s, idx) => {
@@ -171,7 +171,7 @@ export default function VisualPipeline({
                         ? 'bg-primary/10 text-primary'
                         : done
                         ? 'text-foreground'
-                        : 'text-muted-foreground hover:text-foreground'
+                        : 'text-[--text-secondary] hover:text-foreground'
                     )}
                   >
                     <ActiveIcon
@@ -179,7 +179,7 @@ export default function VisualPipeline({
                     />
                     <div className='text-left'>
                       <div className='text-sm leading-tight'>{s.label}</div>
-                      <div className='text-xs leading-tight text-muted-foreground'>
+                      <div className='text-xs leading-tight text-[--text-secondary]'>
                         {s.sub}
                       </div>
                     </div>
@@ -200,7 +200,7 @@ export default function VisualPipeline({
               />
               <HoverCard openDelay={120} closeDelay={80}>
                 <HoverCardTrigger asChild>
-                  <p className='max-w-[200px] truncate text-sm text-muted-foreground cursor-help underline decoration-dotted underline-offset-2'>
+                  <p className='max-w-[200px] truncate text-sm text-[--text-secondary] cursor-help underline decoration-dotted underline-offset-2'>
                     {refFile?.file?.name || '참조 이미지 없음'}
                   </p>
                 </HoverCardTrigger>
@@ -213,7 +213,7 @@ export default function VisualPipeline({
                       className='h-44 w-44 object-cover rounded-md border'
                     />
                   ) : (
-                    <div className='h-44 w-44 flex items-center justify-center text-xs text-muted-foreground'>
+                    <div className='h-44 w-44 flex items-center justify-center text-xs text-[--text-secondary]'>
                       미리볼 이미지 없음
                     </div>
                   )}
@@ -237,13 +237,12 @@ export default function VisualPipeline({
         {/* grid-ish background */}
         <div className='pointer-events-none absolute inset-0 opacity-[0.55]'>
           <div className='absolute inset-0 bg-[radial-gradient(#0000000a_1px,transparent_1px)] [background-size:14px_14px]' />
-          <div className='absolute inset-x-0 top-0 h-40 bg-gradient-to-b from-muted/70 to-transparent' />
         </div>
 
         {/* Header inside canvas */}
         <div className='relative flex justify-between items-center p-4 md:p-6'>
           <div className='flex items-center gap-2'>
-            <div className='inline-flex items-center gap-2 rounded-full border bg-card/80 px-3 py-1.5 backdrop-blur'>
+            <div className='inline-flex items-center gap-2 rounded-full border bg-[--surface-1]/80 px-3 py-1.5 backdrop-blur'>
               <CurrentIcon className='h-4 w-4' />
               <span className='text-sm font-medium'>{steps[step].label}</span>
             </div>
@@ -251,7 +250,7 @@ export default function VisualPipeline({
               className='mx-2 hidden md:block'
               orientation='vertical'
             />
-            <p className='hidden md:block text-xs text-muted-foreground'>
+            <p className='hidden md:block text-xs text-[--text-secondary]'>
               {steps[step].sub}
             </p>
           </div>
@@ -262,7 +261,7 @@ export default function VisualPipeline({
 
         {/* Content */}
         <div className='relative p-4 md:p-6'>
-          <div className='mx-auto rounded-lg shadow-md'>
+          <div className='mx-auto rounded-lg'>
             {step === 0 && (
               <div className='space-y-4'>
                 <SceneList

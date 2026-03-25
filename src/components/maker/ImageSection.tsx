@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { CreditCost } from '@/components/ui/credit-cost';
 import { buildImagePromptText } from '@/lib/maker/imagePromptBuilder';
 import { GeneratedImage, Scene, UploadedImage } from '@/lib/maker/types';
 import { Check, Image as ImageIcon, Loader2, RefreshCw } from 'lucide-react';
@@ -50,7 +51,7 @@ export const ImageSection = ({
       <div className='flex justify-between mb-2'>
         <div className='flex flex-col gap-3'>
           <h3 className='font-semibold'>2. 이미지 생성</h3>
-          <p className='text-sm text-muted-foreground mb-3'>
+          <p className='text-sm text-[--text-secondary] mb-3'>
             각 장면에 맞는 이미지를 생성합니다
           </p>
         </div>
@@ -91,11 +92,11 @@ export const ImageSection = ({
             return (
               <div
                 key={scene.id}
-                className='relative flex gap-4 rounded-lg border bg-card p-3 hover:shadow-sm transition-shadow'
+                className='relative flex gap-4 rounded-lg border bg-[--surface-1] p-3 transition-shadow'
               >
                 {/* 좌: 프레임(이미지) */}
                 <div className=' shrink-0'>
-                  <div className='relative overflow-hidden rounded-lg border bg-muted/20'>
+                  <div className='relative overflow-hidden rounded-lg border bg-[--surface-2]/20'>
                     <div className='h-[256px] w-[256px]'>
                       {image?.dataUrl ? (
                         // eslint-disable-next-line @next/next/no-img-element
@@ -106,7 +107,7 @@ export const ImageSection = ({
                           loading='lazy'
                         />
                       ) : (
-                        <div className='flex h-full w-full items-center justify-center text-muted-foreground'>
+                        <div className='flex h-full w-full items-center justify-center text-[--text-secondary]'>
                           <div className='flex flex-col items-center gap-2'>
                             <ImageIcon className='h-6 w-6' />
                             <span className='text-xs'>이미지 없음</span>
@@ -142,7 +143,7 @@ export const ImageSection = ({
                           생성 중…
                         </>
                       ) : (
-                        '이미지 생성'
+                        <><span>이미지 생성</span><CreditCost amount='5~8' /></>
                       )}
                     </Button>
                     <Button
@@ -160,14 +161,14 @@ export const ImageSection = ({
                 {/* 우: 설명 패널 */}
                 <div className='min-w-0 flex-1'>
                   <div className='mb-2 flex items-center justify-between'>
-                    <div className='flex items-center gap-2 text-xs text-muted-foreground'>
+                    <div className='flex items-center gap-2 text-xs text-[--text-secondary]'>
                       <span className='rounded-full border px-2.5 py-1'>
                         {statusChip}
                       </span>
                       <span>
                         • {scene.id}
                         <Button
-                          className='text-xs text-muted-foreground'
+                          className='text-xs text-[--text-secondary]'
                           size='sm'
                           variant='link'
                           onClick={() => setIdleSceneImage(scene.id)}
@@ -176,7 +177,7 @@ export const ImageSection = ({
                         </Button>
                       </span>
                     </div>
-                    <div className='flex text-xs text-muted-foreground gap-1 items-center'>
+                    <div className='flex text-xs text-[--text-secondary] gap-1 items-center'>
                       <input
                         checked={selected.has(scene.id)}
                         onChange={() => setSelected(scene.id)}
@@ -196,25 +197,25 @@ export const ImageSection = ({
                   <div className='space-y-3'>
                     <div>
                       <h4 className='text-sm font-semibold'>원문</h4>
-                      <p className='mt-1 whitespace-pre-line text-sm text-muted-foreground'>
+                      <p className='mt-1 whitespace-pre-line text-sm text-[--text-secondary]'>
                         {scene.originalText}
                       </p>
                     </div>
 
                     <div>
                       <h4 className='text-sm font-semibold'>이미지 프롬프트</h4>
-                      <p className='mt-1 whitespace-pre-line text-sm text-muted-foreground'>
+                      <p className='mt-1 whitespace-pre-line text-sm text-[--text-secondary]'>
                         {buildImagePromptText(scene.imagePrompt)}
                       </p>
                     </div>
 
                     <details className='group'>
-                      <summary className='cursor-pointer text-xs text-muted-foreground underline decoration-dotted underline-offset-2'>
+                      <summary className='cursor-pointer text-xs text-[--text-secondary] underline decoration-dotted underline-offset-2'>
                         요약/클립 프롬프트 보기
                       </summary>
-                      <div className='mt-2 space-y-2 rounded-md border bg-muted/30 p-2'>
+                      <div className='mt-2 space-y-2 rounded-md border bg-[--surface-2]/30 p-2'>
                         <div>
-                          <div className='text-[11px] font-medium text-muted-foreground'>
+                          <div className='text-[11px] font-medium text-[--text-secondary]'>
                             요약
                           </div>
                           <p className='whitespace-pre-line text-sm'>
@@ -222,7 +223,7 @@ export const ImageSection = ({
                           </p>
                         </div>
                         <div>
-                          <div className='text-[11px] font-medium text-muted-foreground'>
+                          <div className='text-[11px] font-medium text-[--text-secondary]'>
                             장면 프롬프트(Scene Prompt)
                           </div>
                           <p className='whitespace-pre-line text-sm'>

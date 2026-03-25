@@ -2,6 +2,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { CreditCost } from '@/components/ui/credit-cost';
 import { GeneratedClip, GeneratedImage, Scene } from '../../lib/maker/types';
 import {
   RefreshCw,
@@ -76,7 +77,7 @@ export const ClipSection = ({
       <div className='flex items-center justify-between mb-2'>
         <div className='flex flex-col gap-3'>
           <h3 className='font-semibold'>3. 클립 생성</h3>
-          <div className='text-sm text-muted-foreground mb-3'>
+          <div className='text-sm text-[--text-secondary] mb-3'>
             이미지를 동영상 클립으로 변환합니다
           </div>
         </div>
@@ -120,11 +121,11 @@ export const ClipSection = ({
             return (
               <div
                 key={scene.id}
-                className='relative flex gap-4 rounded-lg border bg-card p-3 hover:shadow-sm transition-shadow'
+                className='relative flex gap-4 rounded-lg border bg-[--surface-1] p-3 transition-shadow'
               >
                 {/* 좌: 비디오 프레임 */}
                 <div className='shrink-0'>
-                  <div className='relative overflow-hidden rounded-lg border bg-muted/20'>
+                  <div className='relative overflow-hidden rounded-lg border bg-[--surface-2]/20'>
                     <div className='h-[256px] w-[256px]'>
                       {videoSrc ? (
                         <video
@@ -135,7 +136,7 @@ export const ClipSection = ({
                           poster={baseImage}
                         />
                       ) : (
-                        <div className='flex h-full w-full items-center justify-center text-muted-foreground'>
+                        <div className='flex h-full w-full items-center justify-center text-[--text-secondary]'>
                           <div className='flex flex-col items-center gap-2'>
                             <Film className='h-7 w-7' />
                             <span className='text-xs'>클립 없음 (미생성)</span>
@@ -206,7 +207,7 @@ export const ClipSection = ({
                       ) : isQueueing ? (
                         '대기 중…'
                       ) : (
-                        '클립 생성'
+                        <><span>클립 생성</span><CreditCost amount='12~20' /></>
                       )}
                     </Button>
 
@@ -226,7 +227,7 @@ export const ClipSection = ({
                 {/* 우: 설명 패널 */}
                 <div className='min-w-0 flex-1'>
                   <div className='mb-2 flex items-start justify-between'>
-                    <div className='flex items-center gap-2 text-xs text-muted-foreground'>
+                    <div className='flex items-center gap-2 text-xs text-[--text-secondary]'>
                       <span
                         className={`rounded-full border px-2.5 py-1 ${
                           clip?.status === 'failed' ? 'bg-red-400' : ''
@@ -237,7 +238,7 @@ export const ClipSection = ({
                       <span>
                         • {scene.id}
                         <Button
-                          className='text-xs text-muted-foreground'
+                          className='text-xs text-[--text-secondary]'
                           size='sm'
                           variant='link'
                           onClick={() => setIdleSceneClip(scene.id)}
@@ -247,7 +248,7 @@ export const ClipSection = ({
                       </span>
                     </div>
                     {/* 작은 이미지 썸네일 */}
-                    <div className='flex right-3 absolute text-xs text-muted-foreground gap-1 items-center'>
+                    <div className='flex right-3 absolute text-xs text-[--text-secondary] gap-1 items-center'>
                       <input
                         checked={selected.has(scene.id)}
                         onChange={() => setSelected(scene.id)}
@@ -262,7 +263,7 @@ export const ClipSection = ({
                           className='h-12 w-12 rounded border object-cover'
                         />
                       ) : (
-                        <div className='h-12 w-12 rounded border flex items-center justify-center text-muted-foreground bg-muted/30'>
+                        <div className='h-12 w-12 rounded border flex items-center justify-center text-[--text-secondary] bg-[--surface-2]/30'>
                           <ImageIcon className='h-4 w-4' />
                         </div>
                       )}
@@ -272,25 +273,25 @@ export const ClipSection = ({
                   <div className='space-y-3'>
                     <div>
                       <h4 className='text-sm font-semibold'>원문</h4>
-                      <p className='mt-1 whitespace-pre-line text-sm text-muted-foreground'>
+                      <p className='mt-1 whitespace-pre-line text-sm text-[--text-secondary]'>
                         {scene.originalText}
                       </p>
                     </div>
 
                     <div>
                       <h4 className='text-sm font-semibold'>클립 프롬프트</h4>
-                      <p className='mt-1 whitespace-pre-line text-sm text-muted-foreground'>
+                      <p className='mt-1 whitespace-pre-line text-sm text-[--text-secondary]'>
                         {buildClipPromptText(scene.clipPrompt)}
                       </p>
                     </div>
 
                     <details className='group'>
-                      <summary className='cursor-pointer text-xs text-muted-foreground underline decoration-dotted underline-offset-2'>
+                      <summary className='cursor-pointer text-xs text-[--text-secondary] underline decoration-dotted underline-offset-2'>
                         요약/장면 프롬프트 보기
                       </summary>
-                      <div className='mt-2 space-y-2 rounded-md border bg-muted/30 p-2'>
+                      <div className='mt-2 space-y-2 rounded-md border bg-[--surface-2]/30 p-2'>
                         <div>
-                          <div className='text-[11px] font-medium text-muted-foreground'>
+                          <div className='text-[11px] font-medium text-[--text-secondary]'>
                             요약
                           </div>
                           <p className='whitespace-pre-line text-sm'>
@@ -298,7 +299,7 @@ export const ClipSection = ({
                           </p>
                         </div>
                         <div>
-                          <div className='text-[11px] font-medium text-muted-foreground'>
+                          <div className='text-[11px] font-medium text-[--text-secondary]'>
                             장면 프롬프트(Scene Prompt)
                           </div>
                           <p className='whitespace-pre-line text-sm'>

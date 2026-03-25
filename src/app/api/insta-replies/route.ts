@@ -2,6 +2,8 @@ import { AIReplyItem } from '@/components/insta/InstaHelper';
 import { buildInstagramReplyPrompt } from '@/lib/insta/replyPrompt';
 import { NextRequest } from 'next/server';
 import OpenAI from 'openai';
+import { createClient } from '@/lib/supabase/server';
+import { consumeCredits } from '@/lib/credits/consume';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -17,6 +19,21 @@ export async function POST(req: NextRequest) {
     const { raw, options } = await req.json();
     if (typeof raw !== 'string' || !raw.trim()) {
       return Response.json({ error: 'raw is required' }, { status: 400 });
+    }
+
+    const supabase = await createClient();
+    const { data: { user: authUser } } = await supabase.auth.getUser();
+    if (!authUser) {
+      return Response.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const creditResult = await consumeCredits(authUser.id, 'INSTA_REPLY');
+    if (!creditResult.success) {
+      return Response.json({
+        error: 'INSUFFICIENT_CREDITS',
+        balance: creditResult.balance,
+        required: creditResult.required,
+      }, { status: 402 });
     }
 
     const { system, user } = buildInstagramReplyPrompt(raw, {

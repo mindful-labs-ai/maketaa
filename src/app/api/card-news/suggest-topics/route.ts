@@ -4,9 +4,11 @@
  * Ported from canvas_editor - generalized for any topic domain
  */
 
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenAI } from '@google/genai';
 import type { TopicSuggestion } from '@/lib/card-news/types';
+import { createClient } from '@/lib/supabase/server';
+import { consumeCredits } from '@/lib/credits/consume';
 
 // ============================================================================
 // Season/Context Helpers
@@ -110,8 +112,23 @@ async function generateTopicsWithGemini(): Promise<TopicSuggestion[] | null> {
 // Route Handler
 // ============================================================================
 
-export async function POST(): Promise<NextResponse> {
+export async function POST(_req: NextRequest): Promise<NextResponse> {
   try {
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const creditResult = await consumeCredits(user.id, 'CARD_NEWS_TOPICS');
+    if (!creditResult.success) {
+      return NextResponse.json({
+        error: 'INSUFFICIENT_CREDITS',
+        balance: creditResult.balance,
+        required: creditResult.required,
+      }, { status: 402 });
+    }
+
     const aiTopics = await generateTopicsWithGemini();
 
     if (!aiTopics) {

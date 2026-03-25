@@ -130,22 +130,20 @@ export default function HistoryPage() {
   };
 
   return (
-    <div className='min-h-screen bg-background'>
+    <div>
       {/* Header */}
-      <div className='border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60'>
-        <div className='container mx-auto px-4 py-4'>
-          <div className='flex items-center justify-between'>
-            <div>
-              <h1 className='text-2xl font-bold'>생성 히스토리</h1>
-              <p className='text-sm text-muted-foreground'>
-                AI로 생성한 모든 이미지와 비디오
-              </p>
-            </div>
+      <div className='px-6 pt-6 pb-4'>
+        <div className='flex items-center justify-between'>
+          <div>
+            <h1 className='text-2xl font-bold text-[--text-primary]'>생성 히스토리</h1>
+            <p className='text-sm text-[--text-secondary] mt-1'>
+              AI로 생성한 모든 이미지와 비디오
+            </p>
           </div>
         </div>
       </div>
 
-      <div className='container mx-auto px-4 py-6'>
+      <div className='px-6'>
         {/* Stats */}
         {stats && (
           <div className='grid grid-cols-3 gap-4 mb-6'>

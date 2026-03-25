@@ -1,6 +1,8 @@
 import { sceneRegeneratePrompt } from '@/lib/maker/regeneratePrompt';
 import { NextRequest, NextResponse } from 'next/server';
 import OpenAI from 'openai';
+import { createClient } from '@/lib/supabase/server';
+import { consumeCredits } from '@/lib/credits/consume';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -19,6 +21,21 @@ export async function POST(req: NextRequest) {
         { error: 'scene explain is required' },
         { status: 400 }
       );
+    }
+
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const creditResult = await consumeCredits(user.id, 'SCENE_REGENERATE');
+    if (!creditResult.success) {
+      return NextResponse.json({
+        error: 'INSUFFICIENT_CREDITS',
+        balance: creditResult.balance,
+        required: creditResult.required,
+      }, { status: 402 });
     }
 
     const response = await client.responses.create({

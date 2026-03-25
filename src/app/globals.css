@@ -1,82 +1,102 @@
 @import 'tailwindcss';
 @import 'tw-animate-css';
 
-:root {
-  /* Updated color palette to match design brief - cyan/slate professional theme */ /* #ffffff */ /* #475569 */
-  --card: oklch(1 0 0); /* #ecfeff */
-  --card-foreground: oklch(0.145 0 0); /* #164e63 */
-  --popover: oklch(1 0 0); /* #ffffff */
-  --popover-foreground: oklch(0.145 0 0); /* #475569 */
-  --primary: oklch(0.205 0 0); /* #164e63 */
-  --primary-foreground: oklch(0.985 0 0); /* #ffffff */
-  --secondary: oklch(0.97 0 0); /* #8b5cf6 */
-  --secondary-foreground: oklch(0.205 0 0); /* #ffffff */
-  --muted: oklch(0.97 0 0); /* #f1f5f9 */
-  --muted-foreground: oklch(0.556 0 0); /* #475569 */
-  --accent: oklch(0.97 0 0); /* #8b5cf6 */
-  --accent-foreground: oklch(0.205 0 0); /* #ffffff */
-  --destructive: oklch(0.577 0.245 27.325); /* #be123c */
-  --destructive-foreground: oklch(1 0 0); /* #ffffff */
-  --border: oklch(0.922 0 0); /* #475569 */
-  --input: oklch(0.922 0 0); /* #ecfeff */
-  --ring: oklch(0.708 0 0); /* rgba(22, 78, 99, 0.5) */
-  --chart-1: oklch(0.646 0.222 41.116); /* #8b5cf6 */
-  --chart-2: oklch(0.6 0.118 184.704); /* #ec4899 */
-  --chart-3: oklch(0.398 0.07 227.392); /* #164e63 */
-  --chart-4: oklch(0.828 0.189 84.429); /* #f1f5f9 */
-  --chart-5: oklch(0.769 0.188 70.08); /* #be123c */
-  --radius: 0.625rem;
-  --sidebar: oklch(0.985 0 0); /* #ffffff */
-  --sidebar-foreground: oklch(0.145 0 0); /* #475569 */
-  --sidebar-primary: oklch(0.205 0 0); /* #164e63 */
-  --sidebar-primary-foreground: oklch(0.985 0 0); /* #ffffff */
-  --sidebar-accent: oklch(0.97 0 0); /* #8b5cf6 */
-  --sidebar-accent-foreground: oklch(0.205 0 0); /* #ffffff */
-  --sidebar-border: oklch(0.922 0 0); /* #475569 */
-  --sidebar-ring: oklch(0.708 0 0); /* rgba(22, 78, 99, 0.5) */
-  --background: oklch(1 0 0);
-  --foreground: oklch(0.145 0 0);
-}
+/* ============================================================================
+ * Maketaa Design System
+ * Dark theme as default. Tokens from .omc/plans/design/03-design-guide.md
+ * ========================================================================= */
 
-.dark {
-  /* Updated dark mode colors to maintain contrast and readability */
-  --background: oklch(0.145 0 0); /* Dark slate */
-  --foreground: oklch(0.985 0 0); /* Light text */
-  --card: oklch(0.205 0 0); /* Darker card background */
-  --card-foreground: oklch(0.985 0 0); /* Light card text */
-  --popover: oklch(0.205 0 0); /* Dark popover */
-  --popover-foreground: oklch(0.985 0 0); /* Light popover text */
-  --primary: oklch(0.922 0 0); /* Lighter cyan for dark mode */
-  --primary-foreground: oklch(0.205 0 0); /* Dark text on primary */
-  --secondary: oklch(0.269 0 0); /* Dark secondary */
-  --secondary-foreground: oklch(0.985 0 0); /* Light secondary text */
-  --muted: oklch(0.269 0 0); /* Dark muted */
-  --muted-foreground: oklch(0.708 0 0); /* Muted text */
-  --accent: oklch(0.269 0 0); /* Dark accent */
-  --accent-foreground: oklch(0.985 0 0); /* Light accent text */
-  --destructive: oklch(0.704 0.191 22.216); /* Lighter destructive for dark */
-  --destructive-foreground: oklch(0.75 0.2 12.17); /* Destructive text */
-  --border: oklch(1 0 0 / 10%); /* Dark border */
-  --input: oklch(1 0 0 / 15%); /* Dark input */
-  --ring: oklch(0.556 0 0); /* Ring for dark mode */
-  --chart-1: oklch(0.488 0.243 264.376); /* Adjusted chart colors for dark */
-  --chart-2: oklch(0.696 0.17 162.48);
-  --chart-3: oklch(0.769 0.188 70.08);
-  --chart-4: oklch(0.627 0.265 303.9);
-  --chart-5: oklch(0.645 0.246 16.439);
-  --sidebar: oklch(0.205 0 0); /* Dark sidebar */
-  --sidebar-foreground: oklch(0.985 0 0); /* Light sidebar text */
-  --sidebar-primary: oklch(0.488 0.243 264.376); /* Sidebar primary */
-  --sidebar-primary-foreground: oklch(0.985 0 0); /* Sidebar primary text */
-  --sidebar-accent: oklch(0.269 0 0); /* Sidebar accent */
-  --sidebar-accent-foreground: oklch(0.985 0 0); /* Sidebar accent text */
-  --sidebar-border: oklch(1 0 0 / 10%); /* Sidebar border */
-  --sidebar-ring: oklch(0.556 0 0); /* Sidebar ring */
+:root {
+  /* Surface hierarchy (dark theme default)
+   * Stitch-matched: blue-violet tint, bold layer separation (~12-14 units per step)
+   * surface-0: sidebar, deepest layer
+   * surface-1: main content area bg, noticeably brighter than sidebar
+   * surface-2: cards, panels, inputs — clearly pop on surface-1
+   * surface-3: hover, modal, active states
+   */
+  --surface-0: #0E0E15;
+  --surface-1: #1A1A26;
+  --surface-2: #252535;
+  --surface-3: #303044;
+
+  /* Text */
+  --text-primary: #EEEEF5;
+  --text-secondary: #9898AC;
+  --text-tertiary: #606078;
+  --text-disabled: #404050;
+
+  /* Brand */
+  --brand-primary: #7C5CFC;
+  --brand-secondary: #5B8DEF;
+
+  /* Accent / Interactive */
+  --accent: #7C5CFC;
+  --accent-hover: #8E72FF;
+  --accent-active: #6A48E0;
+  --accent-subtle: #7C5CFC15;
+
+  /* Semantic */
+  --success: #34D399;
+  --warning: #FBBF24;
+  --error: #F87171;
+  --info: #60A5FA;
+
+  /* Borders – more visible, blue-violet tint */
+  --border-default: #32324A;
+  --border-subtle: #262638;
+  --border-strong: #42425A;
+
+  /* Feature accents */
+  --video-accent: #5B8DEF;
+  --card-news-accent: #A78BFA;
+  --image-accent: #34D399;
+  --gif-accent: #F472B6;
+  --insta-accent: #FBBF24;
+
+  /* shadcn/ui compatibility tokens (mapped to Maketaa design system) */
+  --background: var(--surface-0);
+  --foreground: var(--text-primary);
+  --card: var(--surface-1);
+  --card-foreground: var(--text-primary);
+  --popover: var(--surface-1);
+  --popover-foreground: var(--text-primary);
+  --primary: var(--brand-primary);
+  --primary-foreground: #FFFFFF;
+  --secondary: var(--surface-2);
+  --secondary-foreground: var(--text-primary);
+  --muted: var(--surface-2);
+  --muted-foreground: var(--text-secondary);
+  --accent-color: var(--surface-2);
+  --accent-foreground: var(--text-primary);
+  --destructive: var(--error);
+  --destructive-foreground: #FFFFFF;
+  --border: var(--border-default);
+  --input: var(--surface-2);
+  --ring: var(--brand-primary);
+
+  --radius: 0.625rem;
+
+  /* Sidebar */
+  --sidebar: var(--surface-1);
+  --sidebar-foreground: var(--text-primary);
+  --sidebar-primary: var(--brand-primary);
+  --sidebar-primary-foreground: #FFFFFF;
+  --sidebar-accent: var(--surface-3);
+  --sidebar-accent-foreground: var(--text-primary);
+  --sidebar-border: var(--border-default);
+  --sidebar-ring: var(--brand-primary);
+
+  /* Chart colors */
+  --chart-1: var(--brand-primary);
+  --chart-2: var(--brand-secondary);
+  --chart-3: var(--success);
+  --chart-4: var(--warning);
+  --chart-5: var(--error);
 }
 
 @theme inline {
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --font-sans: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', 'SF Mono', 'Fira Code', monospace;
   --color-background: var(--background);
   --color-foreground: var(--foreground);
   --color-card: var(--card);
@@ -89,7 +109,7 @@
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
-  --color-accent: var(--accent);
+  --color-accent: var(--accent-color);
   --color-accent-foreground: var(--accent-foreground);
   --color-destructive: var(--destructive);
   --color-destructive-foreground: var(--destructive-foreground);
@@ -121,5 +141,7 @@
   }
   body {
     @apply bg-background text-foreground;
+    font-family: 'Pretendard Variable', 'Pretendard', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
 }
+

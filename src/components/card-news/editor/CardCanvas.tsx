@@ -12,10 +12,10 @@ const CardCanvasClient = dynamic(
   {
     ssr: false,
     loading: () => (
-      <div className="flex items-center justify-center w-full aspect-square bg-gray-100 rounded-lg border border-gray-200">
+      <div className="flex items-center justify-center w-full aspect-square bg-[--surface-2] rounded-lg border border-[--border-subtle]">
         <div className="text-center">
           <div className="inline-block animate-spin rounded-full h-8 w-8 border-b-2 border-primary mb-2" />
-          <p className="text-sm text-gray-600">Loading canvas...</p>
+          <p className="text-sm text-[--text-secondary]">Loading canvas...</p>
         </div>
       </div>
     ),
@@ -33,8 +33,8 @@ export const CardCanvas = React.forwardRef<
 >(({ card, cardIndex, selectedTextIndex, onTextClick }, ref) => {
   if (!card) {
     return (
-      <div className="flex items-center justify-center w-full aspect-square bg-gray-50 rounded-lg border-2 border-dashed border-gray-300">
-        <p className="text-gray-400">Select a card to begin</p>
+      <div className="flex items-center justify-center w-full aspect-square bg-[--surface-1] rounded-lg border-2 border-dashed border-[--border-default]">
+        <p className="text-[--text-tertiary]">Select a card to begin</p>
       </div>
     );
   }

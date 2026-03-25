@@ -36,10 +36,6 @@
     ".next/dev/types/**/*.ts"
   ],
   "exclude": [
-    "node_modules",
-    "jun-z",
-    "jun-z-update",
-    "card-news-makrer",
-    "stitch-ui-guide"
+    "node_modules"
   ]
 }

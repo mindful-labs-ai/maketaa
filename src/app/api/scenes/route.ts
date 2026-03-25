@@ -1,6 +1,8 @@
 import { scenePrompt } from '@/lib/maker/prompt';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextRequest, NextResponse } from 'next/server';
+import { createClient } from '@/lib/supabase/server';
+import { consumeCredits } from '@/lib/credits/consume';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -12,6 +14,21 @@ export async function POST(req: NextRequest) {
     const { script, customRule, globalStyle } = await req.json();
     if (!script || !script.trim()) {
       return Response.json({ error: 'script is required' }, { status: 400 });
+    }
+
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const creditResult = await consumeCredits(user.id, 'SCENE_GENERATE');
+    if (!creditResult.success) {
+      return NextResponse.json({
+        error: 'INSUFFICIENT_CREDITS',
+        balance: creditResult.balance,
+        required: creditResult.required,
+      }, { status: 402 });
     }
 
     const model = genAI.getGenerativeModel({

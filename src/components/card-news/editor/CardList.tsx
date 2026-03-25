@@ -61,21 +61,21 @@ export function CardList() {
 
   if (!cards || cards.length === 0) {
     return (
-      <div className="w-56 bg-white border-r border-gray-200 p-4 flex items-center justify-center">
-        <p className="text-xs text-gray-400 text-center">카드가 없습니다</p>
+      <div className="w-56 bg-[--surface-1] border-r border-[--border-subtle] p-4 flex items-center justify-center">
+        <p className="text-xs text-[--text-secondary] text-center">카드가 없습니다</p>
       </div>
     );
   }
 
   return (
-    <div className="w-56 bg-white border-r border-gray-200 flex flex-col">
+    <div className="w-56 bg-[--surface-1] border-r border-[--border-subtle] flex flex-col">
       {/* Sticky header */}
-      <div className="px-3 py-2.5 border-b border-gray-100 shrink-0">
+      <div className="px-3 py-2.5 border-b border-[--border-subtle] shrink-0">
         <div className="flex items-center justify-between">
-          <h2 className="font-semibold text-xs text-gray-700 uppercase tracking-wide">카드</h2>
-          <span className="text-xs font-medium text-gray-400 tabular-nums">{cards.length}장</span>
+          <h2 className="font-semibold text-xs text-[--text-secondary] uppercase tracking-wide">카드</h2>
+          <span className="text-xs font-medium text-[--text-secondary] tabular-nums">{cards.length}장</span>
         </div>
-        <p className="text-[10px] text-gray-400 mt-0.5">드래그하여 순서 변경</p>
+        <p className="text-[10px] text-[--text-secondary] mt-0.5">드래그하여 순서 변경</p>
       </div>
 
       {/* Scrollable card list */}
@@ -101,8 +101,8 @@ export function CardList() {
       </div>
 
       {/* Footer hint */}
-      <div className="px-3 py-2 border-t border-gray-100 shrink-0">
-        <p className="text-[10px] text-gray-400">← → 키로 이동</p>
+      <div className="px-3 py-2 border-t border-[--border-subtle] shrink-0">
+        <p className="text-[10px] text-[--text-secondary]">← → 키로 이동</p>
       </div>
     </div>
   );

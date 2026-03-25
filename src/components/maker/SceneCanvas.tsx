@@ -56,7 +56,7 @@ export const SceneCanvas = ({
   if (!scene) {
     return (
       <Card>
-        <CardContent className='p-8 text-center text-muted-foreground'>
+        <CardContent className='p-8 text-center text-[--text-secondary]'>
           장면을 선택하세요.
         </CardContent>
       </Card>
@@ -73,7 +73,7 @@ export const SceneCanvas = ({
       <Card className='h-full py-0'>
         <CardContent className='p-6 space-y-4'>
           <div>
-            <div className='text-xs text-muted-foreground mb-1'>
+            <div className='text-xs text-[--text-secondary] mb-1'>
               Original text
             </div>
             <div className='text-sm leading-relaxed whitespace-pre-wrap'>
@@ -82,7 +82,7 @@ export const SceneCanvas = ({
           </div>
           <Separator />
           <div>
-            <div className='text-xs text-muted-foreground mb-2'>
+            <div className='text-xs text-[--text-secondary] mb-2'>
               {step === 0
                 ? 'SceneGenerating'
                 : step === 1
@@ -153,7 +153,7 @@ export const SceneCanvas = ({
           {step === 1 && (
             <>
               {!sceneImages?.dataUrl ? (
-                <div className='text-sm text-muted-foreground'>
+                <div className='text-sm text-[--text-secondary]'>
                   아직 생성된 이미지가 없습니다.
                 </div>
               ) : (
@@ -202,13 +202,13 @@ export const SceneCanvas = ({
           {step === 2 && (
             <>
               {sceneClips?.status !== 'succeeded' ? (
-                <div className='text-sm text-center text-muted-foreground'>
+                <div className='text-sm text-center text-[--text-secondary]'>
                   아직 생성된 클립이 없습니다.
                 </div>
               ) : (
                 <div
                   key={scene.id}
-                  className='flex flex-col items-center gap-2 p-2 border rounded bg-muted/40'
+                  className='flex flex-col items-center gap-2 p-2 border rounded bg-[--surface-2]/40'
                 >
                   <video
                     src={sceneClips?.dataUrl}

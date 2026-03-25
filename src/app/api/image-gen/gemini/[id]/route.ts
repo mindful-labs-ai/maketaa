@@ -3,6 +3,7 @@ import { uploadBase64Image } from '@/lib/storage/asset-storage';
 import { createClient } from '@/lib/supabase/server';
 import { GoogleGenerativeAI } from '@google/generative-ai';
 import { NextRequest, NextResponse } from 'next/server';
+import { consumeCredits } from '@/lib/credits/consume';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -32,6 +33,21 @@ export async function POST(request: NextRequest) {
         { success: false, error: '필수 파라미터가 누락되었습니다.' },
         { status: 400 }
       );
+    }
+
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const creditResult = await consumeCredits(user.id, 'IMAGE_GEMINI');
+    if (!creditResult.success) {
+      return NextResponse.json({
+        error: 'INSUFFICIENT_CREDITS',
+        balance: creditResult.balance,
+        required: creditResult.required,
+      }, { status: 402 });
     }
 
     const inputBody = !!additions
@@ -137,11 +153,6 @@ export async function POST(request: NextRequest) {
     let historyId: string | null = null;
     if (generatedImageBase64) {
       try {
-        const supabase = await createClient();
-        const {
-          data: { user },
-        } = await supabase.auth.getUser();
-
         if (user) {
           const storageUrl = await uploadBase64Image(
             supabase,

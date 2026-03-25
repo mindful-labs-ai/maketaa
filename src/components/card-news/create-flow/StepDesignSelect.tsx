@@ -3,6 +3,8 @@
 import { useRouter } from 'next/navigation';
 import { useCreateStore } from '@/stores/card-news/useCreateStore';
 import { Button } from '@/components/ui/button';
+import { CreditCost } from '@/components/ui/credit-cost';
+import { creditFetch } from '@/lib/credits/creditFetch';
 
 const DESIGN_TEMPLATES = [
   {
@@ -52,7 +54,7 @@ export default function StepDesignSelect() {
     setGenerationError(null);
 
     try {
-      const res = await fetch('/api/card-news/generate', {
+      const res = await creditFetch('/api/card-news/generate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -118,7 +120,7 @@ export default function StepDesignSelect() {
           이전
         </Button>
         <Button onClick={handleGenerate} disabled={!designTemplateId}>
-          생성하기
+          생성하기 <CreditCost amount={8} />
         </Button>
       </div>
     </div>

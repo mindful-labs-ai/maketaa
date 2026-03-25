@@ -7,21 +7,21 @@ import { ArrowRight, FileText, MessageSquare, Hash } from 'lucide-react';
 
 export const BlurredScriptInputBox = () => {
   return (
-    <div className='min-h-screen bg-background blur-xs'>
+    <div className='blur-xs'>
       {/* Header */}
-      <header className='border-b border-border bg-card'>
-        <div className='container mx-auto px-4 py-6'>
-          <h1 className='text-3xl font-bold text-card-foreground text-center'>
+      <header>
+        <div className='px-6 pt-6 pb-4'>
+          <h1 className='text-2xl font-bold text-[--text-primary]'>
             AI 숏폼 메이커
           </h1>
-          <p className='text-muted-foreground text-center mt-2'>
+          <p className='text-sm text-[--text-secondary] mt-1'>
             스크립트를 입력하고 AI로 숏폼 비디오를 제작하세요
           </p>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className='container mx-auto px-4 py-8 max-w-4xl'>
+      <main className='px-6 pb-6'>
         <Card className='rounded-2xl'>
           <CardHeader>
             <CardTitle className='flex items-center gap-2'>

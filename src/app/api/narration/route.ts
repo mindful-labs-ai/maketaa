@@ -1,5 +1,7 @@
 // app/api/tts/route.ts
 import { NextRequest } from 'next/server';
+import { createClient } from '@/lib/supabase/server';
+import { consumeCredits } from '@/lib/credits/consume';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -17,6 +19,21 @@ export async function POST(req: NextRequest) {
       return new Response(JSON.stringify({ error: 'text is required' }), {
         status: 400,
       });
+    }
+
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return Response.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const creditResult = await consumeCredits(user.id, 'NARRATION');
+    if (!creditResult.success) {
+      return Response.json({
+        error: 'INSUFFICIENT_CREDITS',
+        balance: creditResult.balance,
+        required: creditResult.required,
+      }, { status: 402 });
     }
 
     const r = await fetch(

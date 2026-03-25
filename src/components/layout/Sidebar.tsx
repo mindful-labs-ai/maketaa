@@ -1,115 +1,186 @@
 'use client';
 
+import { useState, useEffect } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
-import { Button } from '../ui/button';
+import { usePathname, useRouter } from 'next/navigation';
+import {
+  Clapperboard,
+  Video,
+  Image,
+  Images,
+  MessageSquare,
+  Newspaper,
+  Sparkles,
+  History,
+  Settings,
+  LogOut,
+  LayoutDashboard,
+  Menu,
+  X,
+  FileBarChart,
+  Coins,
+} from 'lucide-react';
 import { createClient } from '@/lib/supabase/client';
-import { Separator } from '../ui/separator';
 import { useAuthStore } from '@/lib/shared/useAuthStore';
+import { useCreditStore } from '@/lib/credits/useCreditStore';
+import { Sheet, SheetContent, SheetTrigger } from '@/components/ui/sheet';
+import { Button } from '@/components/ui/button';
 
-type SidebarProps = {
-  id?: string;
-  open: boolean;
-  onClose: () => void;
-  links: { href: string; label: string }[];
-};
+const NAV_LINKS = [
+  { href: '/dashboard', label: '대시보드', icon: LayoutDashboard },
+  { href: '/reports', label: '마케팅 리포트', icon: FileBarChart },
+  { href: '/makerScript', label: '숏폼 영상', icon: Clapperboard },
+  { href: '/video', label: '비디오 생성', icon: Video },
+  { href: '/image', label: '이미지 생성', icon: Image },
+  { href: '/image-parallel', label: '병렬 이미지', icon: Images },
+  { href: '/insta', label: '인스타 헬퍼', icon: MessageSquare },
+  { href: '/card-news', label: '카드뉴스', icon: Newspaper },
+  { href: '/gif', label: 'GIF 스튜디오', icon: Sparkles },
+  { href: '/history', label: '생성 히스토리', icon: History },
+] as const;
 
-export const Sidebar = ({ id, open, onClose, links }: SidebarProps) => {
+function SidebarContent({ onNavigate }: { onNavigate?: () => void }) {
   const pathname = usePathname();
-  const supabase = createClient();
-  const userEmail = useAuthStore(s => s.userEmail);
+  const router = useRouter();
+  const userEmail = useAuthStore((s) => s.userEmail);
+  const creditBalance = useCreditStore((s) => s.balance);
+
+  const handleLogout = async () => {
+    await createClient().auth.signOut();
+    router.push('/login');
+  };
+
   return (
-    <>
-      <div
-        className={[
-          'fixed inset-0 z-40 bg-black/40 transition-opacity',
-          open
-            ? 'opacity-100 pointer-events-auto'
-            : 'opacity-0 pointer-events-none',
-        ].join(' ')}
-        onClick={onClose}
-        aria-hidden='true'
-      />
-
-      {/* Drawer */}
-      <aside
-        id={id}
-        aria-hidden={!open}
-        className={[
-          'fixed left-0 top-0 z-50 h-full w-72 border-r border-border bg-card shadow-xl',
-          'transition-transform duration-300 ease-in-out',
-          open ? 'translate-x-0' : '-translate-x-full',
-        ].join(' ')}
-      >
-        <div className='flex h-14 items-center justify-between border-b border-border px-4'>
-          <span className='text-sm font-semibold'>탐색</span>
-          <button
-            type='button'
-            aria-label='사이드바 닫기'
-            onClick={onClose}
-            className='rounded-md p-2 hover:bg-accent focus:outline-none focus:ring-2 focus:ring-ring'
+    <div className='flex flex-col h-full py-6 px-4'>
+      {/* Logo */}
+      <div className='mb-10 px-2'>
+        <h1 className='text-xl font-bold tracking-tight text-[--text-primary]'>
+          Mak
+          <span
+            style={{
+              background: 'linear-gradient(90deg, #7C5CFC, #5B8DEF)',
+              WebkitBackgroundClip: 'text',
+              WebkitTextFillColor: 'transparent',
+            }}
           >
-            <span className='sr-only'>Close</span>
-            {/* X 아이콘 대용 */}
-            <div className='relative h-4 w-4'>
-              <span className='absolute left-1/2 top-1/2 block h-0.5 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 bg-current' />
-              <span className='absolute left-1/2 top-1/2 block h-0.5 w-4 -translate-x-1/2 -translate-y-1/2 -rotate-45 bg-current' />
-            </div>
-          </button>
-        </div>
+            etaa
+          </span>
+        </h1>
+        <p className='text-xs text-[--text-secondary] mt-0.5'>AI Marketing Tool</p>
+      </div>
 
-        <nav className='p-2 h-full'>
-          <div className='p-2 flex flex-col justify-center'>
-            {!!userEmail ? (
-              <>
-                <p className='text-lg'>안녕하세요!</p>
-                <p className='text-sm'>
-                  <strong>{userEmail}</strong>님
-                </p>
-                <Button
-                  className='mt-6'
-                  onClick={() => supabase.auth.signOut()}
-                >
-                  로그아웃
-                </Button>
-              </>
-            ) : (
-              <Button
-                onClick={() => {
-                  supabase.auth.signInWithOAuth({
-                    provider: 'google',
-                    options: { redirectTo: `${location.origin}/auth/callback` },
-                  });
-                }}
-              >
-                로그인하기
-              </Button>
-            )}
+      {/* Nav Links */}
+      <nav className='flex-1 space-y-1 overflow-y-auto'>
+        {NAV_LINKS.map((link) => {
+          const active =
+            link.href === '/dashboard'
+              ? pathname === '/dashboard'
+              : pathname.startsWith(link.href);
+          const Icon = link.icon;
+          return (
+            <Link
+              key={link.href}
+              href={link.href}
+              onClick={onNavigate}
+              className={[
+                'relative flex items-center gap-3 px-3 py-2.5 text-sm font-medium rounded-lg transition-colors duration-200',
+                active
+                  ? 'bg-[--surface-2] text-[--text-primary]'
+                  : 'text-[--text-secondary] hover:bg-[--surface-2] hover:text-[--text-primary]',
+              ].join(' ')}
+            >
+              {active && (
+                <span className='absolute left-0 top-1/2 -translate-y-1/2 w-[3px] h-5 rounded-r-full bg-[--brand-primary]' />
+              )}
+              <Icon size={18} strokeWidth={2} />
+              {link.label}
+            </Link>
+          );
+        })}
+      </nav>
+
+      {/* Bottom: Credits + Settings + User */}
+      <div className='mt-auto pt-4 border-t border-[--border-subtle] space-y-1'>
+        <Link
+          href='/credits'
+          onClick={onNavigate}
+          className='flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-[--text-secondary] hover:bg-[--surface-2] hover:text-[--text-primary] rounded-lg transition-colors'
+        >
+          <Coins size={18} strokeWidth={2} />
+          <span className='flex-1'>크레딧</span>
+          {creditBalance !== null && (
+            <span className='text-xs font-semibold px-2 py-0.5 rounded-full bg-[--surface-3] text-[--brand-primary]'>
+              {creditBalance.toLocaleString()}
+            </span>
+          )}
+        </Link>
+        <Link
+          href='/settings'
+          onClick={onNavigate}
+          className='flex items-center gap-3 px-3 py-2.5 text-sm font-medium text-[--text-secondary] hover:bg-[--surface-2] hover:text-[--text-primary] rounded-lg transition-colors'
+        >
+          <Settings size={18} strokeWidth={2} />
+          설정
+        </Link>
+
+        {userEmail && (
+          <div className='px-3 py-2'>
+            <p className='text-xs text-[--text-secondary] truncate'>{userEmail}</p>
           </div>
-          <Separator className='my-2' />
-          <div>
-            {links.map(link => {
-              const active = pathname === link.href;
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className={[
-                    'block rounded-md px-3 py-2 text-sm transition-colors',
-                    active
-                      ? 'bg-accent text-accent-foreground'
-                      : 'hover:bg-muted',
-                  ].join(' ')}
-                >
-                  {link.label}
-                </Link>
-              );
-            })}
-          </div>
-        </nav>
-      </aside>
-    </>
+        )}
+
+        <button
+          type='button'
+          onClick={handleLogout}
+          className='flex items-center gap-3 w-full px-3 py-2.5 text-sm font-medium text-[--text-secondary] hover:bg-[--surface-2] hover:text-[--error] rounded-lg transition-colors'
+        >
+          <LogOut size={18} strokeWidth={2} />
+          로그아웃
+        </button>
+      </div>
+    </div>
   );
-};
+}
+
+/** Desktop: fixed sidebar. Mobile: hidden (use MobileSidebar). */
+export function Sidebar() {
+  return (
+    <aside className='hidden lg:flex fixed left-0 top-0 z-40 w-56 h-screen flex-col' style={{ backgroundColor: 'var(--surface-1)', borderRight: '1px solid var(--border-subtle)' }}>
+      <SidebarContent />
+    </aside>
+  );
+}
+
+/** Mobile sidebar trigger + Sheet */
+export function MobileSidebar() {
+  const [open, setOpen] = useState(false);
+  const pathname = usePathname();
+
+  useEffect(() => {
+    setOpen(false);
+  }, [pathname]);
+
+  return (
+    <Sheet open={open} onOpenChange={setOpen}>
+      <SheetTrigger asChild>
+        <Button
+          variant='ghost'
+          size='icon'
+          className='lg:hidden text-[--text-secondary] hover:text-[--text-primary]'
+        >
+          <Menu size={20} />
+          <span className='sr-only'>메뉴 열기</span>
+        </Button>
+      </SheetTrigger>
+      <SheetContent
+        side='left'
+        className='border-[--border-default] w-56 p-0'
+        style={{ backgroundColor: 'var(--surface-1)' }}
+      >
+        <SidebarContent onNavigate={() => setOpen(false)} />
+      </SheetContent>
+    </Sheet>
+  );
+}
 
 export default Sidebar;

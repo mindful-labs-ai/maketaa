@@ -1,1 +1,0 @@
-# cardnews-agent core library

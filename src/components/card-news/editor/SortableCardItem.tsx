@@ -70,7 +70,7 @@ export function SortableCardItem({ card, isSelected, onClick }: SortableCardItem
           ? 'border-primary bg-primary/5 shadow-md'
           : isOver
             ? 'border-blue-400 bg-blue-50 shadow-sm'
-            : 'border-gray-200 bg-white hover:border-gray-300'}
+            : 'border-[--border-subtle] bg-[--surface-1] hover:border-[--border-default]'}
         ${isDragging ? 'opacity-50 shadow-lg' : ''}
       `}
     >
@@ -80,11 +80,11 @@ export function SortableCardItem({ card, isSelected, onClick }: SortableCardItem
           <div
             {...attributes}
             {...listeners}
-            className="pt-0.5 cursor-grab active:cursor-grabbing text-gray-400 hover:text-gray-600 flex-shrink-0"
+            className="pt-0.5 cursor-grab active:cursor-grabbing text-[--text-secondary] hover:text-[--text-primary] flex-shrink-0"
           >
             <GripVertical size={16} />
           </div>
-          <span className="text-xs font-semibold text-gray-500 flex-shrink-0 pt-0.5">
+          <span className="text-xs font-semibold text-[--text-secondary] flex-shrink-0 pt-0.5">
             Card {card.index}
           </span>
         </div>
@@ -96,22 +96,22 @@ export function SortableCardItem({ card, isSelected, onClick }: SortableCardItem
       </div>
 
       {/* Headline Preview */}
-      <p className="text-sm font-semibold text-gray-800 truncate ml-6">
+      <p className="text-sm font-semibold text-[--text-primary] truncate ml-6">
         {card.text?.headline || '(No headline)'}
       </p>
 
       {/* Body Preview */}
       {card.text?.body && (
-        <p className="text-xs text-gray-600 truncate mt-1 ml-6">{card.text.body}</p>
+        <p className="text-xs text-[--text-secondary] truncate mt-1 ml-6">{card.text.body}</p>
       )}
 
       {/* Background Type Indicator */}
       <div className="mt-2 flex items-center gap-1 ml-6">
         <div
-          className="h-3 w-3 rounded-full border border-gray-300"
+          className="h-3 w-3 rounded-full border border-[--border-subtle]"
           style={{ backgroundColor: card.style?.color_palette?.primary || '#7B9EBD' }}
         />
-        <span className="text-xs text-gray-500">
+        <span className="text-xs text-[--text-secondary]">
           {card.background?.type === 'image'
             ? 'Image'
             : card.background?.type === 'gradient'

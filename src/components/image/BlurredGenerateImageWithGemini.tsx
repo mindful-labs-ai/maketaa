@@ -2,43 +2,58 @@
 
 import { Button } from '@/components/ui/button';
 import { Textarea } from '@/components/ui/textarea';
-import { Upload, FileImage, Sparkles } from 'lucide-react';
+import { FileImage, Sparkles } from 'lucide-react';
+
 export const BlurredGenerateImageWithGemini = () => {
   return (
-    <div className='w-full max-w-6xl mx-auto px-6 py-18 space-y-6 blur-xs'>
-      <div className='grid md:grid-cols-2 gap-6'>
-        {/* Left: drop zone + list */}
-        <div className='space-y-4'>
-          <h3 className='text-lg font-semibold'>
-            1. 참조 이미지 업로드 (여러 장 가능)
-          </h3>
-          <div className='relative border-2 border-dashed rounded-lg p-8 text-center transition-colors border-gray-300 dark:border-gray-600'>
-            <input type='file' accept='image/*' multiple className='hidden' />
+    <div className='w-full max-w-3xl mx-auto px-6 py-10 space-y-8 blur-xs'>
+      {/* Header */}
+      <div>
+        <h2 className='text-2xl font-bold text-[--text-primary]'>AI 이미지 생성</h2>
+        <p className='text-sm text-[--text-secondary] mt-1'>
+          프롬프트를 입력하면 AI가 고품질 이미지를 만들어드립니다
+        </p>
+      </div>
 
-            <FileImage className='mx-auto h-12 w-12 text-gray-400 mb-4' />
-            <p className='text-sm mb-4'>
-              이미지를 드래그하거나 클릭하여 여러 장 업로드
-            </p>
-            <Button variant='outline'>
-              <Upload className='mr-2 h-4 w-4' /> 이미지 선택
-            </Button>
-          </div>
-        </div>
+      {/* Prompt */}
+      <Textarea
+        placeholder='만들고 싶은 이미지를 설명해주세요...'
+        className='min-h-[160px] bg-[--surface-2] border-[--border-subtle] text-[--text-primary] placeholder:text-[--text-tertiary] text-base resize-none rounded-xl p-4'
+      />
 
-        <div className='space-y-4'>
-          <h3 className='text-lg font-semibold'>2. 생성 프롬프트 입력</h3>
-          <Textarea
-            placeholder='예: Reference 스타일을 유지하고, 스프라이트 시트 지침에 따라 장면을 생성'
-            className='min-h-[180px]'
-          />
-
-          <Button className='w-full'>
-            <>
-              <Sparkles className='mr-2 h-4 w-4' /> Gemini로 이미지 생성
-            </>
-          </Button>
+      {/* Ratio pills */}
+      <div className='space-y-3'>
+        <label className='text-sm font-medium text-[--text-secondary]'>화면 비율</label>
+        <div className='flex flex-wrap gap-2'>
+          {['1:1', '3:2', '4:3', '9:16', '16:9'].map((r, i) => (
+            <span
+              key={r}
+              className={`px-3.5 py-1.5 rounded-lg text-sm font-medium ${
+                i === 0
+                  ? 'bg-primary text-primary-foreground'
+                  : 'bg-[--surface-2] text-[--text-secondary] border border-[--border-subtle]'
+              }`}
+            >
+              {r}
+            </span>
+          ))}
         </div>
       </div>
+
+      {/* Collapsible ref section */}
+      <div className='rounded-xl border border-[--border-subtle] overflow-hidden'>
+        <div className='flex items-center justify-between px-4 py-3 bg-[--surface-1]'>
+          <div className='flex items-center gap-2'>
+            <FileImage className='w-4 h-4 text-[--text-secondary]' />
+            <span className='text-sm font-medium text-[--text-primary]'>참조 이미지</span>
+          </div>
+        </div>
+      </div>
+
+      {/* Generate button */}
+      <Button className='w-full h-12 text-base font-semibold rounded-xl bg-primary text-primary-foreground'>
+        <Sparkles className='mr-2 h-5 w-5' /> Gemini로 이미지 생성
+      </Button>
     </div>
   );
 };

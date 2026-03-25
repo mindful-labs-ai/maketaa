@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { CreditCost } from '@/components/ui/credit-cost';
 import { Slider } from '@/components/ui/slider';
 import {
   Select,
@@ -65,7 +66,7 @@ export default function NarrationPanel({
   return (
     <div className='p-4 border border-border rounded-lg'>
       <h3 className='font-semibold mb-2'>나레이션 생성</h3>
-      <p className='text-sm text-muted-foreground mb-4'>
+      <p className='text-sm text-[--text-secondary] mb-4'>
         스크립트를 음성으로 변환합니다
       </p>
 
@@ -85,7 +86,7 @@ export default function NarrationPanel({
               step={50}
               className='w-full'
             />
-            <div className='w-full text-xs text-muted-foreground flex justify-between'>
+            <div className='w-full text-xs text-[--text-secondary] flex justify-between'>
               <span>Creative</span>
               <span>Robust</span>
             </div>
@@ -130,15 +131,15 @@ export default function NarrationPanel({
             나레이션 생성 중...
           </>
         ) : narration ? (
-          '나레이션 재생성'
+          <><span>나레이션 재생성</span><CreditCost amount={4} /></>
         ) : (
-          '나레이션 생성'
+          <><span>나레이션 생성</span><CreditCost amount={4} /></>
         )}
       </Button>
 
       {/* Player */}
       {narration && (
-        <div className='mt-4 p-3 border border-border rounded-lg bg-card'>
+        <div className='mt-4 p-3 border border-[--border-default] rounded-lg bg-[--surface-1]'>
           <div className='flex items-center gap-3 mb-3'>
             <Button
               size='sm'
@@ -154,7 +155,7 @@ export default function NarrationPanel({
             </Button>
 
             <div className='flex-1'>
-              <div className='flex items-center justify-between text-sm text-muted-foreground mb-1'>
+              <div className='flex items-center justify-between text-sm text-[--text-secondary] mb-1'>
                 <span>{formatTime(Math.floor(displayCurrent))}</span>
                 <span>{formatTime(duration)}</span>
               </div>
@@ -192,7 +193,7 @@ export default function NarrationPanel({
               </div>
             </div>
 
-            <Volume2 className='w-4 h-4 text-muted-foreground' />
+            <Volume2 className='w-4 h-4 text-[--text-secondary]' />
           </div>
 
           <div className='flex items-center justify-end'>

@@ -102,13 +102,13 @@ export default function TextEditModal({
       role="dialog"
       aria-label={`${label} 편집`}
     >
-      <div className="bg-white rounded-2xl shadow-2xl w-full max-w-md mx-4 overflow-hidden">
+      <div className="bg-[--surface-1] rounded-2xl shadow-2xl w-full max-w-md mx-4 overflow-hidden">
         {/* Header */}
-        <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-gray-100">
-          <h2 className="text-base font-semibold text-gray-900">{label} 편집</h2>
+        <div className="flex items-center justify-between px-6 pt-5 pb-4 border-b border-[--border-subtle]">
+          <h2 className="text-base font-semibold text-[--text-primary]">{label} 편집</h2>
           <button
             onClick={onClose}
-            className="w-7 h-7 flex items-center justify-center rounded-full text-gray-400 hover:text-gray-600 hover:bg-gray-100 transition-colors"
+            className="w-7 h-7 flex items-center justify-center rounded-full text-[--text-tertiary] hover:text-[--text-secondary] hover:bg-[--surface-2] transition-colors"
             aria-label="닫기"
           >
             <svg width="14" height="14" viewBox="0 0 14 14" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -125,12 +125,12 @@ export default function TextEditModal({
             onChange={(e) => setValue(e.target.value)}
             rows={fieldName === 'description' ? 6 : fieldName === 'body' || fieldName === 'quote' ? 4 : 2}
             className={[
-              'w-full resize-none rounded-lg border px-4 py-3 text-sm text-gray-900',
-              'placeholder:text-gray-400 leading-relaxed',
+              'w-full resize-none rounded-lg border px-4 py-3 text-sm text-[--text-primary]',
+              'placeholder:text-[--text-tertiary] leading-relaxed',
               'focus:outline-none focus:ring-2 transition-shadow',
               isOverLimit
                 ? 'border-red-400 focus:ring-red-300'
-                : 'border-gray-300 focus:ring-blue-300 focus:border-blue-400',
+                : 'border-[--border-default] focus:ring-blue-300 focus:border-blue-400',
             ].join(' ')}
             placeholder={`${label}을 입력하세요`}
             onKeyDown={(e) => {
@@ -142,11 +142,11 @@ export default function TextEditModal({
           />
           <div className="flex justify-end mt-1.5">
             {resolvedMax !== undefined ? (
-              <span className={['text-xs tabular-nums', isOverLimit ? 'text-red-500 font-medium' : 'text-gray-400'].join(' ')}>
+              <span className={['text-xs tabular-nums', isOverLimit ? 'text-red-500 font-medium' : 'text-[--text-tertiary]'].join(' ')}>
                 {value.length}/{resolvedMax}
               </span>
             ) : (
-              <span className="text-xs text-gray-400 tabular-nums">{value.length}자</span>
+              <span className="text-xs text-[--text-tertiary] tabular-nums">{value.length}자</span>
             )}
           </div>
         </div>
@@ -155,7 +155,7 @@ export default function TextEditModal({
         <div className="flex justify-end gap-2 px-6 pb-5">
           <button
             onClick={onClose}
-            className="px-4 py-2 text-sm font-medium text-gray-600 bg-gray-100 rounded-lg hover:bg-gray-200 transition-colors"
+            className="px-4 py-2 text-sm font-medium text-[--text-secondary] bg-[--surface-2] rounded-lg hover:bg-[--surface-3] transition-colors"
           >
             취소
           </button>

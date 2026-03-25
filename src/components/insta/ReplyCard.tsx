@@ -23,7 +23,7 @@ const ReplyCard = ({ it }: { it: AIReplyItem }) => {
         </div>
         <Button
           size='sm'
-          className='hover:bg-gray-400 active:bg-blue-400'
+          className='hover:bg-[--surface-3] active:bg-[--accent-active]'
           onClick={() => {
             copy(it.reply).then(() => {});
             setCopied(true);

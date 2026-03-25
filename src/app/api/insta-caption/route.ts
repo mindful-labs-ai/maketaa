@@ -1,6 +1,8 @@
 import { NextRequest } from 'next/server';
 import OpenAI from 'openai';
 import { buildInstagramCaptionPrompt } from '@/lib/insta/captionPrompt';
+import { createClient } from '@/lib/supabase/server';
+import { consumeCredits } from '@/lib/credits/consume';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -14,6 +16,21 @@ export async function POST(req: NextRequest) {
     const { script, options } = await req.json();
     if (typeof script !== 'string' || !script.trim()) {
       return new Response('script is required', { status: 400 });
+    }
+
+    const supabase = await createClient();
+    const { data: { user: authUser } } = await supabase.auth.getUser();
+    if (!authUser) {
+      return Response.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const creditResult = await consumeCredits(authUser.id, 'INSTA_CAPTION');
+    if (!creditResult.success) {
+      return Response.json({
+        error: 'INSUFFICIENT_CREDITS',
+        balance: creditResult.balance,
+        required: creditResult.required,
+      }, { status: 402 });
     }
 
     const { system, user } = buildInstagramCaptionPrompt(script, {

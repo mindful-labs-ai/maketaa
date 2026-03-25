@@ -1,6 +1,7 @@
 'use client';
 
 import { Button } from '@/components/ui/button';
+import { CreditCost } from '@/components/ui/credit-cost';
 import {
   Check,
   MinusSquareIcon,
@@ -48,7 +49,7 @@ export const SceneList = ({
       <div className='flex items-center justify-between mb-2'>
         <div className='flex flex-col gap-3'>
           <h3 className='font-semibold'>1. 장면 프롬프트</h3>
-          <p className='text-sm text-muted-foreground mb-3'>
+          <p className='text-sm text-[--text-secondary] mb-3'>
             스크립트를 장면에 따라 나눕니다.
           </p>
         </div>
@@ -78,7 +79,7 @@ export const SceneList = ({
                 장면 생성 중...
               </>
             ) : (
-              '장면 쪼개기'
+              <><span>장면 쪼개기</span><CreditCost amount={3} /></>
             )}
           </Button>
         </div>
@@ -89,13 +90,13 @@ export const SceneList = ({
           {scenes.map(scene => (
             <div
               key={scene.id}
-              className='p-3 border border-border rounded-lg bg-card'
+              className='p-3 border border-[--border-default] rounded-lg bg-[--surface-1]'
             >
               <div className='flex relative items-start justify-between mb-2'>
                 <div className='flex-1'>
                   <div className='flex gap-4 mb-4'>
                     <h1 className='text-lg'># {scene.id}</h1>
-                    <div className='flex text-xs text-muted-foreground gap-1 items-center'>
+                    <div className='flex text-xs text-[--text-secondary] gap-1 items-center'>
                       <input
                         checked={selected.has(scene.id)}
                         onChange={() => setSelected(scene.id)}
@@ -105,23 +106,23 @@ export const SceneList = ({
                       <label htmlFor={scene.id}>이미지 캐릭터 미사용</label>
                     </div>
                   </div>
-                  <p className='text-xs text-muted-foreground mb-1'>원문:</p>
+                  <p className='text-xs text-[--text-secondary] mb-1'>원문:</p>
                   <p className='text-sm font-medium mb-2 whitespace-pre-line'>
                     {scene.originalText}
                   </p>
-                  <p className='text-xs text-muted-foreground mb-1'>
+                  <p className='text-xs text-[--text-secondary] mb-1'>
                     이미지 프롬프트:
                   </p>
-                  <p className='text-sm text-muted-foreground mb-2'>
+                  <p className='text-sm text-[--text-secondary] mb-2'>
                     {buildImagePromptText(scene.imagePrompt)}
                   </p>
-                  <p className='text-xs text-muted-foreground mb-1'>
+                  <p className='text-xs text-[--text-secondary] mb-1'>
                     한글 요약:
                   </p>
-                  <p className='text-sm text-muted-foreground mb-2'>
+                  <p className='text-sm text-[--text-secondary] mb-2'>
                     {scene.koreanSummary}
                   </p>
-                  <p className='text-xs text-muted-foreground mb-1'>
+                  <p className='text-xs text-[--text-secondary] mb-1'>
                     장면 요약:
                   </p>
                   <p className='text-sm'>{scene.sceneExplain}</p>
@@ -143,7 +144,7 @@ export const SceneList = ({
                       })
                     }
                   >
-                    이미지 생성
+                    이미지 생성<CreditCost amount='5~8' />
                   </Button>
                 </div>
                 <div className='absolute flex gap-1 right-0 bottom-0'>
@@ -167,7 +168,7 @@ export const SceneList = ({
           ))}
         </div>
       ) : (
-        <p className='text-center text-muted-foreground mb-4'>
+        <p className='text-center text-[--text-secondary] mb-4'>
           장면을 만들어주세요.
         </p>
       )}

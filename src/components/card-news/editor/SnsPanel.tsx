@@ -60,7 +60,7 @@ const CaptionEditor: React.FC<{
   return (
     <div className={`space-y-3 ${disabled ? 'opacity-50 pointer-events-none' : ''}`}>
       <div className="flex items-center justify-between">
-        <label className="text-sm font-semibold text-gray-900">{platformLabel} 캡션</label>
+        <label className="text-sm font-semibold text-[--text-primary]">{platformLabel} 캡션</label>
         <div className="flex items-center gap-2">
           {stats.charCount > 0 && (
             <>
@@ -71,7 +71,7 @@ const CaptionEditor: React.FC<{
           )}
           <span className={`text-sm font-semibold ${
             stats.warningLevel === 'error' ? 'text-red-600' :
-            stats.warningLevel === 'warning' ? 'text-yellow-600' : 'text-gray-600'
+            stats.warningLevel === 'warning' ? 'text-yellow-600' : 'text-[--text-secondary]'
           }`}>
             {stats.charCount}/{maxChars}
           </span>
@@ -91,13 +91,13 @@ const CaptionEditor: React.FC<{
             ? 'border-red-300 focus:ring-red-500 focus:border-transparent'
             : stats.warningLevel === 'warning'
               ? 'border-yellow-300 focus:ring-yellow-500 focus:border-transparent'
-              : 'border-gray-300 focus:ring-blue-500 focus:border-transparent'}
+              : 'border-[--border-subtle] focus:ring-blue-500 focus:border-transparent'}
         `}
         rows={platform === 'instagram' ? 6 : 4}
         disabled={disabled}
       />
 
-      <div className="flex items-center justify-between text-xs text-gray-500">
+      <div className="flex items-center justify-between text-xs text-[--text-secondary]">
         <div className="flex gap-4">
           <span>총 글자: {stats.charCount}</span>
           <span>해시태그: {stats.hashtagCount}개</span>
@@ -169,18 +169,18 @@ export const SnsPanel = React.forwardRef<HTMLDivElement, SnsPanelProps>(
     return (
       <div
         ref={ref}
-        className={`w-full bg-white rounded-lg border border-gray-200 p-6 ${className}`}
+        className={`w-full bg-[--surface-1] rounded-lg border border-[--border-subtle] p-6 ${className}`}
       >
         <div className="mb-6">
-          <h3 className="text-lg font-bold text-gray-900">SNS 캡션</h3>
-          <p className="text-sm text-gray-600 mt-2">각 플랫폼에 맞게 캡션을 작성해주세요.</p>
-          {autoSaveStatus === 'saving' && <p className="text-xs text-gray-500 mt-2">저장 중...</p>}
+          <h3 className="text-lg font-bold text-[--text-primary]">SNS 캡션</h3>
+          <p className="text-sm text-[--text-secondary] mt-2">각 플랫폼에 맞게 캡션을 작성해주세요.</p>
+          {autoSaveStatus === 'saving' && <p className="text-xs text-[--text-secondary] mt-2">저장 중...</p>}
           {autoSaveStatus === 'saved' && <p className="text-xs text-green-600 mt-2">저장됨</p>}
         </div>
 
         {isDisabled ? (
-          <div className="p-6 bg-gray-50 rounded-lg border-2 border-dashed border-gray-300 text-center">
-            <p className="text-gray-500 text-sm">카드를 선택하면 SNS 캡션을 편집할 수 있습니다.</p>
+          <div className="p-6 bg-[--surface-0] rounded-lg border-2 border-dashed border-[--border-subtle] text-center">
+            <p className="text-[--text-secondary] text-sm">카드를 선택하면 SNS 캡션을 편집할 수 있습니다.</p>
           </div>
         ) : (
           <div className="space-y-8">
@@ -191,7 +191,7 @@ export const SnsPanel = React.forwardRef<HTMLDivElement, SnsPanelProps>(
               maxChars={INSTAGRAM_MAX}
               disabled={isUpdatingInstagram}
             />
-            <hr className="border-gray-200" />
+            <hr className="border-[--border-subtle]" />
             <CaptionEditor
               platform="threads"
               caption={threadsCaption}

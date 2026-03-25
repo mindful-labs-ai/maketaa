@@ -102,7 +102,7 @@ export default function ConfigModal() {
           <div className='flex flex-col items-center gap-3'>
             <h3>비율 및 해상도 설정</h3>
             <div className='flex flex-wrap items-center gap-3'>
-              <div className='inline-flex rounded-full border p-1 bg-card'>
+              <div className='inline-flex rounded-full border p-1 bg-[--surface-1]'>
                 {aspectOptions.map(r => (
                   <Button
                     key={r}
@@ -117,7 +117,7 @@ export default function ConfigModal() {
               </div>
 
               {/* Resolution */}
-              <div className='inline-flex rounded-full border p-1 bg-card'>
+              <div className='inline-flex rounded-full border p-1 bg-[--surface-1]'>
                 {resolutionOptions.map(r => (
                   <Button
                     key={r}
@@ -133,7 +133,7 @@ export default function ConfigModal() {
             </div>
             <h3>이미지/클립 AI 종류 선택</h3>
             <div className='flex flex-wrap items-center gap-3'>
-              <div className='inline-flex rounded-full border p-1 bg-card'>
+              <div className='inline-flex rounded-full border p-1 bg-[--surface-1]'>
                 <Button
                   size='sm'
                   variant={draftImageAI === 'gemini' ? 'default' : 'ghost'}
@@ -152,7 +152,7 @@ export default function ConfigModal() {
                 </Button>
               </div>
 
-              <div className='inline-flex rounded-full border p-1 bg-card'>
+              <div className='inline-flex rounded-full border p-1 bg-[--surface-1]'>
                 <Button
                   size='sm'
                   variant={draftClipAI === 'kling' ? 'default' : 'ghost'}
@@ -177,7 +177,7 @@ export default function ConfigModal() {
           <div className='space-y-2'>
             <div className='flex items-center justify-between'>
               <label className='text-sm font-medium'>이미지 스타일</label>
-              <span className='text-xs text-muted-foreground'>
+              <span className='text-xs text-[--text-secondary]'>
                 {draftGlobalStyle.length}/150
               </span>
             </div>
@@ -187,7 +187,7 @@ export default function ConfigModal() {
               maxRows={4}
               value={draftGlobalStyle}
               onChange={e => setDraftGlobalStyle(e.target.value)}
-              className='w-full resize-none rounded-md border bg-background px-3 py-2 text-sm focus:outline-none'
+              className='w-full resize-none rounded-md border bg-[--surface-0] px-3 py-2 text-sm focus:outline-none'
               placeholder={[
                 '예) A masterpiece Japanese style anime illustration,',
                 'A photorealistic,',
@@ -195,7 +195,7 @@ export default function ConfigModal() {
               ].join(' ')}
             />
 
-            <p className='text-xs text-muted-foreground'>
+            <p className='text-xs text-[--text-secondary]'>
               힌트: 자연어로 자유롭게 작성하세요. 생성되는 모든 이미지에
               스타일이 적용됩니다.
             </p>
@@ -205,7 +205,7 @@ export default function ConfigModal() {
           <div className='space-y-2'>
             <div className='flex items-center justify-between'>
               <label className='text-sm font-medium'>장면 분할 커스텀 룰</label>
-              <span className='text-xs text-muted-foreground'>
+              <span className='text-xs text-[--text-secondary]'>
                 {draftCustomRule.length}/1000
               </span>
             </div>
@@ -215,7 +215,7 @@ export default function ConfigModal() {
               maxRows={12}
               value={draftCustomRule}
               onChange={e => setDraftCustomRule(e.target.value)}
-              className='w-full resize-none rounded-md border bg-background px-3 py-2 text-sm focus:outline-none'
+              className='w-full resize-none rounded-md border bg-[--surface-0] px-3 py-2 text-sm focus:outline-none'
               placeholder={[
                 '예) Close-up은 전체의 15% 이하, 실내는 handheld 금지,',
                 '파스텔 톤 유지, 장면 2/5에는 우산 소품 반복,',
@@ -224,7 +224,7 @@ export default function ConfigModal() {
               ].join(' ')}
             />
 
-            <p className='text-xs text-muted-foreground'>
+            <p className='text-xs text-[--text-secondary]'>
               힌트: 자연어로 자유롭게 작성하세요. 프롬프트에서 사용자 규칙이
               우선됩니다(안전 규칙 제외).
             </p>

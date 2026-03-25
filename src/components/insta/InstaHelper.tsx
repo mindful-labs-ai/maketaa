@@ -1,8 +1,18 @@
 'use client';
 
 import { useState } from 'react';
+import { CreditCost } from '@/components/ui/credit-cost';
 import { Button } from '@/components/ui/button';
+import { Textarea } from '@/components/ui/textarea';
+import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
 import ReplyCard from '@/components/insta/ReplyCard';
+import { creditFetch } from '@/lib/credits/creditFetch';
 
 export interface AIReplyItem {
   id: string;
@@ -70,7 +80,7 @@ export const InstagHelper = () => {
     setReplyErr(null);
     setReplyItems([]);
     try {
-      const res = await fetch('/api/insta-replies', {
+      const res = await creditFetch('/api/insta-replies', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ raw: rawReply, options }),
@@ -98,7 +108,7 @@ export const InstagHelper = () => {
     setCaptionErr(null);
     setCaptionText('');
     try {
-      const res = await fetch('/api/insta-caption', {
+      const res = await creditFetch('/api/insta-caption', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ script: rawCaption, options }),
@@ -121,7 +131,7 @@ export const InstagHelper = () => {
   /* ======== 상단 모드 토글 ======== */
   const TopBar = (
     <div className='flex items-center justify-between'>
-      <h1 className='text-xl font-bold'>
+      <h1 className='text-2xl font-bold text-[--text-primary]'>
         {mode === 'reply'
           ? 'Instagram 댓글/답글 생성기'
           : '실전 택틱 캡션 생성기'}
@@ -145,29 +155,28 @@ export const InstagHelper = () => {
 
   /* ======== 공통 옵션 UI ======== */
   const Options = (
-    <div className='grid gap-3 border rounded p-3'>
+    <div className="space-y-3 rounded-xl border border-[--border-subtle] bg-[--surface-1] p-4">
       <label className='text-sm font-medium'>문체 프롬프트</label>
-      <textarea
-        className='w-full h-20 border rounded p-2'
+      <Textarea
+        className='min-h-[80px]'
         value={options.stylePrompt}
         onChange={e => setOptions({ ...options, stylePrompt: e.target.value })}
       />
       <div className='flex gap-2 items-center'>
         <label className='text-sm font-medium'>언어</label>
-        <select
-          className='border rounded px-2 py-1'
+        <Select
           value={options.language}
-          onChange={e =>
-            setOptions({
-              ...options,
-              language: e.target.value as LanguageCode,
-            })
-          }
+          onValueChange={(v) => setOptions({ ...options, language: v as LanguageCode })}
         >
-          <option value='ko'>한국어</option>
-          <option value='en'>English</option>
-          <option value='ja'>日本語</option>
-        </select>
+          <SelectTrigger className="w-[120px]">
+            <SelectValue />
+          </SelectTrigger>
+          <SelectContent>
+            <SelectItem value="ko">한국어</SelectItem>
+            <SelectItem value="en">English</SelectItem>
+            <SelectItem value="ja">日本語</SelectItem>
+          </SelectContent>
+        </Select>
       </div>
     </div>
   );
@@ -175,8 +184,8 @@ export const InstagHelper = () => {
   /* ======== 댓글/답글 UI ======== */
   const ReplyUI = (
     <div className='space-y-6'>
-      <textarea
-        className='w-full h-40 border rounded p-2'
+      <Textarea
+        className='min-h-[160px]'
         placeholder='인스타 댓글 원문을 그대로 붙여넣으세요'
         value={rawReply}
         onChange={e => setRawReply(e.target.value)}
@@ -189,7 +198,7 @@ export const InstagHelper = () => {
           onClick={handleGenerateReplies}
           disabled={replyLoading || !rawReply.trim()}
         >
-          {replyLoading ? '생성 중…' : '답글 생성'}
+          {replyLoading ? '생성 중…' : <><span>답글 생성</span><CreditCost amount={1} /></>}
         </Button>
         <Button
           variant='outline'
@@ -227,8 +236,8 @@ export const InstagHelper = () => {
   /* ======== 캡션(택틱) UI ======== */
   const CaptionUI = (
     <div className='space-y-6'>
-      <textarea
-        className='w-full h-40 border rounded p-2'
+      <Textarea
+        className='min-h-[160px]'
         placeholder='캡션의 기반이 될 스크립트(콘텐츠 원문)를 붙여넣으세요'
         value={rawCaption}
         onChange={e => setRawCaption(e.target.value)}
@@ -241,7 +250,7 @@ export const InstagHelper = () => {
           onClick={handleGenerateCaption}
           disabled={captionLoading || !rawCaption.trim()}
         >
-          {captionLoading ? '생성 중…' : '캡션 생성'}
+          {captionLoading ? '생성 중…' : <><span>캡션 생성</span><CreditCost amount={1} /></>}
         </Button>
         <Button
           variant='outline'
@@ -259,7 +268,7 @@ export const InstagHelper = () => {
           초기화
         </Button>
         <Button
-          className='hover:bg-gray-400 active:bg-blue-400'
+          className='hover:bg-[--surface-3] active:bg-[--accent-active]'
           onClick={() => {
             copyCaption();
             setCaptionCopied(true);
@@ -287,9 +296,13 @@ export const InstagHelper = () => {
   );
 
   return (
-    <div className='max-w-3xl mx-auto p-6 space-y-6'>
-      {TopBar}
-      {mode === 'reply' ? ReplyUI : CaptionUI}
+    <div className='w-full max-w-3xl mx-auto px-6 py-10 space-y-8'>
+      <div>
+        {TopBar}
+      </div>
+      <div className='space-y-6'>
+        {mode === 'reply' ? ReplyUI : CaptionUI}
+      </div>
     </div>
   );
 };

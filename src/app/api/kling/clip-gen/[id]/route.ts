@@ -1,5 +1,7 @@
 import { NextRequest, NextResponse } from 'next/server';
 import jwt from 'jsonwebtoken';
+import { createClient } from '@/lib/supabase/server';
+import { consumeCredits } from '@/lib/credits/consume';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -46,6 +48,21 @@ export interface TaskStatusResponse {
 export async function POST(request: NextRequest) {
   try {
     const body: ImageToVideoRequest = await request.json();
+
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const creditResult = await consumeCredits(user.id, 'VIDEO_KLING');
+    if (!creditResult.success) {
+      return NextResponse.json({
+        error: 'INSUFFICIENT_CREDITS',
+        balance: creditResult.balance,
+        required: creditResult.required,
+      }, { status: 402 });
+    }
 
     const ACCESS = process.env.KLING_ACCESS_KEY!;
     const SECRET = process.env.KLING_SECRET_KEY!;

@@ -1,10 +1,11 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import { useCreateStore } from '@/stores/card-news/useCreateStore';
 import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import type { TopicSelection } from '@/lib/card-news/types';
+import { creditFetch } from '@/lib/credits/creditFetch';
 
 export default function StepTopicSelect() {
   const {
@@ -19,25 +20,20 @@ export default function StepTopicSelect() {
 
   const [customTitle, setCustomTitle] = useState('');
 
-  useEffect(() => {
-    if (topicSuggestions.length > 0) return;
-
-    async function fetchSuggestions() {
-      setIsLoadingSuggestions(true);
-      try {
-        const res = await fetch('/api/card-news/suggest-topics', { method: 'POST' });
-        if (res.ok) {
-          const data = await res.json();
-          setTopicSuggestions(data.topics || []);
-        }
-      } catch {
-        // silently fail
-      } finally {
-        setIsLoadingSuggestions(false);
+  const fetchSuggestions = async () => {
+    setIsLoadingSuggestions(true);
+    try {
+      const res = await creditFetch('/api/card-news/suggest-topics', { method: 'POST' });
+      if (res.ok) {
+        const data = await res.json();
+        setTopicSuggestions(data.topics || []);
       }
+    } catch {
+      // silently fail
+    } finally {
+      setIsLoadingSuggestions(false);
     }
-    fetchSuggestions();
-  }, [topicSuggestions.length, setTopicSuggestions, setIsLoadingSuggestions]);
+  };
 
   const handleSelectSuggestion = (suggestion: (typeof topicSuggestions)[0]) => {
     selectTopic({
@@ -60,12 +56,20 @@ export default function StepTopicSelect() {
     <div>
       <h2 className='text-lg font-semibold mb-4'>1단계: 주제 선택</h2>
       <p className='text-sm text-muted-foreground mb-6'>
-        AI 추천 주제를 선택하거나 직접 입력하세요.
+        AI 추천 주제를 선택하거나 직접 입력하세요. (추천 시 1 크레딧 소모)
       </p>
 
       {/* AI suggestions */}
       <div className='space-y-3 mb-6'>
-        {isLoadingSuggestions ? (
+        {topicSuggestions.length === 0 && !isLoadingSuggestions ? (
+          <Button
+            variant='outline'
+            className='w-full py-6'
+            onClick={fetchSuggestions}
+          >
+            AI 주제 추천 받기
+          </Button>
+        ) : isLoadingSuggestions ? (
           [1, 2, 3].map((i) => (
             <div key={i} className='h-16 rounded-lg bg-muted animate-pulse' />
           ))
@@ -94,6 +98,16 @@ export default function StepTopicSelect() {
               )}
             </button>
           ))
+        )}
+        {topicSuggestions.length > 0 && !isLoadingSuggestions && (
+          <Button
+            variant='ghost'
+            size='sm'
+            className='w-full text-muted-foreground'
+            onClick={fetchSuggestions}
+          >
+            다시 추천 받기
+          </Button>
         )}
       </div>
 

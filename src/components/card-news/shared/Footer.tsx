@@ -26,8 +26,8 @@ export function Footer({ specId }: { specId: string }) {
         const record = await getCardSpecById(specId);
         setLastUpdated(record.updated_at);
         setVersion(record.spec.meta.id);
-      } catch (err) {
-        console.error('[Footer] Error fetching metadata:', err);
+      } catch {
+        // 메타데이터 로드 실패 시 조용히 무시 (10초 후 재시도)
       }
     };
 
@@ -56,7 +56,7 @@ export function Footer({ specId }: { specId: string }) {
   };
 
   return (
-    <footer className="bg-white border-t border-gray-100 px-4 sm:px-6 h-9 flex items-center shrink-0">
+    <footer className="bg-[--surface-1] border-t border-[--border-subtle] px-4 sm:px-6 h-9 flex items-center shrink-0">
       <div className="w-full flex items-center justify-between">
         {/* Left: Auto-save Status */}
         <div className="flex items-center gap-3">
@@ -65,7 +65,7 @@ export function Footer({ specId }: { specId: string }) {
               {getAutoSaveIcon()}
               <span
                 className={`text-xs ${
-                  autoSaveStatus === 'error' ? 'text-red-600 font-medium' : 'text-gray-500'
+                  autoSaveStatus === 'error' ? 'text-red-600 font-medium' : 'text-[--text-secondary]'
                 }`}
               >
                 {getAutoSaveLabel()}
@@ -73,17 +73,17 @@ export function Footer({ specId }: { specId: string }) {
             </div>
           )}
           {lastUpdated && autoSaveStatus !== 'saving' && (
-            <span className="text-xs text-gray-400 hidden sm:inline">
+            <span className="text-xs text-[--text-secondary] hidden sm:inline">
               {formatDate(lastUpdated)}
             </span>
           )}
         </div>
 
         {/* Right: Minimal metadata */}
-        <div className="flex items-center gap-3 text-xs text-gray-400">
+        <div className="flex items-center gap-3 text-xs text-[--text-secondary]">
           {editCount > 0 && <span>{editCount}회 편집</span>}
           {version && (
-            <code className="text-[10px] bg-gray-100 px-1.5 py-0.5 rounded font-mono text-gray-400 hidden sm:inline">
+            <code className="text-[10px] bg-[--surface-2] px-1.5 py-0.5 rounded font-mono text-[--text-secondary] hidden sm:inline">
               {version.slice(0, 8)}
             </code>
           )}

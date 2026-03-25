@@ -88,7 +88,7 @@ export async function getEditHistory({
 
   if (error) throw error;
 
-  return (data || []).map((row) => ({
+  return (data || []).map((row: Record<string, string | number | null>) => ({
     id: row.id,
     specId: row.spec_id,
     editor: row.editor ?? 'unknown',

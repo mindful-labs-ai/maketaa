@@ -6,7 +6,7 @@ import { getCardSpecById } from '@/lib/card-news/api';
 import { useCardStore, useSelectedCard, useAllCards } from '@/stores/card-news/useCardStore';
 import { CardList } from '@/components/card-news/editor/CardList';
 import CardCanvas from '@/components/card-news/editor/CardCanvas';
-import { HeaderWithApproval } from '@/components/card-news/editor/HeaderWithApproval';
+// HeaderWithApproval removed - 승인/반려 기능 비활성화, 제목은 TopNav에서 표시
 import { Footer } from '@/components/card-news/shared/Footer';
 import { StylePanel } from '@/components/card-news/editor/StylePanel';
 import TextEditModal from '@/components/card-news/editor/TextEditModal';
@@ -157,14 +157,14 @@ export default function EditorPage() {
   if (error) {
     return (
       <div className='flex items-center justify-center h-screen'>
-        <div className='max-w-md p-8 bg-card rounded-xl shadow-lg border border-border'>
+        <div className='max-w-md p-8 bg-[--surface-1] rounded-xl shadow-lg border border-[--border-default]'>
           <div className='flex items-center gap-3 mb-4'>
-            <div className='w-8 h-8 rounded-full bg-red-100 flex items-center justify-center shrink-0'>
-              <span className='text-red-600 text-sm font-bold'>!</span>
+            <div className='w-8 h-8 rounded-full bg-[rgba(248,113,113,0.15)] flex items-center justify-center shrink-0'>
+              <span className='text-[--error] text-sm font-bold'>!</span>
             </div>
             <h1 className='text-base font-semibold'>로드 실패</h1>
           </div>
-          <p className='text-sm text-muted-foreground mb-6'>{error}</p>
+          <p className='text-sm text-[--text-secondary] mb-6'>{error}</p>
           <a
             href='/card-news'
             className='inline-flex items-center gap-2 px-4 py-2 bg-primary text-primary-foreground text-sm rounded-lg hover:opacity-90 transition-opacity'
@@ -184,33 +184,31 @@ export default function EditorPage() {
             {[1, 2, 3].map((i) => (
               <div
                 key={i}
-                className='w-16 h-20 bg-muted rounded-lg animate-pulse'
+                className='w-16 h-20 bg-[--surface-2] rounded-lg animate-pulse'
                 style={{ animationDelay: `${i * 0.1}s` }}
               />
             ))}
           </div>
-          <div className='inline-block w-5 h-5 border-2 border-muted border-t-primary rounded-full animate-spin' />
-          <p className='text-sm text-muted-foreground font-medium'>에디터 로드 중...</p>
+          <div className='inline-block w-5 h-5 border-2 border-[--surface-2] border-t-primary rounded-full animate-spin' />
+          <p className='text-sm text-[--text-secondary] font-medium'>에디터 로드 중...</p>
         </div>
       </div>
     );
   }
 
   return (
-    <div className='flex flex-col h-screen bg-muted/30'>
-      <HeaderWithApproval specId={specId} />
-
+    <div className='flex flex-col h-[calc(100vh-3.5rem)] bg-[--surface-0] overflow-hidden'>
       <div className='flex-1 flex overflow-hidden'>
         <CardList />
 
-        <div className='flex-1 flex flex-col items-center bg-muted/50 overflow-hidden p-2'>
+        <div className='flex-1 flex flex-col items-center bg-[--surface-0] overflow-hidden p-2'>
           {selectedCard ? (
             <div className='flex flex-col items-center w-full h-full py-2 px-2'>
-              <div className='flex items-center gap-2 mb-2 bg-card/80 backdrop-blur-sm rounded-full px-3 py-1.5 shadow-sm border border-border/60 shrink-0'>
+              <div className='flex items-center gap-2 mb-2 bg-[--surface-2] backdrop-blur-sm rounded-full px-3 py-1.5 border border-[--border-subtle] shrink-0'>
                 <button
                   onClick={() => selectCard(Math.max(0, selectedCardIndex - 1))}
                   disabled={selectedCardIndex === 0}
-                  className='w-6 h-6 flex items-center justify-center rounded-full text-muted-foreground hover:bg-muted disabled:opacity-30 transition-colors text-sm'
+                  className='w-6 h-6 flex items-center justify-center rounded-full text-[--text-secondary] hover:bg-[--surface-0] disabled:opacity-30 transition-colors text-sm'
                   aria-label='이전 카드'
                 >
                   ‹
@@ -221,7 +219,7 @@ export default function EditorPage() {
                 <button
                   onClick={() => selectCard(Math.min(cards.length - 1, selectedCardIndex + 1))}
                   disabled={selectedCardIndex === cards.length - 1}
-                  className='w-6 h-6 flex items-center justify-center rounded-full text-muted-foreground hover:bg-muted disabled:opacity-30 transition-colors text-sm'
+                  className='w-6 h-6 flex items-center justify-center rounded-full text-[--text-secondary] hover:bg-[--surface-0] disabled:opacity-30 transition-colors text-sm'
                   aria-label='다음 카드'
                 >
                   ›
@@ -238,19 +236,19 @@ export default function EditorPage() {
               </div>
 
               <div className='flex items-center gap-5 mt-2 shrink-0'>
-                <div className='flex items-center gap-1.5 text-xs text-muted-foreground'>
+                <div className='flex items-center gap-1.5 text-xs text-[--text-secondary]'>
                   <span className='font-medium'>제목</span>
                   <span className='tabular-nums'>{selectedCard.text?.headline?.length || 0}</span>
                   <span>자</span>
                 </div>
-                <div className='w-px h-3 bg-border' />
-                <div className='flex items-center gap-1.5 text-xs text-muted-foreground'>
+                <div className='w-px h-3 bg-[--border-default]' />
+                <div className='flex items-center gap-1.5 text-xs text-[--text-secondary]'>
                   <span className='font-medium'>본문</span>
                   <span className='tabular-nums'>{selectedCard.text?.body?.length || 0}</span>
                   <span>자</span>
                 </div>
-                <div className='w-px h-3 bg-border' />
-                <div className='flex items-center gap-1.5 text-xs text-muted-foreground'>
+                <div className='w-px h-3 bg-[--border-default]' />
+                <div className='flex items-center gap-1.5 text-xs text-[--text-secondary]'>
                   <span className='font-medium'>레이아웃</span>
                   <span>{selectedCard.style?.layout || 'center'}</span>
                 </div>
@@ -258,10 +256,10 @@ export default function EditorPage() {
             </div>
           ) : (
             <div className='flex flex-col items-center justify-center gap-3 py-16'>
-              <div className='w-16 h-20 rounded-xl border-2 border-dashed border-muted-foreground/40 flex items-center justify-center'>
-                <span className='text-2xl text-muted-foreground/40'>+</span>
+              <div className='w-16 h-20 rounded-xl border-2 border-dashed border-[--border-subtle] flex items-center justify-center'>
+                <span className='text-2xl text-[--text-secondary]'>+</span>
               </div>
-              <p className='text-sm text-muted-foreground font-medium'>
+              <p className='text-sm text-[--text-secondary] font-medium'>
                 카드를 선택하여 편집을 시작하세요
               </p>
             </div>

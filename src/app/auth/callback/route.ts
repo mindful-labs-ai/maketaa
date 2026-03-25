@@ -35,6 +35,38 @@ export async function GET(req: Request) {
     }
   }
 
-  // 3) 쿼리 제거 + 홈(또는 이전 경로)로 이동
-  return NextResponse.redirect(new URL('/makerScript', url.origin));
+  // 3) Check for pending report from landing page analysis
+  //    Primary: query param (passed through OAuth redirectTo / emailRedirectTo)
+  //    Fallback: cookie (set by LandingHero client-side)
+  const reportFromParam = url.searchParams.get('report_id');
+  const reportFromCookie = cookieStore.get('pending_report_id')?.value;
+  const pendingReportId = reportFromParam || reportFromCookie;
+
+  console.log('[auth/callback] Full URL:', url.toString());
+  console.log('[auth/callback] report_id from query param:', reportFromParam || 'NONE');
+  console.log('[auth/callback] report_id from cookie:', reportFromCookie || 'NONE');
+  console.log('[auth/callback] Using pendingReportId:', pendingReportId || 'NONE');
+
+  if (pendingReportId) {
+    const { data: { user } } = await supabase.auth.getUser();
+    console.log('[auth/callback] User:', user?.id || 'NO USER');
+
+    if (user) {
+      const { data: claimed, error: claimError } = await supabase
+        .from('marketing_reports')
+        .update({ user_id: user.id })
+        .eq('id', pendingReportId)
+        .is('user_id', null)
+        .select('id');
+
+      console.log('[auth/callback] Claim result:', JSON.stringify({ claimed, claimError }));
+    }
+
+    try { cookieStore.delete('pending_report_id'); } catch { /* noop */ }
+    console.log('[auth/callback] Redirecting to /report/' + pendingReportId);
+    return NextResponse.redirect(new URL(`/report/${pendingReportId}`, url.origin));
+  }
+
+  console.log('[auth/callback] No pending report, redirecting to /dashboard');
+  return NextResponse.redirect(new URL('/dashboard', url.origin));
 }

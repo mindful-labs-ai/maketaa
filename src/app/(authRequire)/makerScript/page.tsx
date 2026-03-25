@@ -18,7 +18,7 @@ const MakerScriptPage = () => {
         <div className='relative'>
           <div className='fixed w-dvw h-dvh flex flex-col gap-2 justify-center items-center z-10'>
             <Button
-              className='text-lg hover:bg-gray-700 active:scale-95 active:bg-gray-500'
+              className='text-lg hover:bg-[--surface-2] active:scale-95 active:bg-[--surface-3]'
               onClick={() => router.push('/signin')}
             >
               로그인하고 숏폼 영상 만들기

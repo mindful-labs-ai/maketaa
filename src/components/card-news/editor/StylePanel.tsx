@@ -67,16 +67,16 @@ const CollapsibleSection: React.FC<{
   children: React.ReactNode;
   disabled?: boolean;
 }> = ({ title, isOpen, onToggle, children, disabled = false }) => (
-  <div className={`border-b border-gray-100 last:border-b-0 ${disabled ? 'opacity-40' : ''}`}>
+  <div className={`border-b border-[--border-subtle] last:border-b-0 ${disabled ? 'opacity-40' : ''}`}>
     <button
       onClick={onToggle}
       disabled={disabled}
-      className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-gray-50 disabled:cursor-not-allowed transition-colors"
+      className="w-full flex items-center justify-between px-4 py-2.5 hover:bg-[--surface-2] disabled:cursor-not-allowed transition-colors"
     >
-      <h3 className="text-xs font-semibold text-gray-700 uppercase tracking-wide">{title}</h3>
+      <h3 className="text-xs font-semibold text-[--text-primary] uppercase tracking-wide">{title}</h3>
       <ChevronDown
         size={14}
-        className={`text-gray-400 transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
+        className={`text-[--text-tertiary] transition-transform duration-200 ${isOpen ? 'rotate-180' : ''}`}
       />
     </button>
     {isOpen && <div className="px-4 pb-4 pt-1 space-y-3">{children}</div>}
@@ -379,15 +379,16 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
     return (
       <div
         ref={ref}
-        className={`w-64 bg-white border-l border-gray-200 overflow-y-auto flex flex-col scrollbar-thin ${className}`}
+        className={`w-64 border-l border-[--border-subtle] overflow-y-auto flex flex-col scrollbar-thin ${className}`}
+        style={{ backgroundColor: 'var(--surface-1)' }}
       >
         {/* Header */}
-        <div className="sticky top-0 z-10 bg-white border-b border-gray-100 px-4 py-3 flex items-center justify-between shrink-0">
-          <h2 className="text-xs font-semibold text-gray-700 uppercase tracking-wide">스타일</h2>
+        <div className="sticky top-0 z-10 border-b border-[--border-subtle] px-4 py-3 flex items-center justify-between shrink-0" style={{ backgroundColor: 'var(--surface-1)' }}>
+          <h2 className="text-xs font-semibold text-[--text-primary] uppercase tracking-wide">스타일</h2>
           <div className="flex items-center gap-1.5 h-4">
             {autoSaveStatus === 'saving' && (
-              <span className="flex items-center gap-1 text-[10px] text-gray-400">
-                <span className="inline-block w-3 h-3 border border-gray-400 border-t-transparent rounded-full animate-spin" />
+              <span className="flex items-center gap-1 text-[10px] text-[--text-tertiary]">
+                <span className="inline-block w-3 h-3 border border-[--border-default] border-t-transparent rounded-full animate-spin" />
                 저장 중
               </span>
             )}
@@ -398,8 +399,8 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
         </div>
 
         {isDisabled && (
-          <div className="px-4 py-2.5 bg-gray-50 border-b border-gray-100">
-            <p className="text-[11px] text-gray-400 text-center">카드를 선택하면 편집할 수 있습니다</p>
+          <div className="px-4 py-2.5 bg-[--surface-1] border-b border-[--border-subtle]">
+            <p className="text-[11px] text-[--text-tertiary] text-center">카드를 선택하면 편집할 수 있습니다</p>
           </div>
         )}
 
@@ -416,8 +417,8 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                 {/* Headline */}
                 <div>
                   <div className="flex items-center justify-between mb-1">
-                    <label className="text-[10px] text-gray-400 uppercase tracking-wide">제목</label>
-                    <span className="text-[10px] text-gray-400 tabular-nums">
+                    <label className="text-[10px] text-[--text-tertiary] uppercase tracking-wide">제목</label>
+                    <span className="text-[10px] text-[--text-tertiary] tabular-nums">
                       {(localText.headline ?? '').length}/{TEXT_LIMITS.headline}
                     </span>
                   </div>
@@ -426,7 +427,7 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                     value={localText.headline ?? ''}
                     maxLength={TEXT_LIMITS.headline}
                     onChange={(e) => handleContentInput('headline', e.target.value)}
-                    className="w-full px-2 py-1.5 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                    className="w-full px-2 py-1.5 text-sm border border-[--border-subtle] rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                     placeholder="제목을 입력하세요"
                   />
                 </div>
@@ -435,12 +436,12 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                 {cardText.body !== undefined ? (
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <label className="text-[10px] text-gray-400 uppercase tracking-wide">본문</label>
+                      <label className="text-[10px] text-[--text-tertiary] uppercase tracking-wide">본문</label>
                       <div className="flex items-center gap-1.5">
-                        <span className="text-[10px] text-gray-400 tabular-nums">
+                        <span className="text-[10px] text-[--text-tertiary] tabular-nums">
                           {(localText.body ?? '').length}/{TEXT_LIMITS.body}
                         </span>
-                        <button onClick={() => handleRemoveField('body')} className="text-gray-300 hover:text-gray-500 transition-colors" title="본문 제거">
+                        <button onClick={() => handleRemoveField('body')} className="text-[--text-tertiary] hover:text-[--text-secondary] transition-colors" title="본문 제거">
                           <span className="text-[12px] leading-none">&times;</span>
                         </button>
                       </div>
@@ -450,12 +451,12 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                       value={localText.body ?? ''}
                       maxLength={TEXT_LIMITS.body}
                       onChange={(e) => handleContentInput('body', e.target.value)}
-                      className="w-full px-2 py-1.5 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 resize-none"
+                      className="w-full px-2 py-1.5 text-sm border border-[--border-subtle] rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 resize-none"
                       placeholder="본문을 입력하세요"
                     />
                   </div>
                 ) : (
-                  <button onClick={() => handleAddField('body')} className="w-full py-1.5 border border-dashed border-gray-300 rounded-md text-[11px] text-gray-400 hover:border-gray-500 hover:text-gray-600 transition-colors">
+                  <button onClick={() => handleAddField('body')} className="w-full py-1.5 border border-dashed border-[--border-default] rounded-md text-[11px] text-[--text-tertiary] hover:border-[--border-strong] hover:text-[--text-secondary] transition-colors">
                     + 본문 추가
                   </button>
                 )}
@@ -464,12 +465,12 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                 {cardText.sub_text !== undefined ? (
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <label className="text-[10px] text-gray-400 uppercase tracking-wide">부제</label>
+                      <label className="text-[10px] text-[--text-tertiary] uppercase tracking-wide">부제</label>
                       <div className="flex items-center gap-1.5">
-                        <span className="text-[10px] text-gray-400 tabular-nums">
+                        <span className="text-[10px] text-[--text-tertiary] tabular-nums">
                           {(localText.sub_text ?? '').length}/{TEXT_LIMITS.sub_text}
                         </span>
-                        <button onClick={() => handleRemoveField('sub_text')} className="text-gray-300 hover:text-gray-500 transition-colors" title="부제 제거">
+                        <button onClick={() => handleRemoveField('sub_text')} className="text-[--text-tertiary] hover:text-[--text-secondary] transition-colors" title="부제 제거">
                           <span className="text-[12px] leading-none">&times;</span>
                         </button>
                       </div>
@@ -479,12 +480,12 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                       value={localText.sub_text ?? ''}
                       maxLength={TEXT_LIMITS.sub_text}
                       onChange={(e) => handleContentInput('sub_text', e.target.value)}
-                      className="w-full px-2 py-1.5 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                      className="w-full px-2 py-1.5 text-sm border border-[--border-subtle] rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                       placeholder="부제를 입력하세요"
                     />
                   </div>
                 ) : (
-                  <button onClick={() => handleAddField('sub_text')} className="w-full py-1.5 border border-dashed border-gray-300 rounded-md text-[11px] text-gray-400 hover:border-gray-500 hover:text-gray-600 transition-colors">
+                  <button onClick={() => handleAddField('sub_text')} className="w-full py-1.5 border border-dashed border-[--border-default] rounded-md text-[11px] text-[--text-tertiary] hover:border-[--border-strong] hover:text-[--text-secondary] transition-colors">
                     + 부제 추가
                   </button>
                 )}
@@ -493,12 +494,12 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                 {cardText.description !== undefined ? (
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <label className="text-[10px] text-gray-400 uppercase tracking-wide">설명</label>
+                      <label className="text-[10px] text-[--text-tertiary] uppercase tracking-wide">설명</label>
                       <div className="flex items-center gap-1.5">
-                        <span className="text-[10px] text-gray-400 tabular-nums">
+                        <span className="text-[10px] text-[--text-tertiary] tabular-nums">
                           {(localText.description ?? '').length}/{TEXT_LIMITS.description}
                         </span>
-                        <button onClick={() => handleRemoveField('description')} className="text-gray-300 hover:text-gray-500 transition-colors" title="설명 제거">
+                        <button onClick={() => handleRemoveField('description')} className="text-[--text-tertiary] hover:text-[--text-secondary] transition-colors" title="설명 제거">
                           <span className="text-[12px] leading-none">&times;</span>
                         </button>
                       </div>
@@ -508,12 +509,12 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                       value={localText.description ?? ''}
                       maxLength={TEXT_LIMITS.description}
                       onChange={(e) => handleContentInput('description', e.target.value)}
-                      className="w-full px-2 py-1.5 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 resize-none"
+                      className="w-full px-2 py-1.5 text-sm border border-[--border-subtle] rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 resize-none"
                       placeholder="설명을 입력하세요"
                     />
                   </div>
                 ) : (
-                  <button onClick={() => handleAddField('description')} className="w-full py-1.5 border border-dashed border-gray-300 rounded-md text-[11px] text-gray-400 hover:border-gray-500 hover:text-gray-600 transition-colors">
+                  <button onClick={() => handleAddField('description')} className="w-full py-1.5 border border-dashed border-[--border-default] rounded-md text-[11px] text-[--text-tertiary] hover:border-[--border-strong] hover:text-[--text-secondary] transition-colors">
                     + 설명 추가
                   </button>
                 )}
@@ -522,12 +523,12 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                 {cardText.quote !== undefined ? (
                   <div>
                     <div className="flex items-center justify-between mb-1">
-                      <label className="text-[10px] text-gray-400 uppercase tracking-wide">인용문</label>
+                      <label className="text-[10px] text-[--text-tertiary] uppercase tracking-wide">인용문</label>
                       <div className="flex items-center gap-1.5">
-                        <span className="text-[10px] text-gray-400 tabular-nums">
+                        <span className="text-[10px] text-[--text-tertiary] tabular-nums">
                           {(localText.quote ?? '').length}/{TEXT_LIMITS.quote}
                         </span>
-                        <button onClick={() => handleRemoveField('quote')} className="text-gray-300 hover:text-gray-500 transition-colors" title="인용문 제거">
+                        <button onClick={() => handleRemoveField('quote')} className="text-[--text-tertiary] hover:text-[--text-secondary] transition-colors" title="인용문 제거">
                           <span className="text-[12px] leading-none">&times;</span>
                         </button>
                       </div>
@@ -537,19 +538,19 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                       value={localText.quote ?? ''}
                       maxLength={TEXT_LIMITS.quote}
                       onChange={(e) => handleContentInput('quote', e.target.value)}
-                      className="w-full px-2 py-1.5 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 resize-none"
+                      className="w-full px-2 py-1.5 text-sm border border-[--border-subtle] rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500 resize-none"
                       placeholder="인용문을 입력하세요"
                     />
                   </div>
                 ) : (
-                  <button onClick={() => handleAddField('quote')} className="w-full py-1.5 border border-dashed border-gray-300 rounded-md text-[11px] text-gray-400 hover:border-gray-500 hover:text-gray-600 transition-colors">
+                  <button onClick={() => handleAddField('quote')} className="w-full py-1.5 border border-dashed border-[--border-default] rounded-md text-[11px] text-[--text-tertiary] hover:border-[--border-strong] hover:text-[--text-secondary] transition-colors">
                     + 인용문 추가
                   </button>
                 )}
 
                 {/* Bullet Points */}
                 <div>
-                  <label className="block text-[10px] text-gray-400 uppercase tracking-wide mb-1.5">목록 항목</label>
+                  <label className="block text-[10px] text-[--text-tertiary] uppercase tracking-wide mb-1.5">목록 항목</label>
                   <div className="space-y-1.5">
                     {localBullets.map((bullet, i) => (
                       <div key={i} className="flex items-center gap-1.5">
@@ -558,7 +559,7 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                           value={bullet}
                           maxLength={TEXT_LIMITS.bullet_point}
                           onChange={(e) => handleBulletInput(i, e.target.value)}
-                          className="flex-1 px-2 py-1.5 text-sm border border-gray-200 rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
+                          className="flex-1 px-2 py-1.5 text-sm border border-[--border-subtle] rounded-md focus:outline-none focus:ring-1 focus:ring-blue-500 focus:border-blue-500"
                           placeholder={`항목 ${i + 1}`}
                         />
                         <button
@@ -567,7 +568,7 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                               console.error('[StylePanel] removeBulletPoint failed:', err)
                             )
                           }
-                          className="shrink-0 text-gray-300 hover:text-gray-500 transition-colors"
+                          className="shrink-0 text-[--text-tertiary] hover:text-[--text-secondary] transition-colors"
                           title="항목 삭제"
                         >
                           <span className="text-[14px] leading-none">&times;</span>
@@ -581,14 +582,14 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                         console.error('[StylePanel] addBulletPoint failed:', err)
                       )
                     }
-                    className="mt-1.5 w-full py-1.5 border border-dashed border-gray-300 rounded-md text-[11px] text-gray-400 hover:border-gray-500 hover:text-gray-600 transition-colors"
+                    className="mt-1.5 w-full py-1.5 border border-dashed border-[--border-default] rounded-md text-[11px] text-[--text-tertiary] hover:border-[--border-strong] hover:text-[--text-secondary] transition-colors"
                   >
                     + 항목 추가
                   </button>
                 </div>
               </div>
             ) : (
-              <p className="text-[11px] text-gray-400">카드를 선택하세요</p>
+              <p className="text-[11px] text-[--text-tertiary]">카드를 선택하세요</p>
             )}
           </CollapsibleSection>
 
@@ -607,11 +608,11 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                     flex flex-col items-center gap-1.5 px-2 py-2.5 rounded-md border text-[11px] font-medium transition-all
                     ${canvasRatio === key
                       ? 'border-gray-900 bg-gray-900 text-white'
-                      : 'border-gray-200 bg-white text-gray-600 hover:border-gray-400'}
+                      : 'border-[--border-subtle] bg-[--surface-1] text-[--text-secondary] hover:border-[--border-default]'}
                   `}
                 >
                   <div
-                    className={`border-2 rounded-sm ${canvasRatio === key ? 'border-white/70' : 'border-gray-400'}`}
+                    className={`border-2 rounded-sm ${canvasRatio === key ? 'border-white/70' : 'border-[--border-default]'}`}
                     style={{
                       width: key === '9:16' ? 14 : 18,
                       height: key === '1:1' ? 18 : key === '4:5' ? 22 : 28,
@@ -640,7 +641,7 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                         py-1.5 rounded-md border text-[11px] font-medium transition-all
                         ${background.type === bgType
                           ? 'border-gray-900 bg-gray-900 text-white'
-                          : 'border-gray-200 bg-white text-gray-600 hover:border-gray-400'}
+                          : 'border-[--border-subtle] bg-[--surface-1] text-[--text-secondary] hover:border-[--border-default]'}
                       `}
                     >
                       {bgType === 'image' ? '이미지' : bgType === 'gradient' ? '그라데' : '단색'}
@@ -659,17 +660,17 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                     />
 
                     {uploadStatus === 'done' && uploadPreview ? (
-                      <div className="relative w-full h-20 rounded-lg border border-gray-200 overflow-hidden group">
+                      <div className="relative w-full h-20 rounded-lg border border-[--border-subtle] overflow-hidden group">
                         <img src={uploadPreview} alt="업로드된 이미지" className="w-full h-full object-cover" />
                         <div className="absolute inset-0 bg-black/50 flex items-center justify-center gap-2 opacity-0 group-hover:opacity-100 transition-opacity">
-                          <button onClick={() => fileInputRef.current?.click()} className="px-2 py-1 bg-white text-gray-800 rounded text-[11px] font-medium hover:bg-gray-100">변경</button>
-                          <button onClick={handleClearUpload} className="p-1 bg-white text-gray-800 rounded hover:bg-gray-100"><X size={11} /></button>
+                          <button onClick={() => fileInputRef.current?.click()} className="px-2 py-1 bg-[--surface-1] text-[--text-primary] rounded text-[11px] font-medium hover:bg-[--surface-2]">변경</button>
+                          <button onClick={handleClearUpload} className="p-1 bg-[--surface-1] text-[--text-primary] rounded hover:bg-[--surface-2]"><X size={11} /></button>
                         </div>
                       </div>
                     ) : uploadStatus === 'processing' ? (
-                      <div className="w-full h-16 rounded-lg border border-dashed border-gray-300 flex items-center justify-center gap-2">
-                        <div className="w-4 h-4 border-2 border-gray-400 border-t-gray-900 rounded-full animate-spin" />
-                        <span className="text-[11px] text-gray-500">처리 중...</span>
+                      <div className="w-full h-16 rounded-lg border border-dashed border-[--border-default] flex items-center justify-center gap-2">
+                        <div className="w-4 h-4 border-2 border-[--border-default] border-t-[--text-primary] rounded-full animate-spin" />
+                        <span className="text-[11px] text-[--text-secondary]">처리 중...</span>
                       </div>
                     ) : (
                       <div
@@ -680,11 +681,11 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                         className={`
                           w-full h-16 rounded-lg border border-dashed cursor-pointer
                           flex items-center justify-center gap-2 transition-colors
-                          ${isDragOver ? 'border-gray-700 bg-gray-50' : 'border-gray-300 bg-white hover:border-gray-500 hover:bg-gray-50'}
+                          ${isDragOver ? 'border-[--border-strong] bg-[--surface-1]' : 'border-[--border-default] bg-[--surface-1] hover:border-[--border-strong] hover:bg-[--surface-2]'}
                         `}
                       >
-                        <Upload size={13} className="text-gray-400" />
-                        <span className="text-[11px] text-gray-500">업로드 또는 드래그</span>
+                        <Upload size={13} className="text-[--text-tertiary]" />
+                        <span className="text-[11px] text-[--text-secondary]">업로드 또는 드래그</span>
                       </div>
                     )}
 
@@ -693,7 +694,7 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                     )}
 
                     {background.src && uploadStatus !== 'done' && (
-                      <div className="w-full h-16 rounded-lg border border-gray-200 overflow-hidden">
+                      <div className="w-full h-16 rounded-lg border border-[--border-subtle] overflow-hidden">
                         <img src={background.src} alt="배경" className="w-full h-full object-cover" />
                       </div>
                     )}
@@ -716,7 +717,7 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                             onChange={(e) => handleSearchInputChange(e.target.value)}
                             onKeyDown={(e) => e.key === 'Enter' && handleSearchSubmit()}
                             placeholder="Unsplash 검색..."
-                            className="flex-1 px-2 py-1.5 text-[11px] border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
+                            className="flex-1 px-2 py-1.5 text-[11px] border border-[--border-subtle] rounded-lg focus:outline-none focus:ring-1 focus:ring-[--border-default] focus:border-[--border-default]"
                           />
                           <button
                             onClick={handleSearchSubmit}
@@ -729,15 +730,15 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
 
                         {isSearching && (
                           <div className="flex items-center justify-center py-3 gap-2">
-                            <div className="w-4 h-4 border-2 border-gray-300 border-t-gray-700 rounded-full animate-spin" />
-                            <span className="text-[11px] text-gray-400">검색 중...</span>
+                            <div className="w-4 h-4 border-2 border-[--border-default] border-t-[--text-primary] rounded-full animate-spin" />
+                            <span className="text-[11px] text-[--text-tertiary]">검색 중...</span>
                           </div>
                         )}
 
                         {searchError && <p className="text-[11px] text-red-500">{searchError}</p>}
 
                         {!isSearching && !searchError && searchResults.length === 0 && searchQuery && (
-                          <p className="text-[11px] text-gray-400 text-center py-2">결과가 없습니다</p>
+                          <p className="text-[11px] text-[--text-tertiary] text-center py-2">결과가 없습니다</p>
                         )}
 
                         {searchResults.length > 0 && (
@@ -764,13 +765,13 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                             {selectedPhotoId && (() => {
                               const photo = searchResults.find((p) => p.id === selectedPhotoId);
                               return photo ? (
-                                <p className="text-[10px] text-gray-400 mt-1.5">
+                                <p className="text-[10px] text-[--text-tertiary] mt-1.5">
                                   Photo by{' '}
-                                  <a href={`${photo.user.links.html}?utm_source=card_news_maker&utm_medium=referral`} target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-600">
+                                  <a href={`${photo.user.links.html}?utm_source=card_news_maker&utm_medium=referral`} target="_blank" rel="noopener noreferrer" className="underline hover:text-[--text-secondary]">
                                     {photo.user.name}
                                   </a>{' '}
                                   on{' '}
-                                  <a href="https://unsplash.com?utm_source=card_news_maker&utm_medium=referral" target="_blank" rel="noopener noreferrer" className="underline hover:text-gray-600">
+                                  <a href="https://unsplash.com?utm_source=card_news_maker&utm_medium=referral" target="_blank" rel="noopener noreferrer" className="underline hover:text-[--text-secondary]">
                                     Unsplash
                                   </a>
                                 </p>
@@ -780,7 +781,7 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                             <button
                               onClick={handleLoadMore}
                               disabled={isSearching}
-                              className="w-full mt-2 py-1.5 text-[11px] text-gray-500 border border-gray-200 rounded-lg hover:bg-gray-50 disabled:opacity-50 transition-colors"
+                              className="w-full mt-2 py-1.5 text-[11px] text-[--text-secondary] border border-[--border-subtle] rounded-lg hover:bg-[--surface-2] disabled:opacity-50 transition-colors"
                             >
                               {isSearching ? '로딩 중...' : '더 보기'}
                             </button>
@@ -792,10 +793,10 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                 )}
 
                 {background.type === 'solid' && (
-                  <p className="text-[11px] text-gray-400">아래 색상 팔레트에서 배경색을 설정하세요.</p>
+                  <p className="text-[11px] text-[--text-tertiary]">아래 색상 팔레트에서 배경색을 설정하세요.</p>
                 )}
                 {background.type === 'gradient' && (
-                  <p className="text-[11px] text-gray-400">아래 색상 팔레트의 주/보조색상이 그라데이션에 사용됩니다.</p>
+                  <p className="text-[11px] text-[--text-tertiary]">아래 색상 팔레트의 주/보조색상이 그라데이션에 사용됩니다.</p>
                 )}
               </div>
             )}
@@ -820,21 +821,21 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                       type="color"
                       value={(palette as any)[key] || fallback}
                       onChange={(e) => handlePaletteColorClick(key, e.target.value)}
-                      className="w-8 h-8 rounded-md border border-gray-200 cursor-pointer shrink-0 p-0.5"
+                      className="w-8 h-8 rounded-md border border-[--border-subtle] cursor-pointer shrink-0 p-0.5"
                     />
                     <input
                       type="text"
                       value={(palette as any)[key] || ''}
                       onChange={(e) => handlePaletteColorClick(key, e.target.value)}
-                      className="flex-1 px-2 py-1.5 text-[11px] bg-white border border-gray-200 rounded-md text-gray-600 font-mono focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
+                      className="flex-1 px-2 py-1.5 text-[11px] bg-[--surface-1] border border-[--border-subtle] rounded-md text-[--text-secondary] font-mono focus:outline-none focus:ring-1 focus:ring-[--border-default] focus:border-[--border-default]"
                       placeholder="#000000"
                     />
-                    <span className="text-[10px] text-gray-400 shrink-0 w-12 text-right">{label}</span>
+                    <span className="text-[10px] text-[--text-tertiary] shrink-0 w-12 text-right">{label}</span>
                   </div>
                 ))}
 
                 <div className="pt-1">
-                  <p className="text-[10px] text-gray-400 mb-2 uppercase tracking-wide">프리셋</p>
+                  <p className="text-[10px] text-[--text-tertiary] mb-2 uppercase tracking-wide">프리셋</p>
                   <div className="grid grid-cols-4 gap-1.5">
                     {Object.values(COLOR_PALETTES).map((preset) => (
                       <button
@@ -850,20 +851,20 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                           })
                         }
                         title={preset.name}
-                        className="flex flex-col gap-0.5 p-1 rounded-md border border-gray-200 hover:border-gray-500 transition-all"
+                        className="flex flex-col gap-0.5 p-1 rounded-md border border-[--border-subtle] hover:border-[--border-strong] transition-all"
                       >
                         <div className="flex gap-0.5">
                           <div className="w-full h-2.5 rounded-sm" style={{ backgroundColor: preset.primary }} />
                           <div className="w-full h-2.5 rounded-sm" style={{ backgroundColor: preset.secondary }} />
                         </div>
-                        <span className="text-[9px] text-gray-500 mt-0.5 truncate text-center">{preset.name}</span>
+                        <span className="text-[9px] text-[--text-secondary] mt-0.5 truncate text-center">{preset.name}</span>
                       </button>
                     ))}
                   </div>
                 </div>
               </div>
             ) : (
-              <p className="text-[11px] text-gray-400">팔레트 정보 없음</p>
+              <p className="text-[11px] text-[--text-tertiary]">팔레트 정보 없음</p>
             )}
           </CollapsibleSection>
 
@@ -882,7 +883,7 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                     py-1.5 rounded-md border text-[11px] font-medium transition-all
                     ${layout === layoutType
                       ? 'border-gray-900 bg-gray-900 text-white'
-                      : 'border-gray-200 bg-white text-gray-600 hover:border-gray-400'}
+                      : 'border-[--border-subtle] bg-[--surface-1] text-[--text-secondary] hover:border-[--border-default]'}
                   `}
                 >
                   {layoutType === 'center' ? '중앙'
@@ -905,11 +906,11 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
             {fontSizes && (
               <div className="space-y-3">
                 <div>
-                  <label className="block text-[10px] text-gray-400 uppercase tracking-wide mb-1.5">제목 글꼴</label>
+                  <label className="block text-[10px] text-[--text-tertiary] uppercase tracking-wide mb-1.5">제목 글꼴</label>
                   <select
                     value={fontSizes.headline_family}
                     onChange={(e) => handleFontFamilyChange('headline_family', e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
+                    className="w-full px-2.5 py-1.5 text-xs bg-[--surface-1] border border-[--border-subtle] rounded-lg focus:outline-none focus:ring-1 focus:ring-[--border-default] focus:border-[--border-default]"
                   >
                     {FONT_OPTIONS.map((font) => (
                       <option key={font.family} value={font.family}>{font.label}</option>
@@ -918,11 +919,11 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
                 </div>
 
                 <div>
-                  <label className="block text-[10px] text-gray-400 uppercase tracking-wide mb-1.5">본문 글꼴</label>
+                  <label className="block text-[10px] text-[--text-tertiary] uppercase tracking-wide mb-1.5">본문 글꼴</label>
                   <select
                     value={fontSizes.body_family}
                     onChange={(e) => handleFontFamilyChange('body_family', e.target.value)}
-                    className="w-full px-2.5 py-1.5 text-xs bg-white border border-gray-200 rounded-lg focus:outline-none focus:ring-1 focus:ring-gray-400 focus:border-gray-400"
+                    className="w-full px-2.5 py-1.5 text-xs bg-[--surface-1] border border-[--border-subtle] rounded-lg focus:outline-none focus:ring-1 focus:ring-[--border-default] focus:border-[--border-default]"
                   >
                     {FONT_OPTIONS.map((font) => (
                       <option key={font.family} value={font.family}>{font.label}</option>
@@ -932,30 +933,30 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
 
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <label className="text-[10px] text-gray-400 uppercase tracking-wide">제목 크기</label>
-                    <span className="text-xs font-semibold text-gray-700 tabular-nums">{fontSizes.headline_size}px</span>
+                    <label className="text-[10px] text-[--text-tertiary] uppercase tracking-wide">제목 크기</label>
+                    <span className="text-xs font-semibold text-[--text-primary] tabular-nums">{fontSizes.headline_size}px</span>
                   </div>
                   <input
                     type="range" min="32" max="64" step="2"
                     value={fontSizes.headline_size}
                     onChange={(e) => handleFontSizeChange('headline_size', parseInt(e.target.value))}
-                    className="w-full h-1.5 bg-gray-200 rounded-full appearance-none cursor-pointer accent-gray-900"
+                    className="w-full h-1.5 bg-[--surface-3] rounded-full appearance-none cursor-pointer accent-gray-900"
                   />
-                  <div className="flex justify-between mt-1 text-[10px] text-gray-400"><span>32</span><span>64</span></div>
+                  <div className="flex justify-between mt-1 text-[10px] text-[--text-tertiary]"><span>32</span><span>64</span></div>
                 </div>
 
                 <div>
                   <div className="flex items-center justify-between mb-1.5">
-                    <label className="text-[10px] text-gray-400 uppercase tracking-wide">본문 크기</label>
-                    <span className="text-xs font-semibold text-gray-700 tabular-nums">{fontSizes.body_size}px</span>
+                    <label className="text-[10px] text-[--text-tertiary] uppercase tracking-wide">본문 크기</label>
+                    <span className="text-xs font-semibold text-[--text-primary] tabular-nums">{fontSizes.body_size}px</span>
                   </div>
                   <input
                     type="range" min="20" max="40" step="2"
                     value={fontSizes.body_size}
                     onChange={(e) => handleFontSizeChange('body_size', parseInt(e.target.value))}
-                    className="w-full h-1.5 bg-gray-200 rounded-full appearance-none cursor-pointer accent-gray-900"
+                    className="w-full h-1.5 bg-[--surface-3] rounded-full appearance-none cursor-pointer accent-gray-900"
                   />
-                  <div className="flex justify-between mt-1 text-[10px] text-gray-400"><span>20</span><span>40</span></div>
+                  <div className="flex justify-between mt-1 text-[10px] text-[--text-tertiary]"><span>20</span><span>40</span></div>
                 </div>
               </div>
             )}
@@ -969,16 +970,16 @@ export const StylePanel = React.forwardRef<HTMLDivElement, StylePanelProps>(
           >
             <div>
               <div className="flex items-center justify-between mb-1.5">
-                <label className="text-[10px] text-gray-400 uppercase tracking-wide">불투명도</label>
-                <span className="text-xs font-semibold text-gray-700 tabular-nums">{(overlay * 100).toFixed(0)}%</span>
+                <label className="text-[10px] text-[--text-tertiary] uppercase tracking-wide">불투명도</label>
+                <span className="text-xs font-semibold text-[--text-primary] tabular-nums">{(overlay * 100).toFixed(0)}%</span>
               </div>
               <input
                 type="range" min="0" max="1" step="0.05"
                 value={overlay}
                 onChange={(e) => handleOverlayChange(parseFloat(e.target.value))}
-                className="w-full h-1.5 bg-gray-200 rounded-full appearance-none cursor-pointer accent-gray-900"
+                className="w-full h-1.5 bg-[--surface-3] rounded-full appearance-none cursor-pointer accent-gray-900"
               />
-              <div className="flex justify-between mt-1 text-[10px] text-gray-400"><span>0%</span><span>100%</span></div>
+              <div className="flex justify-between mt-1 text-[10px] text-[--text-tertiary]"><span>0%</span><span>100%</span></div>
             </div>
           </CollapsibleSection>
 

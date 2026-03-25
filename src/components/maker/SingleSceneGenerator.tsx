@@ -4,6 +4,7 @@ import { notify } from '@/lib/maker/utils';
 import { Button } from '../ui/button';
 import { useAIConfigStore } from '@/lib/maker/useAiConfigStore';
 import { reportUsage } from '@/lib/shared/usage';
+import { creditFetch } from '@/lib/credits/creditFetch';
 
 type Props = {
   sceneId: string;
@@ -35,7 +36,7 @@ export const SingleSceneRegenerator = ({
 
     let tokenUsage;
     try {
-      const res = await fetch('/api/scenes/regenerate', {
+      const res = await creditFetch('/api/scenes/regenerate', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({ script, customRule, sceneExplain, globalStyle }),

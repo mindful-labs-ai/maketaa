@@ -65,35 +65,35 @@ export function EditHistory({
   const groupedByCard = groupEditsByCard(displayedEdits);
 
   return (
-    <div className="border-t border-gray-200 bg-gray-50 rounded-lg overflow-hidden">
+    <div className="border-t border-[--border-subtle] bg-[--surface-1] rounded-lg overflow-hidden">
       {/* Header */}
       <button
         onClick={() => setIsCollapsed(!isCollapsed)}
-        className="w-full flex items-center justify-between px-4 py-3 hover:bg-gray-100 transition-colors"
+        className="w-full flex items-center justify-between px-4 py-3 hover:bg-[--surface-2] transition-colors"
       >
         <div className="flex items-center gap-3">
-          <Clock size={18} className="text-gray-600" />
-          <h3 className="font-semibold text-gray-900">편집 이력</h3>
+          <Clock size={18} className="text-[--text-secondary]" />
+          <h3 className="font-semibold text-[--text-primary]">편집 이력</h3>
           {edits.length > 0 && (
-            <span className="text-xs bg-gray-200 text-gray-700 px-2 py-0.5 rounded-full">
+            <span className="text-xs bg-[--surface-3] text-[--text-primary] px-2 py-0.5 rounded-full">
               {edits.length}
             </span>
           )}
         </div>
         {isCollapsed ? (
-          <ChevronDown size={18} className="text-gray-600" />
+          <ChevronDown size={18} className="text-[--text-secondary]" />
         ) : (
-          <ChevronUp size={18} className="text-gray-600" />
+          <ChevronUp size={18} className="text-[--text-secondary]" />
         )}
       </button>
 
       {/* Content */}
       {!isCollapsed && (
-        <div className="border-t border-gray-200 px-4 py-4">
+        <div className="border-t border-[--border-subtle] px-4 py-4">
           {isLoading && (
             <div className="text-center py-6">
-              <div className="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-gray-600 mb-2" />
-              <p className="text-sm text-gray-600">Loading edit history...</p>
+              <div className="inline-block animate-spin rounded-full h-5 w-5 border-b-2 border-[--text-secondary] mb-2" />
+              <p className="text-sm text-[--text-secondary]">Loading edit history...</p>
             </div>
           )}
 
@@ -106,7 +106,7 @@ export function EditHistory({
 
           {!isLoading && !error && edits.length === 0 && (
             <div className="text-center py-6">
-              <p className="text-sm text-gray-500">No edits recorded yet</p>
+              <p className="text-sm text-[--text-secondary]">No edits recorded yet</p>
             </div>
           )}
 
@@ -115,7 +115,7 @@ export function EditHistory({
               {Array.from(groupedByCard.entries()).map(([cardIndex, cardEdits]) => (
                 <div key={cardIndex}>
                   {cardIndex >= 0 && (
-                    <h4 className="text-xs font-semibold text-gray-700 uppercase mb-2">
+                    <h4 className="text-xs font-semibold text-[--text-primary] uppercase mb-2">
                       Card {cardIndex + 1}
                     </h4>
                   )}
@@ -123,13 +123,13 @@ export function EditHistory({
                     {cardEdits.map((edit) => (
                       <div
                         key={edit.id}
-                        className="bg-white border border-gray-200 rounded p-3 hover:border-gray-300 transition-colors"
+                        className="bg-[--surface-1] border border-[--border-subtle] rounded p-3 hover:border-[--border-default] transition-colors"
                       >
                         <div className="flex items-start justify-between mb-2">
-                          <p className="text-xs font-medium text-gray-900">
+                          <p className="text-xs font-medium text-[--text-primary]">
                             {formatFieldPath(edit.fieldPath)}
                           </p>
-                          <span className="text-xs text-gray-500 flex-shrink-0">
+                          <span className="text-xs text-[--text-secondary] flex-shrink-0">
                             {new Date(edit.createdAt).toLocaleTimeString('ko-KR', {
                               month: 'short',
                               day: 'numeric',
@@ -138,25 +138,25 @@ export function EditHistory({
                             })}
                           </span>
                         </div>
-                        <p className="text-xs text-gray-600 mb-2">
+                        <p className="text-xs text-[--text-secondary] mb-2">
                           <span className="font-medium">by</span> {edit.editor}
                         </p>
-                        <div className="bg-gray-50 border border-gray-200 rounded p-2 space-y-1 mb-2">
+                        <div className="bg-[--surface-1] border border-[--border-subtle] rounded p-2 space-y-1 mb-2">
                           <div className="flex items-center gap-2">
-                            <span className="text-xs font-medium text-gray-600">Before:</span>
+                            <span className="text-xs font-medium text-[--text-secondary]">Before:</span>
                             <code className="text-xs text-red-600 bg-red-50 px-1.5 py-0.5 rounded font-mono">
                               {formatEditValue(edit.oldValue, 50)}
                             </code>
                           </div>
                           <div className="flex items-center gap-2">
-                            <span className="text-xs font-medium text-gray-600">After:</span>
+                            <span className="text-xs font-medium text-[--text-secondary]">After:</span>
                             <code className="text-xs text-green-600 bg-green-50 px-1.5 py-0.5 rounded font-mono">
                               {formatEditValue(edit.newValue, 50)}
                             </code>
                           </div>
                         </div>
                         {edit.changeReason && (
-                          <p className="text-xs text-gray-600 italic">{edit.changeReason}</p>
+                          <p className="text-xs text-[--text-secondary] italic">{edit.changeReason}</p>
                         )}
                       </div>
                     ))}
@@ -169,7 +169,7 @@ export function EditHistory({
           {hasMore && !isLoading && (
             <button
               onClick={handleShowMore}
-              className="mt-4 w-full px-3 py-2 text-sm font-medium text-gray-700 bg-white border border-gray-300 rounded-lg hover:bg-gray-50 transition-colors"
+              className="mt-4 w-full px-3 py-2 text-sm font-medium text-[--text-primary] bg-[--surface-1] border border-[--border-default] rounded-lg hover:bg-[--surface-2] transition-colors"
             >
               Show {Math.min(itemsPerPage, edits.length - displayCount)} more edits
             </button>

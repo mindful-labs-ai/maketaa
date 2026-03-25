@@ -53,6 +53,9 @@ importers:
       '@supabase/supabase-js':
         specifier: ^2.57.4
         version: 2.57.4
+      '@tosspayments/tosspayments-sdk':
+        specifier: ^2.6.0
+        version: 2.6.0
       class-variance-authority:
         specifier: ^0.7.1
         version: 0.7.1
@@ -1099,6 +1102,9 @@ packages:
   '@tootallnate/once@2.0.0':
     resolution: {integrity: sha512-XCuKFP5PS55gnMVu3dty8KPatLqUoy/ZYzDzAGCQ8JNFCkLXzmI7vNHCR+XpbZaMWQK/vQubr7PkYq8g470J/A==}
     engines: {node: '>= 10'}
+
+  '@tosspayments/tosspayments-sdk@2.6.0':
+    resolution: {integrity: sha512-d/9tCj5d+Jbj312bWYXo9dtGNzQaWRxTKWmw6rTwuDgw5g4mrJWV9dP9qiN6/x9PYaphbYDjxGenguHoVQXTGA==}
 
   '@tybys/wasm-util@0.10.0':
     resolution: {integrity: sha512-VyyPYFlOMNylG45GoAe0xDoLwWuowvf92F9kySqzYh8vmYm7D2u4iUJKa1tOUpS70Ku13ASrOkS4ScXFsTaCNQ==}
@@ -4038,6 +4044,8 @@ snapshots:
 
   '@tootallnate/once@2.0.0':
     optional: true
+
+  '@tosspayments/tosspayments-sdk@2.6.0': {}
 
   '@tybys/wasm-util@0.10.0':
     dependencies:

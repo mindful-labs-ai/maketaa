@@ -8,6 +8,7 @@ import { NextRequest, NextResponse } from 'next/server';
 import { GoogleGenAI } from '@google/genai';
 import { createServerClient } from '@supabase/ssr';
 import { cookies } from 'next/headers';
+import { consumeCredits } from '@/lib/credits/consume';
 import type {
   CardSpec,
   Card,
@@ -314,6 +315,15 @@ export async function POST(request: NextRequest): Promise<NextResponse> {
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) {
       return NextResponse.json({ error: '인증이 필요합니다.' }, { status: 401 });
+    }
+
+    const creditResult = await consumeCredits(user.id, 'CARD_NEWS_GENERATE');
+    if (!creditResult.success) {
+      return NextResponse.json({
+        error: 'INSUFFICIENT_CREDITS',
+        balance: creditResult.balance,
+        required: creditResult.required,
+      }, { status: 402 });
     }
 
     const id = crypto.randomUUID();

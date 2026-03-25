@@ -86,14 +86,14 @@ export const ApproveDialog = React.forwardRef<HTMLDivElement, ApproveDialogProps
 
     return (
       <div ref={ref} className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-        <div className="bg-white rounded-lg shadow-2xl max-w-md w-full mx-4 p-8">
+        <div className="bg-[--surface-1] rounded-lg shadow-2xl max-w-md w-full mx-4 p-8">
           {/* Header */}
           <div className="flex items-center gap-3 mb-6">
             <CheckCircle2 size={24} className="text-green-600" />
-            <h2 className="text-xl font-bold text-gray-900">승인하기</h2>
+            <h2 className="text-xl font-bold text-[--text-primary]">승인하기</h2>
           </div>
 
-          <p className="text-sm text-gray-600 mb-6">카드 승인 전 아래 항목들을 확인해주세요.</p>
+          <p className="text-sm text-[--text-secondary] mb-6">카드 승인 전 아래 항목들을 확인해주세요.</p>
 
           {error && (
             <div className="mb-6 p-4 bg-red-50 border border-red-200 rounded-lg flex items-start gap-3">
@@ -114,12 +114,12 @@ export const ApproveDialog = React.forwardRef<HTMLDivElement, ApproveDialogProps
                   id={`checkbox-${item.id}`}
                   checked={item.checked}
                   onChange={() => toggleCheckbox(item.id)}
-                  className="w-4 h-4 mt-1 rounded border-gray-300 text-green-600 focus:ring-green-500 cursor-pointer"
+                  className="w-4 h-4 mt-1 rounded border-[--border-default] text-green-600 focus:ring-green-500 cursor-pointer"
                 />
                 <label htmlFor={`checkbox-${item.id}`} className="cursor-pointer flex-1">
-                  <p className="text-sm font-medium text-gray-900">{item.label}</p>
+                  <p className="text-sm font-medium text-[--text-primary]">{item.label}</p>
                   {item.description && (
-                    <p className="text-xs text-gray-500 mt-1">{item.description}</p>
+                    <p className="text-xs text-[--text-secondary] mt-1">{item.description}</p>
                   )}
                 </label>
               </div>
@@ -131,7 +131,7 @@ export const ApproveDialog = React.forwardRef<HTMLDivElement, ApproveDialogProps
             <button
               onClick={onClose}
               disabled={isApproving}
-              className="px-4 py-2.5 border border-gray-300 rounded-lg text-gray-700 font-medium hover:bg-gray-50 disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
+              className="px-4 py-2.5 border border-[--border-default] rounded-lg text-[--text-primary] font-medium hover:bg-[--surface-2] disabled:opacity-50 disabled:cursor-not-allowed transition-colors"
             >
               취소
             </button>
@@ -144,7 +144,7 @@ export const ApproveDialog = React.forwardRef<HTMLDivElement, ApproveDialogProps
             </button>
           </div>
 
-          <p className="text-xs text-gray-500 mt-6 text-center">
+          <p className="text-xs text-[--text-secondary] mt-6 text-center">
             승인 후 카드는 발행 대기 상태로 변경됩니다.
           </p>
         </div>

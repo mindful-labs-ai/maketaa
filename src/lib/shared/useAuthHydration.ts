@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import { createClient } from '@/lib/supabase/client';
 import { useAuthStore } from '@/lib/shared/useAuthStore';
+import { useCreditStore } from '@/lib/credits/useCreditStore';
 
 const emptyUsage = {
   allScene: 0,
@@ -16,6 +17,7 @@ export function useAuthHydration() {
   const supabase = createClient();
   const initState = useAuthStore(s => s.initState);
   const setId = useAuthStore(s => s.setId);
+  const fetchCredits = useCreditStore(s => s.fetch);
   const [ready, setReady] = useState(false);
 
   useEffect(() => {
@@ -27,6 +29,7 @@ export function useAuthHydration() {
       } = await supabase.auth.getUser();
       if (user?.id) {
         setId(user.id);
+        fetchCredits();
         const res = await fetch('/api/me', { cache: 'no-store' });
         if (res.ok) {
           const me = await res.json();
@@ -54,9 +57,10 @@ export function useAuthHydration() {
       }
 
       const { data: sub } = supabase.auth.onAuthStateChange(
-        async (_event, session) => {
+        async (_event: string, session: { user?: { id: string } } | null) => {
           if (session?.user) {
             setId(session.user.id);
+            fetchCredits();
             const res = await fetch('/api/me', { cache: 'no-store' });
             if (res.ok) {
               const me = await res.json();
@@ -86,7 +90,7 @@ export function useAuthHydration() {
     return () => {
       unsub?.unsubscribe?.();
     };
-  }, [supabase, initState, setId]);
+  }, [supabase, initState, setId, fetchCredits]);
 
   return ready;
 }

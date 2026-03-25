@@ -1,5 +1,7 @@
 /* eslint-disable prettier/prettier */
 import { NextRequest, NextResponse } from 'next/server';
+import { createClient } from '@/lib/supabase/server';
+import { consumeCredits } from '@/lib/credits/consume';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -53,6 +55,22 @@ export interface TaskResponse {
 export async function POST(request: NextRequest) {
   try {
     const body: ImageToVideoRequest = await request.json();
+
+    const supabase = await createClient();
+    const { data: { user } } = await supabase.auth.getUser();
+    if (!user) {
+      return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+    }
+
+    const seedanceCostKey = body.liteModel || body.lastImage ? 'VIDEO_SEEDANCE_LITE' : 'VIDEO_SEEDANCE_PRO';
+    const creditResult = await consumeCredits(user.id, seedanceCostKey);
+    if (!creditResult.success) {
+      return NextResponse.json({
+        error: 'INSUFFICIENT_CREDITS',
+        balance: creditResult.balance,
+        required: creditResult.required,
+      }, { status: 402 });
+    }
 
     const apiKey = process.env.SEEDANCE_API_KEY;
 

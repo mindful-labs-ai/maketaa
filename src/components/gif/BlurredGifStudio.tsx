@@ -3,6 +3,13 @@
 import React from 'react';
 import { Button } from '@/components/ui/button';
 import {
+  Select,
+  SelectContent,
+  SelectItem,
+  SelectTrigger,
+  SelectValue,
+} from '@/components/ui/select';
+import {
   PlayCircle,
   Download,
   Images,
@@ -14,14 +21,14 @@ import { TEMPLATES } from '@/lib/gif/template';
 
 export const BlurredGifStudio = () => {
   return (
-    <div className='w-full h-[calc(100dvh-2rem)] mx-auto p-3 md:p-4 blur-xs'>
-      <div className='w-full text-center border rounded-xl p-3 mb-2 bg-white/80 shadow-sm'>
-        <h1 className='text-2xl text-card-foreground font-bold'>GIF 메이커</h1>
+    <div className='w-full blur-xs'>
+      <div className='px-6 pt-6 pb-4'>
+        <h1 className='text-2xl font-bold text-[--text-primary]'>GIF 스튜디오</h1>
       </div>
       {/* 3‑pane layout */}
-      <div className='grid grid-cols-12 gap-4 h-full'>
+      <div className='px-6 grid grid-cols-12 gap-4'>
         {/* Left Sidebar — Settings */}
-        <aside className='col-span-12 md:col-span-3 xl:col-span-2 border rounded-xl p-3 md:p-4 bg-white/80 shadow-sm flex flex-col'>
+        <aside className='col-span-12 md:col-span-3 xl:col-span-2 border border-[--border-subtle] rounded-xl p-3 md:p-4 bg-[--surface-1] flex flex-col'>
           <div className='space-y-5'>
             <div className='space-y-3'>
               <div className='text-sm font-medium'>내 캐릭터 선택</div>
@@ -31,8 +38,8 @@ export const BlurredGifStudio = () => {
                 `}
               >
                 <input type='file' accept='image/*' className='hidden' />
-                <FileImage className='mx-auto h-10 w-10 text-gray-400 mb-3' />
-                <p className='text-xs mb-3 text-gray-600'>
+                <FileImage className='mx-auto h-10 w-10 text-muted-foreground mb-3' />
+                <p className='text-xs mb-3 text-muted-foreground'>
                   이미지를 드래그하거나 클릭하여 업로드
                 </p>
                 <Button variant='outline' size='sm'>
@@ -42,16 +49,18 @@ export const BlurredGifStudio = () => {
             </div>
             <div className='space-y-3'>
               <div className='text-sm font-medium'>템플릿 선택</div>
-              <select className='w-full border rounded-md h-10 px-3 bg-white'>
-                <option value='' disabled>
-                  템플릿을 선택하세요
-                </option>
-                {TEMPLATES.map((t, i) => (
-                  <option key={t.frames[i].id} value={t.id}>
-                    {t.name}
-                  </option>
-                ))}
-              </select>
+              <Select>
+                <SelectTrigger className="w-full">
+                  <SelectValue placeholder="템플릿을 선택하세요" />
+                </SelectTrigger>
+                <SelectContent>
+                  {TEMPLATES.map((t, i) => (
+                    <SelectItem key={t.frames[i]?.id ?? t.id} value={t.id}>
+                      {t.name}
+                    </SelectItem>
+                  ))}
+                </SelectContent>
+              </Select>
             </div>
           </div>
 
@@ -62,7 +71,7 @@ export const BlurredGifStudio = () => {
               </>
             </Button>
 
-            <div className='text-xs text-gray-500'>진행률: %</div>
+            <div className='text-xs text-muted-foreground'>진행률: %</div>
             <div className='w-full h-2 rounded bg-neutral-200 overflow-hidden'>
               <div
                 className='h-full bg-neutral-800 transition-all'
@@ -73,24 +82,20 @@ export const BlurredGifStudio = () => {
         </aside>
 
         {/* Center — Pipeline */}
-        <main className='col-span-12 md:col-span-6 xl:col-span-8 rounded-xl p-3 md:p-5 bg-white/60 border overflow-y-auto'>
+        <main className='col-span-12 md:col-span-6 xl:col-span-8 rounded-xl p-3 md:p-5 bg-[--surface-1] border border-[--border-subtle] overflow-y-auto'>
           <div className='flex items-center gap-2 mb-3'>
             <Images className='h-5 w-5' />
             <h3 className='font-semibold'>생성 파이프라인</h3>
-            <span className='text-xs text-gray-500'></span>
+            <span className='text-xs text-muted-foreground'></span>
           </div>
 
-          {frames.length === 0 && (
-            <div className='text-sm text-gray-500'>
-              왼쪽 사이드바에서 캐릭터/템플릿을 선택하고 <b>만들기</b>를 눌러
-              시작하세요.
-            </div>
-          )}
-
-          <div className='flex flex-col gap-6'></div>
+          <div className='text-sm text-muted-foreground'>
+            왼쪽 사이드바에서 캐릭터/템플릿을 선택하고 <b>만들기</b>를 눌러
+            시작하세요.
+          </div>
         </main>
 
-        <aside className='col-span-12 md:col-span-3 xl:col-span-2 border rounded-xl p-3 md:p-4 bg-white/80 shadow-sm flex flex-col'>
+        <aside className='col-span-12 md:col-span-3 xl:col-span-2 border border-[--border-subtle] rounded-xl p-3 md:p-4 bg-[--surface-1] flex flex-col'>
           <div className='flex items-center gap-2 mb-2'>
             <Film className='h-5 w-5' />
             <div className='font-semibold'>갤러리 & GIF</div>

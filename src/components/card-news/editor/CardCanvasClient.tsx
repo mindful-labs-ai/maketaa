@@ -711,6 +711,12 @@ const CardCanvasClient = React.forwardRef<unknown, CardCanvasClientProps>(
         });
 
         setIsLoading(false);
+
+        // Render the initial card right after canvas init to avoid race condition
+        // where the card render effect fires before the canvas is ready.
+        if (card) {
+          await renderContent(fabricCanvas, card, canvasWidth, canvasHeight);
+        }
       };
 
       init().catch(console.error);

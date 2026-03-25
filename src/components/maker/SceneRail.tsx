@@ -32,7 +32,7 @@ export default memo(function SceneRail({
   onSelect,
 }: Props) {
   return (
-    <div className='sticky top-[56px] z-10 bg-background border-b'>
+    <div className='sticky top-[56px] z-10 bg-[--surface-0] border-b'>
       <div className='py-2 flex items-center gap-2 overflow-x-auto no-scrollbar'>
         {scenes.map(s => {
           const sceneImage = images.get(s.id);
@@ -53,7 +53,7 @@ export default memo(function SceneRail({
               </HoverCardTrigger>
               <HoverCardContent className='w-[420px]'>
                 <div className='space-y-2'>
-                  <div className='flex justify-between items-center text-xs text-muted-foreground'>
+                  <div className='flex justify-between items-center text-xs text-[--text-secondary]'>
                     {s.id}
                     <div className='flex items-center gap-1'>
                       <Badge
@@ -93,12 +93,12 @@ export default memo(function SceneRail({
                   </div>
                   <div className='text-sm font-medium'>{s.koreanSummary}</div>
                   <Separator className='my-4' />
-                  <div className='text-xs text-muted-foreground'>
+                  <div className='text-xs text-[--text-secondary]'>
                     SceneMessage
                   </div>
                   <p className='text-sm leading-relaxed'>{s.sceneExplain}</p>
                   <Separator className='my-4' />
-                  <div className='text-xs text-muted-foreground'>
+                  <div className='text-xs text-[--text-secondary]'>
                     Original text
                   </div>
                   <p className='text-sm leading-relaxed'>{s.originalText}</p>
