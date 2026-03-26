@@ -4,6 +4,34 @@ import Link from 'next/link';
 import LandingHero from '@/components/landing/LandingHero';
 import BottomURLInput from '@/components/landing/BottomURLInput';
 
+const jsonLd = {
+  '@context': 'https://schema.org',
+  '@graph': [
+    {
+      '@type': 'WebApplication',
+      name: 'Maketaa',
+      url: 'https://maketaa.com',
+      description:
+        'AI로 마케팅 콘텐츠를 쉽고 빠르게. URL만 입력하면 AI가 맞춤 마케팅 전략을 분석하고, 숏폼 영상과 카드뉴스를 자동으로 제작합니다.',
+      applicationCategory: 'BusinessApplication',
+      operatingSystem: 'Web',
+      offers: {
+        '@type': 'Offer',
+        price: '0',
+        priceCurrency: 'KRW',
+        description: '무료 체험 제공',
+      },
+      inLanguage: 'ko',
+    },
+    {
+      '@type': 'Organization',
+      name: 'Maketaa',
+      url: 'https://maketaa.com',
+      logo: 'https://maketaa.com/icon.svg',
+    },
+  ],
+};
+
 export default async function RootPage() {
   const supabase = await createClient();
   const {
@@ -16,6 +44,10 @@ export default async function RootPage() {
 
   return (
     <div className='min-h-screen' style={{ background: 'var(--surface-0)' }}>
+      <script
+        type='application/ld+json'
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
       <LandingNav />
       <LandingHero />
       <FeatureCards />
