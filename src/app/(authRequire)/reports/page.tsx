@@ -32,9 +32,13 @@ export default function ReportsPage() {
   useEffect(() => {
     async function load() {
       const supabase = createClient();
+      const { data: { user } } = await supabase.auth.getUser();
+      if (!user) { setLoading(false); return; }
+
       const { data, error } = await supabase
         .from('marketing_reports')
         .select('*')
+        .eq('user_id', user.id)
         .order('created_at', { ascending: false });
 
       if (!error && data) {

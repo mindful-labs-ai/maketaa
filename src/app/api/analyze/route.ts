@@ -152,9 +152,6 @@ export async function POST(req: NextRequest) {
     }
 
     // Save report to Supabase
-    console.log('[/api/analyze] Saving report to DB for URL:', parsedUrl.toString());
-    console.log('[/api/analyze] Supabase URL:', process.env.NEXT_PUBLIC_SUPABASE_URL ? 'SET' : 'MISSING');
-    console.log('[/api/analyze] Service role key:', process.env.SUPABASE_SERVICE_ROLE_KEY ? 'SET' : 'MISSING (using anon)');
 
     const { data: saved, error: dbError } = await supabaseAdmin
       .from('marketing_reports')
@@ -168,7 +165,7 @@ export async function POST(req: NextRequest) {
       return NextResponse.json({ ...report, reportId: null });
     }
 
-    console.log('[/api/analyze] Report saved successfully, id:', saved.id);
+    // Report saved: saved.id
     return NextResponse.json({ ...report, reportId: saved.id });
   } catch (err) {
     console.error('[/api/analyze]', err);

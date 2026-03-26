@@ -83,7 +83,7 @@ export const middleware = async (req: NextRequest) => {
           } catch {}
         }
       }
-      if (!redirectTo) redirectTo = '/makerScript';
+      if (!redirectTo) redirectTo = '/dashboard';
       return NextResponse.redirect(new URL(redirectTo, url.origin));
     }
     return NextResponse.next({ request: { headers: req.headers } });
@@ -103,7 +103,7 @@ export const middleware = async (req: NextRequest) => {
           } catch {}
         }
       }
-      if (!redirectTo) redirectTo = '/makerScript';
+      if (!redirectTo) redirectTo = '/dashboard';
       return NextResponse.redirect(new URL(redirectTo, url.origin));
     }
     return NextResponse.next({ request: { headers: req.headers } });
@@ -152,7 +152,6 @@ export const middleware = async (req: NextRequest) => {
   const {
     data: { user },
   } = await supabase.auth.getUser();
-  console.log('세션 갱신');
 
   res.headers.set('x-mw', expMs ? 'slow-exp-imminent' : 'slow-exp-unknown');
   return res;

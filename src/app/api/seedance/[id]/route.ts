@@ -1,4 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
+import { createClient } from '@/lib/supabase/server';
 
 export const runtime = 'nodejs';
 export const dynamic = 'force-dynamic';
@@ -7,6 +8,12 @@ export async function GET(
   _request: NextRequest,
   ctx: { params: Promise<{ id: string }> }
 ) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const taskId = (await ctx.params).id;
 
   if (!taskId)
@@ -18,7 +25,7 @@ export async function GET(
     if (!apiKey) {
       return NextResponse.json(
         { error: 'API key not configured' },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -31,13 +38,10 @@ export async function GET(
           Authorization: `Bearer ${apiKey}`,
         },
         cache: 'no-store',
-      }
+      },
     );
 
     const data = await response.json();
-
-    console.log(data);
-
     return NextResponse.json(data);
   } catch (e) {
     return NextResponse.json({ error: String(e) }, { status: 500 });
@@ -48,6 +52,12 @@ export async function DELETE(
   _request: NextRequest,
   ctx: { params: Promise<{ id: string }> }
 ) {
+  const supabase = await createClient();
+  const { data: { user } } = await supabase.auth.getUser();
+  if (!user) {
+    return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
+  }
+
   const taskId = (await ctx.params).id;
 
   if (!taskId)
@@ -59,7 +69,7 @@ export async function DELETE(
     if (!apiKey) {
       return NextResponse.json(
         { error: 'API key not configured' },
-        { status: 500 }
+        { status: 500 },
       );
     }
 
@@ -72,13 +82,10 @@ export async function DELETE(
           Authorization: `Bearer ${apiKey}`,
         },
         cache: 'no-store',
-      }
+      },
     );
 
     const data = await response.json();
-
-    console.log(data);
-
     return NextResponse.json(data);
   } catch (e) {
     return NextResponse.json({ error: String(e) }, { status: 500 });
