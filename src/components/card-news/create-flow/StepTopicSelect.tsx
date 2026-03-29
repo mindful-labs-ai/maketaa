@@ -19,11 +19,16 @@ export default function StepTopicSelect() {
   } = useCreateStore();
 
   const [customTitle, setCustomTitle] = useState('');
+  const [keyword, setKeyword] = useState('');
 
   const fetchSuggestions = async () => {
     setIsLoadingSuggestions(true);
     try {
-      const res = await creditFetch('/api/card-news/suggest-topics', { method: 'POST' });
+      const res = await creditFetch('/api/card-news/suggest-topics', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ keyword: keyword.trim() || undefined }),
+      });
       if (res.ok) {
         const data = await res.json();
         setTopicSuggestions(data.topics || []);
@@ -62,13 +67,23 @@ export default function StepTopicSelect() {
       {/* AI suggestions */}
       <div className='space-y-3 mb-6'>
         {topicSuggestions.length === 0 && !isLoadingSuggestions ? (
-          <Button
-            variant='outline'
-            className='w-full py-6'
-            onClick={fetchSuggestions}
-          >
-            AI 주제 추천 받기
-          </Button>
+          <div className='space-y-2'>
+            <Input
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+              placeholder='키워드 입력 (예: 마케팅, 건강, 재테크...)'
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') fetchSuggestions();
+              }}
+            />
+            <Button
+              variant='outline'
+              className='w-full py-6'
+              onClick={fetchSuggestions}
+            >
+              {keyword.trim() ? `"${keyword.trim()}" 관련 AI 주제 추천 받기` : 'AI 주제 추천 받기'}
+            </Button>
+          </div>
         ) : isLoadingSuggestions ? (
           [1, 2, 3].map((i) => (
             <div key={i} className='h-16 rounded-lg bg-muted animate-pulse' />
@@ -100,14 +115,24 @@ export default function StepTopicSelect() {
           ))
         )}
         {topicSuggestions.length > 0 && !isLoadingSuggestions && (
-          <Button
-            variant='ghost'
-            size='sm'
-            className='w-full text-muted-foreground'
-            onClick={fetchSuggestions}
-          >
-            다시 추천 받기
-          </Button>
+          <div className='space-y-2'>
+            <Input
+              value={keyword}
+              onChange={(e) => setKeyword(e.target.value)}
+              placeholder='키워드 입력 (예: 마케팅, 건강, 재테크...)'
+              onKeyDown={(e) => {
+                if (e.key === 'Enter') fetchSuggestions();
+              }}
+            />
+            <Button
+              variant='ghost'
+              size='sm'
+              className='w-full text-muted-foreground'
+              onClick={fetchSuggestions}
+            >
+              {keyword.trim() ? `"${keyword.trim()}" 관련 다시 추천 받기` : '다시 추천 받기'}
+            </Button>
+          </div>
         )}
       </div>
 

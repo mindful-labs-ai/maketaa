@@ -217,6 +217,7 @@ export default function LandingHero() {
           >
             당신의 비즈니스에 딱 맞는
             <br />
+            AI 마케팅 전략,{' '}
             <span
               style={{
                 background: 'linear-gradient(135deg, #7C5CFC 0%, #5B8DEF 100%)',
@@ -224,7 +225,7 @@ export default function LandingHero() {
                 WebkitTextFillColor: 'transparent',
               }}
             >
-              AI 마케팅 전략
+              마케타
             </span>
           </h1>
 

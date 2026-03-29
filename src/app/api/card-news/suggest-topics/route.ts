@@ -47,10 +47,23 @@ const TOPIC_CATEGORIES = [
   '인간관계', '문화/예술', '스포츠', '뷰티/패션', '시사/이슈',
 ];
 
-function buildResearcherPrompt(seasonInfo: ReturnType<typeof getSeasonInfo>): string {
+function buildResearcherPrompt(seasonInfo: ReturnType<typeof getSeasonInfo>, keyword?: string): string {
   const shuffled = [...TOPIC_CATEGORIES].sort(() => Math.random() - 0.5);
   const pickedCategories = shuffled.slice(0, 3);
   const randomSeed = Math.floor(Math.random() * 10000);
+
+  const keywordInstruction = keyword
+    ? `\n- 사용자 키워드: "${keyword}" → 모든 주제는 이 키워드와 관련되어야 합니다`
+    : '';
+
+  const topicComposition = keyword
+    ? `## 주제 구성 (5개)
+1. "${keyword}" 키워드를 중심으로 다양한 관점의 주제 5개
+2. 시즌 이슈를 자연스럽게 반영할 수 있으면 포함`
+    : `## 주제 구성 (5개)
+1. 시즌 이슈 반영: 1-2개
+2. 다음 카테고리 중 최소 2개 포함: ${pickedCategories.join(', ')}
+3. 나머지는 참신하고 흥미로운 관점`;
 
   return `당신은 카드뉴스 기획자입니다.
 
@@ -58,12 +71,9 @@ function buildResearcherPrompt(seasonInfo: ReturnType<typeof getSeasonInfo>): st
 - 현재: ${seasonInfo.month}월 (${seasonInfo.season})
 - 시기 이슈: ${seasonInfo.events.join(', ')}
 - 타겟: 20-40대 성인
-- 랜덤 시드: ${randomSeed}
+- 랜덤 시드: ${randomSeed}${keywordInstruction}
 
-## 주제 구성 (5개)
-1. 시즌 이슈 반영: 1-2개
-2. 다음 카테고리 중 최소 2개 포함: ${pickedCategories.join(', ')}
-3. 나머지는 참신하고 흥미로운 관점
+${topicComposition}
 
 ## 주제 작성 가이드
 - 제목은 15자 이내, 독자의 호기심을 자극
@@ -74,14 +84,14 @@ JSON만 출력:
 {"topics":[{"title":"15자이내","description":"40자이내 설명","tags":["태그1","태그2","태그3"]}]}`;
 }
 
-async function generateTopicsWithGemini(): Promise<TopicSuggestion[] | null> {
+async function generateTopicsWithGemini(keyword?: string): Promise<TopicSuggestion[] | null> {
   const apiKey = process.env.GEMINI_API_KEY;
   if (!apiKey) return null;
 
   try {
     const ai = new GoogleGenAI({ apiKey });
     const seasonInfo = getSeasonInfo();
-    const prompt = buildResearcherPrompt(seasonInfo);
+    const prompt = buildResearcherPrompt(seasonInfo, keyword);
 
     const response = await ai.models.generateContent({
       model: 'gemini-2.5-flash',
@@ -112,13 +122,16 @@ async function generateTopicsWithGemini(): Promise<TopicSuggestion[] | null> {
 // Route Handler
 // ============================================================================
 
-export async function POST(_req: NextRequest): Promise<NextResponse> {
+export async function POST(req: NextRequest): Promise<NextResponse> {
   try {
     const supabase = await createClient();
     const { data: { user } } = await supabase.auth.getUser();
     if (!user) {
       return NextResponse.json({ error: 'Unauthorized' }, { status: 401 });
     }
+
+    const body = await req.json().catch(() => ({}));
+    const keyword = typeof body.keyword === 'string' ? body.keyword.trim().slice(0, 50) : undefined;
 
     const creditResult = await consumeCredits(user.id, 'CARD_NEWS_TOPICS');
     if (!creditResult.success) {
@@ -129,7 +142,7 @@ export async function POST(_req: NextRequest): Promise<NextResponse> {
       }, { status: 402 });
     }
 
-    const aiTopics = await generateTopicsWithGemini();
+    const aiTopics = await generateTopicsWithGemini(keyword || undefined);
 
     if (!aiTopics) {
       return NextResponse.json(
