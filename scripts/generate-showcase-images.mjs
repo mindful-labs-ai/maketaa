@@ -1,7 +1,11 @@
 import fs from 'fs';
 import path from 'path';
 
-const API_KEY = process.env.GEMINI_API_KEY || 'AIzaSyDzLsUc9LO0hCD9Uz_1MVJcRwUw65R0LBc';
+const API_KEY = process.env.GEMINI_API_KEY;
+if (!API_KEY) {
+  console.error('Error: GEMINI_API_KEY environment variable is required.');
+  process.exit(1);
+}
 const MODEL = 'gemini-3-pro-image-preview';
 const OUTPUT_DIR = path.resolve('public/showcase');
 
